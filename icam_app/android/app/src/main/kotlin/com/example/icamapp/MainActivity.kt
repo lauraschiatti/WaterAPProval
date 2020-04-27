@@ -1,4 +1,4 @@
-package com.example.icam_app
+package com.example.icamapp
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

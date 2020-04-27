@@ -1,6 +1,6 @@
-# icam_app
+# icamapp
 
-A new Flutter project.
+ICAMpff monitoring app
 
 ## Getting Started
 
