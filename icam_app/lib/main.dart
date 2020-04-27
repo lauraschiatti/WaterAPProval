@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
-
 import 'package:icam_app/theme.dart';
 
 import 'src/home_page.dart';

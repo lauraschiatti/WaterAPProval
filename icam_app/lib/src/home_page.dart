@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
 import 'package:icam_app/theme.dart';
+
+import 'map_page.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
@@ -16,8 +17,8 @@ class _HomePageState extends State<HomePage> {
   int selectedIndex = 0;
 
   List<Widget> widgetOptions = <Widget>[
-    Text('Home'),
-    Text('Favorites'),
+    MapControllerPage(),
+//    Text('Favorites'),
     Text('Export data'),
     Text('About')
   ];
@@ -37,23 +38,23 @@ class _HomePageState extends State<HomePage> {
         bottomNavigationBar:  BottomNavigationBar(
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-                icon: Icon(Icons.search),
-                title: Text('Search')
+                icon: Icon(Icons.map),
+                title: Text('Map')
+            ),
+
+//            BottomNavigationBarItem(
+//                icon: Icon(Icons.favorite_border),
+//                title: Text('Favorites')
+//            ),
+
+            BottomNavigationBarItem(
+                icon: Icon(Icons.file_download),
+                title: Text('Export data')
             ),
 
             BottomNavigationBarItem(
-                icon: Icon(Icons.favorite_border),
-                title: Text('Favorites')
-            ),
-
-            BottomNavigationBarItem(
-                icon: Icon(Icons.notifications),
-                title: Text('Notifications')
-            ),
-
-            BottomNavigationBarItem(
-                icon: Icon(Icons.account_circle),
-                title: Text('Profile')
+                icon: Icon(Icons.info_outline),
+                title: Text('About')
             )
           ],
 
