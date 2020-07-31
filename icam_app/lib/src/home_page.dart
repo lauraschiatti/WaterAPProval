@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:icam_app/classes/language.dart';
+import 'package:icam_app/localization/localization_constants.dart';
 import 'package:icam_app/main.dart';
 import 'package:icam_app/routes/route_names.dart';
 import 'package:icam_app/theme.dart';
@@ -19,7 +21,6 @@ class _HomePageState extends State<HomePage> {
   List<Widget> widgetOptions = <Widget>[
     MapControllerPage(),
     Text('Export data'),
-    AboutPage()
   ];
 
   void _onItemTapped(int index) {
@@ -28,12 +29,54 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+   // change locale based on locale selected by the user
+  void _changeLanguage(Language language) async{
+    // create Locale based on lang selected using the dropdown
+    Locale _temp = await setLocale(language.languageCode);
+
+    // use MyApp (root) to be able to change the language
+    MyApp.setLocale(context, _temp);
+  }
+
   @override
   Widget build(BuildContext context) {
+    // app’s current locale
+//    Locale myLocale = Localizations.localeOf(context);
+//    print('myLocale is $myLocale');
+
     return Scaffold(
         drawer: _drawerList(),
         appBar: new AppBar(
             title: Text(appTitle),
+            actions: <Widget>[
+              Padding(
+                padding: EdgeInsets.all(15.0),
+                child: DropdownButton(
+                  isDense: true,
+                  onChanged: (Language language) {
+                    _changeLanguage(language);
+                  },
+                  underline: SizedBox(), // hide underline
+                  icon: Icon(
+                    Icons.language,
+                    color: Colors.white
+                  ),
+                  // map items in languageList
+                  items: Language.languageList()
+                      .map<DropdownMenuItem<Language>>((lang) => DropdownMenuItem(
+                        value: lang,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: <Widget>[
+                            Text(lang.name, style: TextStyle(fontSize: 20)),
+                            Text(lang.flag)
+                          ],
+                        )
+                      ))
+                      .toList(), // convert iterable to list
+                ),
+              )
+            ]
         ),
         body: Center(
           child: widgetOptions.elementAt(selectedIndex),
@@ -42,7 +85,7 @@ class _HomePageState extends State<HomePage> {
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
                 icon: Icon(Icons.map),
-                title: Text('Map')
+                title: Text(getTranslated(context, "map"))
             ),
 
 //            BottomNavigationBarItem(
@@ -51,7 +94,7 @@ class _HomePageState extends State<HomePage> {
 //            ),
             BottomNavigationBarItem(
                 icon: Icon(Icons.file_download),
-                title: Text('Export data')
+                title: Text(getTranslated(context, "export"))
             )
           ],
 
@@ -82,7 +125,7 @@ class _HomePageState extends State<HomePage> {
             child: Container(
               height: 100,
               child: CircleAvatar(
-                radius: 20,
+                radius: 10,
                 backgroundColor: Colors.white,
         //                            child: PNetworkImage(rocket),
               )
@@ -95,7 +138,7 @@ class _HomePageState extends State<HomePage> {
               size: 20
             ),
             title: Text(
-              "About Us",
+              getTranslated(context, "about"),
               style: _textStyle,
             ),
             onTap:(){
@@ -112,7 +155,7 @@ class _HomePageState extends State<HomePage> {
                 size: 20
             ),
             title: Text(
-              "Settings",
+              getTranslated(context, "settings"),
               style: _textStyle,
             ),
             onTap:(){

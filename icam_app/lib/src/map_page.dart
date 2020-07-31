@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:icam_app/localization/localization_constants.dart';
 import 'package:latlong/latlong.dart';
 
 class MapControllerPage extends StatefulWidget {
@@ -120,7 +121,7 @@ class MapControllerPageState extends State<MapControllerPage> {
           Padding(
             padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
 //            title: Text(DemoLocalizations.of(context).title)
-            child: Text('This map is showing Cartagena de Indias, Col.'),
+            child: Text(getTranslated(context, "map_text")),
           )
         ],
       ),
