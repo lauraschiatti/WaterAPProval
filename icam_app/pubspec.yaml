@@ -27,10 +27,15 @@ dependencies:
   splashscreen: ^1.2.0
   flutter_map: any # or the latest version on Pub
 
+  # setup localization
+  flutter_localizations:
+    sdk: flutter
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  intl: # 0.15.1
+  intl_translation: #0.15.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

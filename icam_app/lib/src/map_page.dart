@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
 
-final appTitle = 'ICAM App';
-
 class MapControllerPage extends StatefulWidget {
-  static const String route = 'map_controller';
+  MapControllerPage({Key key}) : super(key: key);
 
   @override
   MapControllerPageState createState() {
@@ -31,10 +29,10 @@ class MapControllerPageState extends State<MapControllerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Text(appTitle),
-      ),
+//      appBar: AppBar(
+//        automaticallyImplyLeading: false,
+//        title: Text(appTitle),
+//      ),
       body: _buildBody(context)
     );
   }
@@ -121,6 +119,7 @@ class MapControllerPageState extends State<MapControllerPage> {
           ),
           Padding(
             padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
+//            title: Text(DemoLocalizations.of(context).title)
             child: Text('This map is showing Cartagena de Indias, Col.'),
           )
         ],
