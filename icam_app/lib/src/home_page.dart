@@ -87,8 +87,8 @@ class _HomePageState extends State<HomePage> {
           currentIndex: selectedIndex,
           selectedItemColor: myTheme.primaryColor,
           type: BottomNavigationBarType.fixed,
-          selectedFontSize: 14.0,
-          unselectedFontSize: 4.0,
+          selectedFontSize: 16.0,
+          unselectedFontSize: 14.0,
           onTap: _onItemTapped,
         )
     );
