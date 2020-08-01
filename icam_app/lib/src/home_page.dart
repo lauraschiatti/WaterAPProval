@@ -6,7 +6,7 @@ import 'package:icam_app/routes/route_names.dart';
 import 'package:icam_app/theme.dart';
 
 import 'map_page.dart';
-import 'about.dart';
+import 'info.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -40,35 +40,41 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       appBar: AppBar(
+         title: Text(appTitle),
+         actions: <Widget>[
+           IconButton(
+              icon: Icon(Icons.info_outline, color: Colors.white),
+              onPressed: () {
+               //navigate to about page
+               Navigator.pushNamed(context, infoRoute);
+             },
+           ),
+           // overflow menu
+           PopupMenuButton(
+              onSelected: (Language language) {
+                _changeLanguage(language);
+              },
+              icon: Icon(Icons.translate, color: Colors.white),
+              itemBuilder: (BuildContext context) {
+                 return Language.languageList()
+                    .map<PopupMenuItem<Language>>((lang) {
+                    return PopupMenuItem(
+                      value: lang,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          Text(lang.name, style: TextStyle(fontSize: 30)),
+                          Text(lang.flag)
+                        ],
+                      )
+                    );
+                }).toList();
+             },
+           ),
+         ],
+       ),
         drawer: _drawerList(),
-        appBar: new AppBar(
-            title: Text(appTitle),
-            actions: <Widget>[
-              Padding(padding: EdgeInsets.all(8.0),
-                child: DropdownButton(
-                  onChanged: (Language language) {
-                    _changeLanguage(language);
-                  },
-                  underline: SizedBox(), // hide underline
-                  icon: Icon(Icons.language, color: Colors.white),
-                  // map items in languageList
-                  items: Language.languageList()
-                      .map<DropdownMenuItem<Language>>((lang) {
-                        return DropdownMenuItem(
-                          value: lang,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: <Widget>[
-                              Text(lang.name, style: TextStyle(fontSize: 30)),
-                              Text(lang.flag)
-                            ],
-                          ),
-                        );
-                  }).toList(),// convert iterable to list
-                ),
-              )
-            ]
-        ),
         body: Center(
           child: widgetOptions.elementAt(selectedIndex),
         ),
@@ -96,58 +102,90 @@ class _HomePageState extends State<HomePage> {
 
   Container _drawerList() {
     TextStyle _textStyle = TextStyle(
-      color: Colors.white,
-      fontSize: 18
+      fontSize: 16
     );
 
     return Container(
       // get real screen resolution
       width: MediaQuery.of(context).size.width / 1.5,
-      color: myTheme.primaryColor,
+      color: Colors.white,
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
           DrawerHeader(
+            decoration: BoxDecoration(
+              color: myTheme.primaryColor
+            ),
             child: Column(
                 children: <Widget>[
-                Container(
-                  height: 60,
-                  margin: EdgeInsets.only(top: 15),
-                  child: CircleAvatar(
-                    radius: 50,
-                    child: Image.asset('assets/images/user.png'),
-                  )
-                ),
-                Padding(
-                  padding: EdgeInsets.all(4),
-                ),
-                Text(
-                  "Profile",
-//                  getTranslated(context, "no_account"),
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 15),
-                  textAlign: TextAlign.center,
-                ),
-                Padding(
-                  padding: EdgeInsets.all(4),
-                ),
-                Text(
-                  "No account registered",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 12),
-                  textAlign: TextAlign.center,
-                ),
+                  Container(
+                    height: 60,
+                    margin: EdgeInsets.only(top: 15),
+                    child: CircleAvatar(
+                      radius: 50,
+                      child: Image.asset('assets/images/user.png'),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(4),
+                  ),
+                  Text(getTranslated(context, "profile"),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 15),
+                    textAlign: TextAlign.center,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(4),
+                  ),
+                  Text(getTranslated(context, "no_account"),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12),
+                    textAlign: TextAlign.center,
+                  ),
                 ]
-            )
+              )
+          ),
+          ListTile(
+            leading: Icon(
+                Icons.import_contacts,
+                size: 18
+            ),
+            title: Text(
+              appTitle + " Encyclopedia",
+              style: _textStyle,
+            ),
+            onTap:(){
+              print("Encyclopedia");
+//              // to close the drawer
+//              Navigator.pop(context);
+//              //navigate to about page
+//              Navigator.pushNamed(context, notFoundRoute);
+            },
+          ),
+          ListTile(
+            leading: Icon(
+                Icons.access_alarms,
+                size: 18
+            ),
+            title: Text(
+              "Reminders",
+              style: _textStyle,
+            ),
+            onTap:(){
+              print("Reminders");
+//              // to close the drawer
+//              Navigator.pop(context);
+//              //navigate to about page
+//              Navigator.pushNamed(context, notFoundRoute);
+            },
           ),
           ListTile(
             leading: Icon(
                 Icons.settings,
-                color: Colors.white,
                 size: 18
             ),
             title: Text(
@@ -155,29 +193,67 @@ class _HomePageState extends State<HomePage> {
               style: _textStyle,
             ),
             onTap:(){
-              // to close the drawer
-              Navigator.pop(context);
-              //navigate to about page
-              Navigator.pushNamed(context, notFoundRoute);
+              print("Settings");
+//              // to close the drawer
+//              Navigator.pop(context);
+//              //navigate to about page
+//              Navigator.pushNamed(context, notFoundRoute);
+            },
+          ),
+          ListTile(
+            leading: Icon(
+                Icons.share,
+                size: 18
+            ),
+            title: Text(
+              "Tell friends about " + appTitle,
+              style: _textStyle,
+            ),
+            onTap:(){
+              print("Tell friends about");
+//              // to close the drawer
+//              Navigator.pop(context);
+//              //navigate to about page
+//              Navigator.pushNamed(context, notFoundRoute);
+            },
+          ),
+          Divider(
+            color: Colors.black54,
+          ),
+          ListTile(
+            leading: Icon(
+            Icons.format_indent_increase,
+            size: 18
+            ),
+            title: Text(
+            "Terms of Service",
+            style: _textStyle,
+            ),
+            onTap:(){
+              print("Terms of Service");
+//              // to close the drawer
+//              Navigator.pop(context);
+//              //navigate to about page
+//              Navigator.pushNamed(context, aboutRoute);
             },
           ),
           ListTile(
             leading: Icon(
                 Icons.info_outline,
-                color: Colors.white,
                 size: 18
             ),
             title: Text(
-              getTranslated(context, "about"),
+              "Imprint",
               style: _textStyle,
             ),
             onTap:(){
-              // to close the drawer
-              Navigator.pop(context);
-              //navigate to about page
-              Navigator.pushNamed(context, aboutRoute);
+              print("Imprint");
+//              // to close the drawer
+//              Navigator.pop(context);
+//              //navigate to about page
+//              Navigator.pushNamed(context, aboutRoute);
             },
-          ),
+          )
         ],
       ),
     );

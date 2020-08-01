@@ -79,6 +79,7 @@ class _MyAppState extends State<MyApp> {
 //          GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
+
         // resolves the app's locale when when the app is started,
         // and when the user changes the device's locale.
         localeResolutionCallback: (Locale locale, Iterable<Locale> supportedLocales) {
@@ -86,10 +87,15 @@ class _MyAppState extends State<MyApp> {
           // check if the current device locale is supported
           for (var supportedLocale in supportedLocales) {
             if (locale.countryCode == supportedLocale.countryCode) {
+              // the app will support the language
               return supportedLocale;
             }
           }
-          return locale;
+          // if the locale of the device is not supported, use first one
+          // from the list (English, in this case)
+//          return locale;
+          return supportedLocales.first; // default locale
+
         },
         // navigation using Generated Routes
         onGenerateRoute: Router.generateRoute,

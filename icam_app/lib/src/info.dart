@@ -27,12 +27,12 @@ import 'package:flutter/material.dart';
 
 import 'package:icam_app/theme.dart';
 
-class AboutPage extends StatefulWidget {
+class InfoPage extends StatefulWidget {
   @override
   _ProfileState createState() => _ProfileState();
 }
 
-class _ProfileState extends State<AboutPage> {
+class _ProfileState extends State<InfoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
