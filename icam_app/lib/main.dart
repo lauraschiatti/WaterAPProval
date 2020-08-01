@@ -5,11 +5,10 @@ import 'package:icam_app/localization/localization_constants.dart';
 import 'package:icam_app/routes/route_names.dart';
 import 'package:icam_app/routes/router.dart';
 
-import 'package:splashscreen/splashscreen.dart';
 import 'package:icam_app/theme.dart';
 
 import 'localization/app_localizations.dart';
-import 'src/home_page.dart';
+import 'package:icam_app/src/splash_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -30,7 +29,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   // current locale
   Locale _locale;
-
   // change locale from anywhere in the app
   void setLocale(Locale locale){
     setState(() {
@@ -39,14 +37,14 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  // get local for the first time when launching app,
+  // get locale for the first time when launching app,
   // get locale from shared preferences and set it to _locale
   @override
   void didChangeDependencies() { // called when dependency of this State object changes.
     getLocale().then((locale) {
       setState(() {
         print('locale is $locale');
-        _locale = locale;
+        this._locale = locale;
       });
     });
     super.didChangeDependencies();
@@ -54,7 +52,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    if(_locale == null) {
+    if(this._locale == null) {
       return Container(
         child: Center(child: CircularProgressIndicator()),
       );
@@ -100,41 +98,5 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
       );
     }
-  }
-}
-
-
-/**
- * Splash Screen
- **/
-class SplashPage extends StatefulWidget {
-  @override
-  _SplashPageState createState() => _SplashPageState();
-}
-
-class _SplashPageState extends State<SplashPage> {
-  @override
-  Widget build(BuildContext context) {
-    return new SplashScreen(
-      seconds: 5,
-      backgroundColor: myTheme.primaryColor,
-      title: Text(
-        'ICAM App ',
-        style: TextStyle(
-            fontWeight: FontWeight.w300,
-            fontSize: 20.0,
-            color: Colors.white
-        ),
-      ),
-      image: Image.asset('assets/images/icon.png',
-          fit: BoxFit.cover,
-//          height: 100.0,
-//          width: 100.0
-      ),
-      photoSize: 90.0,
-      loaderColor: Colors.white,
-      styleTextUnderTheLoader: TextStyle(),
-      navigateAfterSeconds:  HomePage(),
-    );
   }
 }

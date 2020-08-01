@@ -30,50 +30,41 @@ class _HomePageState extends State<HomePage> {
   }
 
    // change locale based on locale selected by the user
-  void _changeLanguage(Language language) async{
+  void _changeLanguage(Language language) async {
     // create Locale based on lang selected using the dropdown
-    Locale _temp = await setLocale(language.languageCode);
-
+    Locale _locale = await setLocale(language.languageCode);
     // use MyApp (root) to be able to change the language
-    MyApp.setLocale(context, _temp);
+    MyApp.setLocale(context, _locale);
   }
 
   @override
   Widget build(BuildContext context) {
-    // app’s current locale
-//    Locale myLocale = Localizations.localeOf(context);
-//    print('myLocale is $myLocale');
-
     return Scaffold(
         drawer: _drawerList(),
         appBar: new AppBar(
             title: Text(appTitle),
             actions: <Widget>[
-              Padding(
-                padding: EdgeInsets.all(15.0),
+              Padding(padding: EdgeInsets.all(8.0),
                 child: DropdownButton(
-                  isDense: true,
                   onChanged: (Language language) {
                     _changeLanguage(language);
                   },
                   underline: SizedBox(), // hide underline
-                  icon: Icon(
-                    Icons.language,
-                    color: Colors.white
-                  ),
+                  icon: Icon(Icons.language, color: Colors.white),
                   // map items in languageList
                   items: Language.languageList()
-                      .map<DropdownMenuItem<Language>>((lang) => DropdownMenuItem(
-                        value: lang,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: <Widget>[
-                            Text(lang.name, style: TextStyle(fontSize: 20)),
-                            Text(lang.flag)
-                          ],
-                        )
-                      ))
-                      .toList(), // convert iterable to list
+                      .map<DropdownMenuItem<Language>>((lang) {
+                        return DropdownMenuItem(
+                          value: lang,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: <Widget>[
+                              Text(lang.name, style: TextStyle(fontSize: 30)),
+                              Text(lang.flag)
+                            ],
+                          ),
+                        );
+                  }).toList(),// convert iterable to list
                 ),
               )
             ]
@@ -87,11 +78,6 @@ class _HomePageState extends State<HomePage> {
                 icon: Icon(Icons.map),
                 title: Text(getTranslated(context, "map"))
             ),
-
-//            BottomNavigationBarItem(
-//                icon: Icon(Icons.favorite_border),
-//                title: Text('Favorites')
-//            ),
             BottomNavigationBarItem(
                 icon: Icon(Icons.file_download),
                 title: Text(getTranslated(context, "export"))
@@ -101,8 +87,8 @@ class _HomePageState extends State<HomePage> {
           currentIndex: selectedIndex,
           selectedItemColor: myTheme.primaryColor,
           type: BottomNavigationBarType.fixed,
-          //        selectedFontSize: 14.0,
-          //        unselectedFontSize: 14.0,
+          selectedFontSize: 14.0,
+          unselectedFontSize: 4.0,
           onTap: _onItemTapped,
         )
     );
@@ -111,7 +97,7 @@ class _HomePageState extends State<HomePage> {
   Container _drawerList() {
     TextStyle _textStyle = TextStyle(
       color: Colors.white,
-      fontSize: 20
+      fontSize: 18
     );
 
     return Container(
@@ -122,37 +108,47 @@ class _HomePageState extends State<HomePage> {
         padding: EdgeInsets.zero,
         children: <Widget>[
           DrawerHeader(
-            child: Container(
-              height: 100,
-              child: CircleAvatar(
-                radius: 10,
-                backgroundColor: Colors.white,
-        //                            child: PNetworkImage(rocket),
-              )
+            child: Column(
+                children: <Widget>[
+                Container(
+                  height: 60,
+                  margin: EdgeInsets.only(top: 15),
+                  child: CircleAvatar(
+                    radius: 50,
+                    child: Image.asset('assets/images/user.png'),
+                  )
+                ),
+                Padding(
+                  padding: EdgeInsets.all(4),
+                ),
+                Text(
+                  "Profile",
+//                  getTranslated(context, "no_account"),
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 15),
+                  textAlign: TextAlign.center,
+                ),
+                Padding(
+                  padding: EdgeInsets.all(4),
+                ),
+                Text(
+                  "No account registered",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12),
+                  textAlign: TextAlign.center,
+                ),
+                ]
             )
-          ),
-          ListTile(
-            leading: Icon(
-              Icons.info_outline,
-              color: Colors.white,
-              size: 20
-            ),
-            title: Text(
-              getTranslated(context, "about"),
-              style: _textStyle,
-            ),
-            onTap:(){
-              // to close the drawer
-              Navigator.pop(context);
-              //navigate to about page
-              Navigator.pushNamed(context, aboutRoute);
-            },
           ),
           ListTile(
             leading: Icon(
                 Icons.settings,
                 color: Colors.white,
-                size: 20
+                size: 18
             ),
             title: Text(
               getTranslated(context, "settings"),
@@ -163,6 +159,23 @@ class _HomePageState extends State<HomePage> {
               Navigator.pop(context);
               //navigate to about page
               Navigator.pushNamed(context, notFoundRoute);
+            },
+          ),
+          ListTile(
+            leading: Icon(
+                Icons.info_outline,
+                color: Colors.white,
+                size: 18
+            ),
+            title: Text(
+              getTranslated(context, "about"),
+              style: _textStyle,
+            ),
+            onTap:(){
+              // to close the drawer
+              Navigator.pop(context);
+              //navigate to about page
+              Navigator.pushNamed(context, aboutRoute);
             },
           ),
         ],
