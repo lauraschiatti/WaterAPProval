@@ -24,14 +24,15 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   splashscreen: ^1.2.0
-
+  # setup localization
   flutter_localizations:
     sdk: flutter
   # persistent data
   shared_preferences: ^0.5.6+3
-
   flutter_map: any # or the latest version on Pub
-  # setup localization
+  url_launcher: ^5.3.0
+#  url_launcher_web: ^0.1.0+1
+#  url_launcher_macos: ^0.0.1
 
 dev_dependencies:
   flutter_test:
@@ -52,6 +53,7 @@ flutter:
   assets:
     - assets/images/icon.png
     - assets/images/user.png
+    - assets/images/invemar.png
     - lib/lang/en.json
     - lib/lang/es.json
 

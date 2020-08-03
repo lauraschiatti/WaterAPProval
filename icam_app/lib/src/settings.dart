@@ -24,19 +24,23 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:icam_app/localization/localization_constants.dart';
 
 import 'package:icam_app/theme.dart';
 
-class InfoPage extends StatefulWidget {
+class SettingsPage extends StatefulWidget {
   @override
-  _ProfileState createState() => _ProfileState();
+  _SettingsState createState() => _SettingsState();
 }
 
-class _ProfileState extends State<InfoPage> {
+class _SettingsState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Color.fromRGBO(255, 255, 255, .9),
+        appBar: AppBar(
+            title: Text(getTranslated(context, "settings"))
+        ),
         body: SafeArea(
           child: ListView(
             children: <Widget>[
@@ -147,7 +151,7 @@ class _ProfileState extends State<InfoPage> {
                           ),
                         ),
                       ),
-//                      UserInfo()
+                      UserInfo()
                     ],
                   )
                 ],

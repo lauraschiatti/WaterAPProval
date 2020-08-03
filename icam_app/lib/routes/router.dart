@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:icam_app/src/info.dart';
+import 'package:icam_app/src/about.dart';
+import 'package:icam_app/src/settings.dart';
 import 'package:icam_app/src/home_page.dart';
 import 'package:icam_app/src/map_page.dart';
 import 'package:icam_app/src/not_found.dart';
@@ -16,8 +17,10 @@ class Router {
         return MaterialPageRoute(builder: (_) => HomePage());
       case mapRoute:
         return MaterialPageRoute(builder: (_) => MapControllerPage());
-      case infoRoute:
-        return MaterialPageRoute(builder: (_) => InfoPage());
+      case aboutRoute:
+        return MaterialPageRoute(builder: (_) => AboutPage());
+      case settingsRoute:
+        return MaterialPageRoute(builder: (_) => SettingsPage());
     }
 
     // if none of the cases matches

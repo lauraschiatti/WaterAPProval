@@ -6,7 +6,7 @@ import 'package:icam_app/routes/route_names.dart';
 import 'package:icam_app/theme.dart';
 
 import 'map_page.dart';
-import 'info.dart';
+import 'settings.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
               icon: Icon(Icons.info_outline, color: Colors.white),
               onPressed: () {
                //navigate to about page
-               Navigator.pushNamed(context, infoRoute);
+//               Navigator.pushNamed(context, infoRoute);
              },
            ),
            // overflow menu
@@ -155,7 +155,8 @@ class _HomePageState extends State<HomePage> {
                 size: 18
             ),
             title: Text(
-              appTitle + " Encyclopedia",
+//              appTitle + " " + getTranslated(context, "encyclopedia"),
+              getTranslated(context, "encyclopedia"),
               style: _textStyle,
             ),
             onTap:(){
@@ -172,7 +173,7 @@ class _HomePageState extends State<HomePage> {
                 size: 18
             ),
             title: Text(
-              "Reminders",
+              getTranslated(context, "reminders"),
               style: _textStyle,
             ),
             onTap:(){
@@ -193,11 +194,10 @@ class _HomePageState extends State<HomePage> {
               style: _textStyle,
             ),
             onTap:(){
-              print("Settings");
-//              // to close the drawer
-//              Navigator.pop(context);
-//              //navigate to about page
-//              Navigator.pushNamed(context, notFoundRoute);
+              // to close the drawer
+              Navigator.pop(context);
+              //navigate to about page
+              Navigator.pushNamed(context, settingsRoute);
             },
           ),
           ListTile(
@@ -206,7 +206,7 @@ class _HomePageState extends State<HomePage> {
                 size: 18
             ),
             title: Text(
-              "Tell friends about " + appTitle,
+              getTranslated(context, "tell_friends"), // + appTitle,
               style: _textStyle,
             ),
             onTap:(){
@@ -226,7 +226,7 @@ class _HomePageState extends State<HomePage> {
             size: 18
             ),
             title: Text(
-            "Terms of Service",
+            getTranslated(context, "terms"),
             style: _textStyle,
             ),
             onTap:(){
@@ -243,15 +243,15 @@ class _HomePageState extends State<HomePage> {
                 size: 18
             ),
             title: Text(
-              "Imprint",
+              getTranslated(context, "about"),
               style: _textStyle,
             ),
             onTap:(){
-              print("Imprint");
-//              // to close the drawer
-//              Navigator.pop(context);
-//              //navigate to about page
-//              Navigator.pushNamed(context, aboutRoute);
+              print("About");
+              // to close the drawer
+              Navigator.pop(context);
+              //navigate to about page
+              Navigator.pushNamed(context, aboutRoute);
             },
           )
         ],

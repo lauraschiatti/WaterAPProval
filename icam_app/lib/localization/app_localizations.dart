@@ -23,6 +23,9 @@ class AppLocalizations {
     // convert the returned string into actual JSON format
     Map<String, dynamic> mappedJson = json.decode(jsonString);
 
+    //TODO: handle badly formatted JSON exception
+    //print(mappedJson);
+
     // save map of string on _localizedValues
     _localizedStrings = mappedJson.map((key, value) {
       return MapEntry(key, value.toString());

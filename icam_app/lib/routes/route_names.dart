@@ -3,5 +3,7 @@
 
 const String homeRoute = '/';
 const String mapRoute = 'map';
-const String infoRoute = 'info';
+const String aboutRoute = 'about';
+const String settingsRoute = 'settings';
+
 const String notFoundRoute = 'notfound';
