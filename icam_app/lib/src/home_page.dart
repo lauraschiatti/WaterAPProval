@@ -6,7 +6,6 @@ import 'package:icam_app/routes/route_names.dart';
 import 'package:icam_app/theme.dart';
 
 import 'map_page.dart';
-import 'settings.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -16,7 +15,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  /*********************************/
+  /* BottomNavigationBarItem */
+  /*********************************/
   int selectedIndex = 0;
+
+  // TODO: different background color for listtile
+  // https://github.com/flutter/flutter/issues/7499
 
   List<Widget> widgetOptions = <Widget>[
     MapControllerPage(),
@@ -29,7 +35,11 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-   // change locale based on locale selected by the user
+  /*********************************/
+  /* changeLanguage DropdownButton */
+  /*********************************/
+
+  // change locale based on locale selected by the user
   void _changeLanguage(Language language) async {
     // create Locale based on lang selected using the dropdown
     Locale _locale = await setLocale(language.languageCode);
@@ -37,29 +47,33 @@ class _HomePageState extends State<HomePage> {
     MyApp.setLocale(context, _locale);
   }
 
+  /*********************************/
+  /*  Drawer */
+  /*********************************/
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: AppBar(
-         title: Text(appTitle),
-         actions: <Widget>[
-           IconButton(
+        appBar: AppBar(
+          title: Text(appTitle),
+          actions: <Widget>[
+            IconButton(
               icon: Icon(Icons.info_outline, color: Colors.white),
               onPressed: () {
-               //navigate to about page
-//               Navigator.pushNamed(context, infoRoute);
-             },
-           ),
-           // overflow menu
-           PopupMenuButton(
+                //navigate to about page
+               Navigator.pushNamed(context, infoRoute);
+              },
+            ),
+            // overflow menu
+            PopupMenuButton(
               onSelected: (Language language) {
                 _changeLanguage(language);
               },
               icon: Icon(Icons.translate, color: Colors.white),
               itemBuilder: (BuildContext context) {
-                 return Language.languageList()
+                return Language.languageList()
                     .map<PopupMenuItem<Language>>((lang) {
-                    return PopupMenuItem(
+                  return PopupMenuItem(
                       value: lang,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -68,13 +82,13 @@ class _HomePageState extends State<HomePage> {
                           Text(lang.flag)
                         ],
                       )
-                    );
+                  );
                 }).toList();
-             },
-           ),
-         ],
-       ),
-        drawer: _drawerList(),
+              },
+            ),
+          ],
+        ),
+        drawer: DrawerList(),
         body: Center(
           child: widgetOptions.elementAt(selectedIndex),
         ),
@@ -99,12 +113,23 @@ class _HomePageState extends State<HomePage> {
         )
     );
   }
+}
 
-  Container _drawerList() {
-    TextStyle _textStyle = TextStyle(
-      fontSize: 16
-    );
+class DrawerList extends StatefulWidget{
+  @override
+  _DrawerListState createState() => _DrawerListState();
+}
 
+class _DrawerListState extends State<DrawerList> {
+
+  @override
+  void initState() {
+    super.initState();
+//    _color = Colors.transparent;
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       // get real screen resolution
       width: MediaQuery.of(context).size.width / 1.5,
@@ -112,150 +137,112 @@ class _HomePageState extends State<HomePage> {
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          DrawerHeader(
-            decoration: BoxDecoration(
-              color: myTheme.primaryColor
-            ),
-            child: Column(
-                children: <Widget>[
-                  Container(
-                    height: 60,
-                    margin: EdgeInsets.only(top: 15),
-                    child: CircleAvatar(
-                      radius: 50,
-                      child: Image.asset('assets/images/user.png'),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(4),
-                  ),
-                  Text(getTranslated(context, "profile"),
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 15),
-                    textAlign: TextAlign.center,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(4),
-                  ),
-                  Text(getTranslated(context, "no_account"),
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 12),
-                    textAlign: TextAlign.center,
-                  ),
-                ]
-              )
+          _buildDrawerHeader(context),
+          _buildListTile(
+              context: context,
+              icon: Icons.import_contacts,
+              title: "encyclopedia",
+              route: notFoundRoute
           ),
-          ListTile(
-            leading: Icon(
-                Icons.import_contacts,
-                size: 18
-            ),
-            title: Text(
-//              appTitle + " " + getTranslated(context, "encyclopedia"),
-              getTranslated(context, "encyclopedia"),
-              style: _textStyle,
-            ),
-            onTap:(){
-              print("Encyclopedia");
-//              // to close the drawer
-//              Navigator.pop(context);
-//              //navigate to about page
-//              Navigator.pushNamed(context, notFoundRoute);
-            },
+          _buildListTile(
+              context: context,
+              icon: Icons.access_alarms,
+              title: "reminders",
+              route: notFoundRoute
           ),
-          ListTile(
-            leading: Icon(
-                Icons.access_alarms,
-                size: 18
-            ),
-            title: Text(
-              getTranslated(context, "reminders"),
-              style: _textStyle,
-            ),
-            onTap:(){
-              print("Reminders");
-//              // to close the drawer
-//              Navigator.pop(context);
-//              //navigate to about page
-//              Navigator.pushNamed(context, notFoundRoute);
-            },
+          SizedBox(
+            width: 10.0,
           ),
-          ListTile(
-            leading: Icon(
-                Icons.settings,
-                size: 18
-            ),
-            title: Text(
-              getTranslated(context, "settings"),
-              style: _textStyle,
-            ),
-            onTap:(){
-              // to close the drawer
-              Navigator.pop(context);
-              //navigate to about page
-              Navigator.pushNamed(context, settingsRoute);
-            },
+          _buildListTile(
+              context: context,
+              icon: Icons.settings,
+              title: "settings",
+              route: settingsRoute
           ),
-          ListTile(
-            leading: Icon(
-                Icons.share,
-                size: 18
-            ),
-            title: Text(
-              getTranslated(context, "tell_friends"), // + appTitle,
-              style: _textStyle,
-            ),
-            onTap:(){
-              print("Tell friends about");
-//              // to close the drawer
-//              Navigator.pop(context);
-//              //navigate to about page
-//              Navigator.pushNamed(context, notFoundRoute);
-            },
+          _buildListTile(
+              context: context,
+              icon: Icons.share,
+              title: "tell_friends",
+              route: notFoundRoute
           ),
-          Divider(
-            color: Colors.black54,
+          _buildListTile(
+              context: context,
+              icon: Icons.format_indent_increase,
+              title: "terms",
+              route: notFoundRoute
           ),
-          ListTile(
-            leading: Icon(
-            Icons.format_indent_increase,
-            size: 18
-            ),
-            title: Text(
-            getTranslated(context, "terms"),
-            style: _textStyle,
-            ),
-            onTap:(){
-              print("Terms of Service");
-//              // to close the drawer
-//              Navigator.pop(context);
-//              //navigate to about page
-//              Navigator.pushNamed(context, aboutRoute);
-            },
-          ),
-          ListTile(
-            leading: Icon(
-                Icons.info_outline,
-                size: 18
-            ),
-            title: Text(
-              getTranslated(context, "about"),
-              style: _textStyle,
-            ),
-            onTap:(){
-              print("About");
-              // to close the drawer
-              Navigator.pop(context);
-              //navigate to about page
-              Navigator.pushNamed(context, aboutRoute);
-            },
+          _buildListTile(
+              context: context,
+              icon: Icons.info_outline,
+              title: "about",
+              route: aboutRoute
           )
         ],
       ),
     );
   }
+}
+
+DrawerHeader _buildDrawerHeader(context){
+  return DrawerHeader(
+      decoration: BoxDecoration(
+          color: myTheme.primaryColor
+      ),
+      child: Column(
+          children: <Widget>[
+            Container(
+              height: 60,
+              margin: EdgeInsets.only(top: 15),
+              child: CircleAvatar(
+                radius: 50,
+                child: Image.asset('assets/images/user.png'),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(4),
+            ),
+            Text(getTranslated(context, "profile"),
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 15),
+              textAlign: TextAlign.center,
+            ),
+            Padding(
+              padding: EdgeInsets.all(4),
+            ),
+            Text(getTranslated(context, "no_account"),
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 12),
+              textAlign: TextAlign.center,
+            ),
+          ]
+      )
+  );
+}
+
+
+ListTile _buildListTile({context, icon, title, route}){
+  return ListTile(
+    leading: Icon(
+        icon,
+        size: 18
+    ),
+    title: Text(getTranslated(context, title),
+      style: TextStyle(fontSize: 16),
+    ),
+    onTap:(){
+      print(title);
+      // to close the drawer
+      Navigator.pop(context);
+      //navigate to about page
+      Navigator.pushNamed(context, route);
+
+//      setState(() {
+//                _color = Colors.lightBlueAccent;
+//      });
+    },
+  );
 }

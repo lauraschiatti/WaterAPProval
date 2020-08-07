@@ -120,8 +120,12 @@ class MapControllerPageState extends State<MapControllerPage> {
           ),
           Padding(
             padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
-//            title: Text(DemoLocalizations.of(context).title)
-            child: Text(getTranslated(context, "map_text")),
+            child: Text(
+                getTranslated(context, "map_text"),
+                    style: TextStyle(
+                      fontSize: 14
+                    )
+            ),
           )
         ],
       ),
