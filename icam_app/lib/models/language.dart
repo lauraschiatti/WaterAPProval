@@ -1,5 +1,3 @@
-
-
 // // use custom class for language items
 class Language {
   final int id;
