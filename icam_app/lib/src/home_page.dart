@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:icam_app/classes/language.dart';
+import 'package:icam_app/models/language.dart';
 import 'package:icam_app/localization/localization_constants.dart';
 import 'package:icam_app/main.dart';
 import 'package:icam_app/routes/route_names.dart';
@@ -16,9 +16,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  /*********************************/
-  /* BottomNavigationBarItem */
-  /*********************************/
+  //BottomNavigationBarItem
+
   int selectedIndex = 0;
 
   // TODO: different background color for listtile
@@ -35,9 +34,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  /*********************************/
-  /* changeLanguage DropdownButton */
-  /*********************************/
+  //changeLanguage DropdownButton
 
   // change locale based on locale selected by the user
   void _changeLanguage(Language language) async {
@@ -47,9 +44,7 @@ class _HomePageState extends State<HomePage> {
     MyApp.setLocale(context, _locale);
   }
 
-  /*********************************/
-  /*  Drawer */
-  /*********************************/
+  // Drawer
 
   @override
   Widget build(BuildContext context) {

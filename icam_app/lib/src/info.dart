@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:icam_app/localization/localization_constants.dart';
-import 'package:icam_app/main.dart';
 
 final priceTextStyle = TextStyle(
   color: Colors.grey.shade600,
@@ -172,9 +171,8 @@ class ICAMInfo extends StatelessWidget {
 
 
 
-/*********************************/
-/* ICAM calculator */
-/*********************************/
+// ICAM calculator
+
 class OrderItem {
   final String title;
   final int qty;

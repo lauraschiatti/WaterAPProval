@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:icam_app/localization/localization_constants.dart';
-
 import 'package:icam_app/routes/route_names.dart';
 import 'package:icam_app/routes/router.dart';
-
 import 'package:icam_app/theme.dart';
+import 'package:icam_app/src/splash_page.dart';
+import 'package:flutter_config/flutter_config.dart';
 
 import 'localization/app_localizations.dart';
-import 'package:icam_app/src/splash_page.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+   WidgetsFlutterBinding.ensureInitialized();
+
+  // load all environment variables
+  await FlutterConfig.loadEnvVariables();
+
+  runApp(MyApp());
+}
 
 final appTitle = 'ICAM App';
 
@@ -52,6 +58,8 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    print(".env file ==> API_URL: " + FlutterConfig.get('API_URL'));
+
     if(this._locale == null) {
       return Container(
         child: Center(child: CircularProgressIndicator()),

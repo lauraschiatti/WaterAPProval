@@ -29,19 +29,18 @@ dependencies:
     sdk: flutter
   # persistent data
   shared_preferences: ^0.5.6+3
-  flutter_map: any # or the latest version on Pub
   url_launcher: ^5.3.0
-#  url_launcher_web: ^0.1.0+1
-#  url_launcher_macos: ^0.0.1
+  google_maps_flutter: ^0.5.21+15
 
 dev_dependencies:
+  # to store keys on .env file
+  flutter_config: ^1.0.5
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: "^0.7.3"
 
-
 flutter_icons:
-  android: "launcher_icon"
+  android: true # override the icon for the platform
   ios: true
   image_path: "assets/icon/icon-blue.png"
 # For information on the generic Dart part of this file, see the
