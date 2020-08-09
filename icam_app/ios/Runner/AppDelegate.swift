@@ -12,7 +12,8 @@ import GoogleMaps
   ) -> Bool {
     // provide Google Maps API key
     let googleMapApiKey = ProcessInfo.processInfo.environment["GOOGLE_MAPS_API_KEY"]
-
+    
+    // TODO: set credentials from environment
     //GMSServices.provideAPIKey(environment["MAPS_API_KEY"])
 //    if ([mapsApiKey length] == 0) {
 //      mapsApiKey = @"YOUR KEY HERE";

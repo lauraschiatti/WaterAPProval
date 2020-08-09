@@ -18,7 +18,7 @@ class AppLocalizations {
   // load languaje JSON from "lib/lang" folder
   Future load() async {
     String jsonString =
-        await rootBundle.loadString('lib/lang/${locale.languageCode}.json');
+        await rootBundle.loadString('assets/lang/${locale.languageCode}.json');
 
     // convert the returned string into actual JSON format
     Map<String, dynamic> mappedJson = json.decode(jsonString);

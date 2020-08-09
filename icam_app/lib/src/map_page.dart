@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:icam_app/localization/localization_constants.dart';
 import 'dart:async';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:icam_app/models/node.dart';
+import 'package:icam_app/models/node.dart' as node;
 import 'package:icam_app/theme.dart';
 
 class MapControllerPage extends StatefulWidget {
@@ -16,7 +16,7 @@ class MapControllerPageState extends State<MapControllerPage> {
 
   // google map setup
   Completer<GoogleMapController> _controller = Completer();
-  static const LatLng _center = const LatLng(10.421756, -75.549671); // center at cartagena
+  static const LatLng _center = const LatLng(10.412497, -75.535607); // center at cartagena
   LatLng _lastMapPosition = _center; // default center
   MapType _currentMapType = MapType.normal;
 
@@ -24,28 +24,34 @@ class MapControllerPageState extends State<MapControllerPage> {
 
   _onMapCreated(GoogleMapController controller) async{
 
-//    _controller.complete(controller);
+    _controller.complete(controller);
 
-    final nodes = await node.FromJson(str);
-    final nodes = await  Locations.fromJson(json.decode(response.body));
-
+    // add markers to map
+    final nodes = await node.getNodeFromFakeServer();
     setState(() {
       _markers.clear();
-      for (final office in googleOffices.offices) {
+      for (final node in nodes) {
         final marker = Marker(
-          markerId: MarkerId(office.name),
-          position: LatLng(office.lat, office.lng),
+          markerId: MarkerId(node.id),
+          position: LatLng(node.coordinates[0], node.coordinates[1]),
           infoWindow: InfoWindow(
-            title: office.name,
-            snippet: office.address,
+            title: node.name,
+            snippet: node.status
           ),
+          icon: BitmapDescriptor.defaultMarker,
+          onTap: _onMarkerTapped
         );
-        _markers[office.name] = marker;
+        _markers.add(marker);
       }
+    });
   }
 
   _onCameraMove(CameraPosition position){
     _lastMapPosition = position.target;
+  }
+
+  _onMarkerTapped(){
+
   }
 
   _onMapTypeButtonPressed(){
@@ -74,10 +80,9 @@ class MapControllerPageState extends State<MapControllerPage> {
     });
   }
 
-
   Widget button(Function function, IconData icon, String heroTag){
     return new FloatingActionButton(
-      heroTag: heroTag,
+      heroTag: heroTag, // to avoid scheduler warning
       onPressed: function,
       materialTapTargetSize: MaterialTapTargetSize.padded,
       backgroundColor: myTheme.primaryColor,
@@ -89,13 +94,10 @@ class MapControllerPageState extends State<MapControllerPage> {
     );
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-//      appBar: AppBar(
-//        automaticallyImplyLeading: false,
-//        title: Text(appTitle),
-//      ),
       body: _buildBody(context)
     );
   }
@@ -104,13 +106,11 @@ class MapControllerPageState extends State<MapControllerPage> {
     return Stack(
       children: <Widget>[
         GoogleMap(
-          //enable zoom gestures
-//          zoomGesturesEnabled: true,
-          padding: EdgeInsets.only(bottom: 500, top: 0, right: 0, left: 0),
+          //          padding: EdgeInsets.only(bottom: 500, top: 0, right: 0, left: 0),
           onMapCreated: _onMapCreated,
           initialCameraPosition: CameraPosition(
               target: _center,
-              zoom: 15.0
+              zoom: 14.0
           ),
           mapType: _currentMapType,
           markers: _markers,
@@ -122,9 +122,9 @@ class MapControllerPageState extends State<MapControllerPage> {
             alignment: Alignment.topRight,
             child: Column(
               children: <Widget>[
-                button(_onMapTypeButtonPressed, Icons.map, "btn1"),
+                button(_onMapTypeButtonPressed, Icons.map, "map"),
                 SizedBox(height: 16.0),
-                button(_onAddMarkerButtonPressed, Icons.add_location, "btn2"),
+                button(_onAddMarkerButtonPressed, Icons.add_location, "add_location"),
                 SizedBox(height: 16.0),
               ],
             ),
@@ -134,7 +134,10 @@ class MapControllerPageState extends State<MapControllerPage> {
           padding: EdgeInsets.only(top: 8.0, bottom: 16.0),
           child: Text(
             getTranslated(context, "map_text"),
-            style: TextStyle(fontSize: 14)
+            style: TextStyle(
+                fontSize: 14,
+                backgroundColor: Colors.white
+            ),
           )
         )
       ],

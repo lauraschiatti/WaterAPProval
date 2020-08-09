@@ -1,4 +1,3 @@
-import 'sensor.dart';
 
 class NodeType {
   final String id;
