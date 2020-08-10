@@ -74,10 +74,10 @@ class EnumValues<T> {
 
 // mimics the behaviour of when we get the actual data from the API
 Future<List<Node>> getNodeFromFakeServer() async {
-  String data_str = await rootBundle.loadString('assets/api_json/nodes.json');
+  String dataStr = await rootBundle.loadString('assets/api_json/nodes.json');
 
   return await Future.delayed(Duration(seconds: 2), (){
-      List<dynamic> data =  jsonDecode(data_str);
+      List<dynamic> data =  jsonDecode(dataStr);
       List<Node> nodes = data.map((data) => Node.fromJson(data)).toList();
       return nodes;
   });

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:icam_app/localization/localization_constants.dart';
 import 'package:icam_app/main.dart';
 
-import 'package:url_launcher/url_launcher.dart';
-
 class CartagenaPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
