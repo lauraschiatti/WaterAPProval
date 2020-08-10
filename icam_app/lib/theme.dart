@@ -87,60 +87,6 @@ final ThemeData myTheme = ThemeData(
     ),
   ),
   textTheme: TextTheme(
-    display4: TextStyle(
-      color: Color(0x8a000000),
-      fontSize: 96,
-      fontWeight: FontWeight.w300,
-      fontStyle: FontStyle.normal,
-    ),
-    display3: TextStyle(
-      color: Color(0x8a000000),
-      fontSize: 60,
-      fontWeight: FontWeight.w300,
-      fontStyle: FontStyle.normal,
-    ),
-    display2: TextStyle(
-      color: Color(0x8a000000),
-      fontSize: 48,
-      fontWeight: FontWeight.w400,
-      fontStyle: FontStyle.normal,
-    ),
-    display1: TextStyle(
-      color: Color(0x8a000000),
-      fontSize: 34,
-      fontWeight: FontWeight.w400,
-      fontStyle: FontStyle.normal,
-    ),
-    headline: TextStyle(
-      color: Color(0xdd000000),
-      fontSize: 24,
-      fontWeight: FontWeight.w400,
-      fontStyle: FontStyle.normal,
-    ),
-    title: TextStyle(
-      color: Color(0xdd000000),
-      fontSize: 20,
-      fontWeight: FontWeight.w500,
-      fontStyle: FontStyle.normal,
-    ),
-    subhead: TextStyle(
-      color: Color(0xdd000000),
-      fontSize: 16,
-      fontWeight: FontWeight.w400,
-      fontStyle: FontStyle.normal,
-    ),
-    body2: TextStyle(
-      color: Color(0xdd000000),
-      fontSize: 14,
-      fontWeight: FontWeight.w400,
-      fontStyle: FontStyle.normal,
-    ),
-    body1: TextStyle(
-      color: Color(0xdd000000),
-      fontSize: 16,
-      fontWeight: FontWeight.w400,
-      fontStyle: FontStyle.normal,
-    ),
     caption: TextStyle(
       color: Color(0x8a000000),
       fontSize: 12,
@@ -149,12 +95,6 @@ final ThemeData myTheme = ThemeData(
     ),
     button: TextStyle(
       color: Color(0xdd000000),
-      fontSize: 14,
-      fontWeight: FontWeight.w500,
-      fontStyle: FontStyle.normal,
-    ),
-    subtitle: TextStyle(
-      color: Color(0xff000000),
       fontSize: 14,
       fontWeight: FontWeight.w500,
       fontStyle: FontStyle.normal,
@@ -167,60 +107,7 @@ final ThemeData myTheme = ThemeData(
     ),
   ),
   primaryTextTheme: TextTheme(
-    display4: TextStyle(
-      color: Color(0xb3ffffff),
-      fontSize: 96,
-      fontWeight: FontWeight.w300,
-      fontStyle: FontStyle.normal,
-    ),
-    display3: TextStyle(
-      color: Color(0xb3ffffff),
-      fontSize: 60,
-      fontWeight: FontWeight.w300,
-      fontStyle: FontStyle.normal,
-    ),
-    display2: TextStyle(
-      color: Color(0xb3ffffff),
-      fontSize: 48,
-      fontWeight: FontWeight.w400,
-      fontStyle: FontStyle.normal,
-    ),
-    display1: TextStyle(
-      color: Color(0xb3ffffff),
-      fontSize: 34,
-      fontWeight: FontWeight.w400,
-      fontStyle: FontStyle.normal,
-    ),
-    headline: TextStyle(
-      color: Color(0xffffffff),
-      fontSize: 24,
-      fontWeight: FontWeight.w400,
-      fontStyle: FontStyle.normal,
-    ),
-    title: TextStyle(
-      color: Color(0xffffffff),
-      fontSize: 20,
-      fontWeight: FontWeight.w500,
-      fontStyle: FontStyle.normal,
-    ),
-    subhead: TextStyle(
-      color: Color(0xffffffff),
-      fontSize: 16,
-      fontWeight: FontWeight.w400,
-      fontStyle: FontStyle.normal,
-    ),
-    body2: TextStyle(
-      color: Color(0xffffffff),
-      fontSize: 14,
-      fontWeight: FontWeight.w400,
-      fontStyle: FontStyle.normal,
-    ),
-    body1: TextStyle(
-      color: Color(0xffffffff),
-      fontSize: 16,
-      fontWeight: FontWeight.w400,
-      fontStyle: FontStyle.normal,
-    ),
+
     caption: TextStyle(
       color: Color(0xb3ffffff),
       fontSize: 12,
@@ -233,12 +120,7 @@ final ThemeData myTheme = ThemeData(
       fontWeight: FontWeight.w500,
       fontStyle: FontStyle.normal,
     ),
-    subtitle: TextStyle(
-      color: Color(0xffffffff),
-      fontSize: 14,
-      fontWeight: FontWeight.w500,
-      fontStyle: FontStyle.normal,
-    ),
+
     overline: TextStyle(
       color: Color(0xffffffff),
       fontSize: 10,
@@ -247,60 +129,6 @@ final ThemeData myTheme = ThemeData(
     ),
   ),
   accentTextTheme: TextTheme(
-    display4: TextStyle(
-      color: Color(0xb3ffffff),
-      fontSize: 96,
-      fontWeight: FontWeight.w300,
-      fontStyle: FontStyle.normal,
-    ),
-    display3: TextStyle(
-      color: Color(0xb3ffffff),
-      fontSize: 60,
-      fontWeight: FontWeight.w300,
-      fontStyle: FontStyle.normal,
-    ),
-    display2: TextStyle(
-      color: Color(0xb3ffffff),
-      fontSize: 48,
-      fontWeight: FontWeight.w400,
-      fontStyle: FontStyle.normal,
-    ),
-    display1: TextStyle(
-      color: Color(0xb3ffffff),
-      fontSize: 34,
-      fontWeight: FontWeight.w400,
-      fontStyle: FontStyle.normal,
-    ),
-    headline: TextStyle(
-      color: Color(0xffffffff),
-      fontSize: 24,
-      fontWeight: FontWeight.w400,
-      fontStyle: FontStyle.normal,
-    ),
-    title: TextStyle(
-      color: Color(0xffffffff),
-      fontSize: 20,
-      fontWeight: FontWeight.w500,
-      fontStyle: FontStyle.normal,
-    ),
-    subhead: TextStyle(
-      color: Color(0xffffffff),
-      fontSize: 16,
-      fontWeight: FontWeight.w400,
-      fontStyle: FontStyle.normal,
-    ),
-    body2: TextStyle(
-      color: Color(0xffffffff),
-      fontSize: 14,
-      fontWeight: FontWeight.w400,
-      fontStyle: FontStyle.normal,
-    ),
-    body1: TextStyle(
-      color: Color(0xffffffff),
-      fontSize: 16,
-      fontWeight: FontWeight.w400,
-      fontStyle: FontStyle.normal,
-    ),
     caption: TextStyle(
       color: Color(0xb3ffffff),
       fontSize: 12,
@@ -308,12 +136,6 @@ final ThemeData myTheme = ThemeData(
       fontStyle: FontStyle.normal,
     ),
     button: TextStyle(
-      color: Color(0xffffffff),
-      fontSize: 14,
-      fontWeight: FontWeight.w500,
-      fontStyle: FontStyle.normal,
-    ),
-    subtitle: TextStyle(
       color: Color(0xffffffff),
       fontSize: 14,
       fontWeight: FontWeight.w500,
@@ -352,7 +174,6 @@ final ThemeData myTheme = ThemeData(
       fontStyle: FontStyle.normal,
     ),
     errorMaxLines: null,
-    hasFloatingPlaceholder: true,
     isDense: false,
     contentPadding: EdgeInsets.only(top: 12, bottom: 12, left: 0, right: 0),
     isCollapsed: false,
