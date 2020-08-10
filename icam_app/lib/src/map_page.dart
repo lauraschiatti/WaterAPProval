@@ -3,6 +3,7 @@ import 'package:icam_app/localization/localization_constants.dart';
 import 'dart:async';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:icam_app/models/node.dart' as node;
+import 'package:icam_app/routes/route_names.dart';
 import 'package:icam_app/theme.dart';
 
 class MapControllerPage extends StatefulWidget {
@@ -16,14 +17,14 @@ class MapControllerPageState extends State<MapControllerPage> {
 
   // google map setup
   Completer<GoogleMapController> _controller = Completer();
-  static const LatLng _center = const LatLng(10.412497, -75.535607); // center at cartagena
+  static const LatLng _center = const LatLng(
+      10.412497, -75.535607); // center at cartagena
   LatLng _lastMapPosition = _center; // default center
   MapType _currentMapType = MapType.normal;
 
   final Set<Marker> _markers = {};
 
-  _onMapCreated(GoogleMapController controller) async{
-
+  _onMapCreated(GoogleMapController controller) async {
     _controller.complete(controller);
 
     // add markers to map
@@ -32,57 +33,62 @@ class MapControllerPageState extends State<MapControllerPage> {
       _markers.clear();
       for (final node in nodes) {
         final marker = Marker(
-          markerId: MarkerId(node.id),
-          position: LatLng(node.coordinates[0], node.coordinates[1]),
-          infoWindow: InfoWindow(
-            title: node.name,
-            snippet: node.status
-          ),
-          icon: BitmapDescriptor.defaultMarker,
-          onTap: _onMarkerTapped
+            markerId: MarkerId(node.id),
+            position: LatLng(node.coordinates[0], node.coordinates[1]),
+            infoWindow: InfoWindow(
+                title: node.name,
+                snippet: node.status
+            ),
+            icon: BitmapDescriptor.defaultMarker,
+            onTap: () {
+              print("tapped marker");
+              //navigate to details page
+//            Navigator.pushNamed(
+//                context,
+//                nodeDetailRoute,
+//                arguments: node
+//            );
+            }
         );
         _markers.add(marker);
       }
     });
   }
 
-  _onCameraMove(CameraPosition position){
+  _onCameraMove(CameraPosition position) {
     _lastMapPosition = position.target;
   }
 
-  _onMarkerTapped(){
-
-  }
-
-  _onMapTypeButtonPressed(){
+  _onMapTypeButtonPressed() {
     setState(() {
-      _currentMapType = _currentMapType  == MapType.normal
+      _currentMapType = _currentMapType == MapType.normal
           ? MapType.satellite
           : MapType.normal;
     });
   }
 
-  _onAddMarkerButtonPressed(){
+  _onAddMarkerButtonPressed() {
     // HEX/RGB to HSV color conversion:
     // 0xFF0288D1 ==> rgb(2, 119, 189) ==> hsl(320, 100%, 51%)
 //    const double hue = 202;
 
     setState(() {
       _markers.add(Marker(
-        markerId: MarkerId(_lastMapPosition.toString()),
-        position: _lastMapPosition,
-        infoWindow: InfoWindow(
-          title: "This is a title",
-          snippet: "This is a snippet"
-        ),
-        icon: BitmapDescriptor.defaultMarker//.defaultMarkerWithHue(hue)
+          markerId: MarkerId(_lastMapPosition.toString()),
+          position: _lastMapPosition,
+          infoWindow: InfoWindow(
+              title: "This is a title",
+              snippet: "This is a snippet"
+          ),
+          icon: BitmapDescriptor.defaultMarker //.defaultMarkerWithHue(hue)
       ));
     });
   }
 
-  Widget button(Function function, IconData icon, String heroTag){
+  Widget button(Function function, IconData icon, String heroTag) {
     return new FloatingActionButton(
-      heroTag: heroTag, // to avoid scheduler warning
+      heroTag: heroTag,
+      // to avoid scheduler warning
       onPressed: function,
       materialTapTargetSize: MaterialTapTargetSize.padded,
       backgroundColor: myTheme.primaryColor,
@@ -98,11 +104,33 @@ class MapControllerPageState extends State<MapControllerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _buildBody(context)
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(right: 130.0),
+        child: FloatingActionButton.extended(
+          icon: Icon(
+            Icons.location_searching,
+            color: Colors.white,
+          ), //
+          label: Text(
+            getTranslated(context, "map_text"),
+            style: TextStyle(
+                fontSize: 12,
+                color: Colors.white
+            ),
+          ), //
+          backgroundColor: Colors.black54,
+          onPressed: () {
+            Navigator.pushNamed(context, cgenaRoute); // cartagena_page
+          },
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      body: _buildBody(context),
     );
   }
 
-  _buildBody(context){
+
+  _buildBody(context) {
     return Stack(
       children: <Widget>[
         GoogleMap(
@@ -124,22 +152,13 @@ class MapControllerPageState extends State<MapControllerPage> {
               children: <Widget>[
                 button(_onMapTypeButtonPressed, Icons.map, "map"),
                 SizedBox(height: 16.0),
-                button(_onAddMarkerButtonPressed, Icons.add_location, "add_location"),
+                button(_onAddMarkerButtonPressed, Icons.add_location,
+                    "add_location"),
                 SizedBox(height: 16.0),
               ],
             ),
           ),
         ),
-        Padding(
-          padding: EdgeInsets.only(top: 8.0, bottom: 16.0),
-          child: Text(
-            getTranslated(context, "map_text"),
-            style: TextStyle(
-                fontSize: 14,
-                backgroundColor: Colors.white
-            ),
-          )
-        )
       ],
     );
   }

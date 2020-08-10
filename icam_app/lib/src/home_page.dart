@@ -110,6 +110,8 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
+
+// Drawer
 class DrawerList extends StatefulWidget{
   @override
   _DrawerListState createState() => _DrawerListState();
@@ -217,7 +219,6 @@ DrawerHeader _buildDrawerHeader(context){
       )
   );
 }
-
 
 ListTile _buildListTile({context, icon, title, route}){
   return ListTile(
