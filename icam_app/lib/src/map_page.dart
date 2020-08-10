@@ -18,9 +18,7 @@ class MapControllerPageState extends State<MapControllerPage> {
 
   // google map setup
   Completer<GoogleMapController> _controller = Completer();
-
-  static const LatLng _center = const LatLng(
-      10.418252, -75.537818); // center at cartagena
+  static const LatLng _center = const LatLng(10.418252, -75.537818);
   LatLng _lastMapPosition = _center; // default center
   MapType _currentMapType = MapType.normal;
 
@@ -37,23 +35,7 @@ class MapControllerPageState extends State<MapControllerPage> {
     setState(() {
       _markers.clear();
       for (final node in nodes) {
-        final marker = Marker(
-            markerId: MarkerId(node.id),
-            position: LatLng(node.coordinates[0], node.coordinates[1]),
-            infoWindow: InfoWindow(
-                title: node.name,
-                snippet: node.status,
-                onTap: () {
-                  // InfoWindow clicked
-                  Navigator.pushNamed(
-                    context,
-                    nodeDetailRoute,
-                    arguments: node
-                  );
-                }
-            ),
-            icon: BitmapDescriptor.defaultMarker,
-        );
+        Marker marker = _addMarker(node);
         // add marker to map
         _markers.add(marker);
       }
@@ -89,22 +71,96 @@ class MapControllerPageState extends State<MapControllerPage> {
     });
   }
 
-  _onAddMarkerButtonPressed() {
+  Marker _addMarker(node){
+
     // HEX/RGB to HSV color conversion:
     // 0xFF0288D1 ==> rgb(2, 119, 189) ==> hsl(320, 100%, 51%)
 //    const double hue = 202;
 
-    setState(() {
-      _markers.add(Marker(
-          markerId: MarkerId(_lastMapPosition.toString()),
-          position: _lastMapPosition,
-          infoWindow: InfoWindow(
-              title: "This is a title",
-              snippet: "This is a snippet"
+    final marker = Marker(
+      markerId: MarkerId(node.id),
+      position: LatLng(node.coordinates[0], node.coordinates[1]),
+      infoWindow: InfoWindow(
+          title: node.name,
+          snippet: node.status,
+          onTap: () {
+            // InfoWindow clicked
+            Navigator.pushNamed(
+                context,
+                nodeDetailRoute,
+                arguments: node
+            );
+          }
+      ),
+      icon: BitmapDescriptor.defaultMarker, //.defaultMarkerWithHue(hue)
+    );
+    return marker;
+  }
+
+  Future<void> _showConventionDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          titlePadding: EdgeInsets.fromLTRB(15, 15,15, 0),
+          title: Text(
+            'ICAMpff (estuary) values',
+            style: TextStyle(
+              fontWeight: FontWeight.bold
+            ),
+            textAlign: TextAlign.center,
           ),
-          icon: BitmapDescriptor.defaultMarker //.defaultMarkerWithHue(hue)
-      ));
-    });
+          content: SingleChildScrollView(
+            padding: EdgeInsets.all(0),
+            child: ListBody(
+              children: <Widget>[
+                _DialogItem(
+                  icon: Icons.brightness_1,
+                  color: Colors.black54,
+                  text: 'Unavailable',
+                ),
+                _DialogItem(
+                  icon: Icons.brightness_1,
+                  color: Colors.red,
+                  text: 'Poor (0-25)',
+                ),
+                _DialogItem(
+                  icon: Icons.brightness_1,
+                  color: Colors.orange,
+                  text: 'Inadequate (26-50)',
+                ),
+                _DialogItem(
+                  icon: Icons.brightness_1,
+                  color: Colors.yellow,
+                  text: 'Acceptable (51-70)',
+                ),
+                _DialogItem(
+                  icon: Icons.brightness_1,
+                  color: Colors.green,
+                  text: 'Adequate (71-90)',
+                ),
+                _DialogItem(
+                  icon: Icons.brightness_1,
+                  color: Colors.blue[900],
+                  text: 'Optimal (91-100)',
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Close'),
+              color: myTheme.primaryColor,
+              textColor: Colors.white,
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   Widget button(Function function, IconData icon, String heroTag) {
@@ -116,7 +172,7 @@ class MapControllerPageState extends State<MapControllerPage> {
       backgroundColor: myTheme.primaryColor,
       child: Icon(
         icon,
-        size: 36.0,
+        size: 34.0,
         color: Colors.white,
       ),
     );
@@ -151,7 +207,6 @@ class MapControllerPageState extends State<MapControllerPage> {
   }
 
   _buildBody(context) {
-
     return Stack(
       children: <Widget>[
         GoogleMap(
@@ -166,24 +221,57 @@ class MapControllerPageState extends State<MapControllerPage> {
           markers: _markers,
 //          polygons: _polygons,
           onCameraMove: _onCameraMove,
-
+          mapToolbarEnabled: false // disable google maps navigation button
         ),
         Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: EdgeInsets.all(18.0),
           child: Align(
             alignment: Alignment.topRight,
             child: Column(
               children: <Widget>[
                 button(_onMapTypeButtonPressed, Icons.map, "map"),
                 SizedBox(height: 16.0),
-                button(_onAddMarkerButtonPressed, Icons.add_location,
-                    "add_location"),
-                SizedBox(height: 16.0),
+                button(_showConventionDialog, Icons.data_usage, "show_convention"),
+                SizedBox(height: 16.0)
               ],
             ),
           ),
         ),
       ],
+    );
+  }
+}
+
+
+class _DialogItem extends StatelessWidget {
+  const _DialogItem({
+    Key key,
+    this.icon,
+    this.color,
+    this.text,
+  }) : super(key: key);
+
+  final IconData icon;
+  final Color color;
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return SimpleDialogOption(
+      padding: EdgeInsets.all(2),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Icon(icon, size: 30, color: color),
+          Flexible(
+            child: Padding(
+              padding: const EdgeInsetsDirectional.only(start: 5, end: 0),
+              child: Text(text),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

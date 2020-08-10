@@ -24,5 +24,14 @@
   "no_restrictions_text": "Unlike other institutions with monitoring plans on water bodies of the internal bayous and lagoons system of Cartagena that restrict access to the data taken, ",
   "no_restrictions_text2": " provides information available for the entire community.",
   "download": "Download",
-  "download_text": "After having filtered the data, the information is available either as a Comma Separated Values (.csv) file or as a graph, which may be also visualized in the platform."
+  "download_text": "After having filtered the data, the information is available either as a Comma Separated Values (.csv) file or as a graph, which may be also visualized in the platform.",
+  "icam_values": "ICAMpff (estuary) values",
+  "unavailable": "Unavailable",
+  "poor": "Poor (0-25%)",
+  "inadequate": "Inadequate (26-50%)",
+  "acceptable": "Acceptable (51-70%)",
+  "adequate": "Adequate (71-90%)",
+  "optimal": "Optimal (91-100%)",
+  "close": "Close"
+
 }

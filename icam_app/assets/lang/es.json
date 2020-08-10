@@ -24,6 +24,13 @@
   "no_restrictions_text": "A diferencia de otras instituciones con planes de monitoreo de los cuerpos de agua de Cartagena, los cuales restringen el acceso a la informacióń obtenida, ",
   "no_restrictions_text2": "  deja su información disponible para toda la comunidad.",
   "download": "Descarga",
-  "download_text": "Luego de consultar la información, esta puede ser descargada en el formato de texto separado por comas (csv) o como un gráfico."
-
+  "download_text": "Luego de consultar la información, esta puede ser descargada en el formato de texto separado por comas (csv) o como un gráfico.",
+  "icam_values": "Escala de valoración del ICAMpff",
+  "unavailable": "No disponible",
+  "poor": "Pésima (0-25%)",
+  "inadequate": "Inadecuada (26-50%)",
+  "acceptable": "Aceptable (51-70%)",
+  "adequate": "Adecuata (71-90%)",
+  "optimal": "Óptima (91-100%)",
+  "close": "Cerrar"
 }
