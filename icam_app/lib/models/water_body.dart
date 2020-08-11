@@ -4,6 +4,8 @@
 //     final waterBody = waterBodyFromJson(jsonString);
 import 'dart:convert';
 
+import 'package:flutter/services.dart';
+
 List<WaterBody> waterBodyFromJson(String str) => List<WaterBody>.from(json.decode(str).map((x) => WaterBody.fromJson(x)));
 
 String waterBodyToJson(List<WaterBody> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
@@ -82,5 +84,19 @@ class Properties {
     "name": name,
     "icam": icam,
   };
+}
+
+// mimics the behaviour of when we get the actual data from the API
+Future<List<WaterBody>> getNodeFromFakeServer() async {
+  String dataStr = await rootBundle
+      .loadString('assets/api_json/water_bodies.json');
+
+  return await Future.delayed(Duration(seconds: 2), (){
+    List<dynamic> data =  jsonDecode(dataStr);
+    List<WaterBody> water_bodies = data.map((data) =>
+        WaterBody.fromJson(data)
+    ).toList();
+    return water_bodies;
+  });
 }
 
