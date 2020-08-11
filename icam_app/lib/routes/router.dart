@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:icam_app/models/node.dart';
 import 'package:icam_app/src/about.dart';
-import 'package:icam_app/src/info.dart';
 import 'package:icam_app/src/settings.dart';
 import 'package:icam_app/src/home_page.dart';
 import 'package:icam_app/src/map_page.dart';
@@ -25,8 +24,6 @@ class Router {
         return MaterialPageRoute(builder: (_) => AboutPage());
       case settingsRoute:
         return MaterialPageRoute(builder: (_) => SettingsPage());
-      case infoRoute:
-        return MaterialPageRoute(builder: (_) => InfoPage());
       case cgenaRoute:
         return MaterialPageRoute(builder: (_) => CartagenaPage());
 

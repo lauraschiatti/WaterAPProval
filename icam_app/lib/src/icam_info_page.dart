@@ -7,20 +7,16 @@ final priceTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
 );
 
-class InfoPage extends StatelessWidget {
+class ICAMInfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-//      backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Text("Info")
-      ),
       body: Stack(
         children: <Widget> [
           ListView(
             padding: const EdgeInsets.fromLTRB(
               16.0,
-              kToolbarHeight, //+ 10.0,
+              kToolbarHeight - 20.0,
               16.0,
               16.0,
             ),

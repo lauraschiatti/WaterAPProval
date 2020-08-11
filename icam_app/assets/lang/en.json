@@ -1,14 +1,14 @@
 {
   "profile": "Profile",
   "no_account": "No account registered",
-  "about": "Info app",
+  "info_app": "Info app",
   "settings": "Settings",
   "terms": "Terms of Service",
   "tell_friends": "Tell friends",
   "reminders": "Reminders",
   "encyclopedia": "Encyclopedia",
   "map": "Map",
-  "export": "Export data",
+  "export": "Export",
   "map_text": "Cartagena de Indias, CO",
   "project_info": "Project Information",
   "project_description": "is a web-based platform that supports the monitoring program of the bayous and lagoons system of Cartagena de Indias. This program is freely available: you may redistribute and/or modify it under the terms of the license GNU Affero General Public License or any other subsequent version. For more information, click here to read the GNU Affero General Public License.",
@@ -32,6 +32,6 @@
   "acceptable": "Acceptable (51-70%)",
   "adequate": "Adequate (71-90%)",
   "optimal": "Optimal (91-100%)",
-  "close": "Close"
-
+  "close": "Close",
+  "version": "Version"
 }

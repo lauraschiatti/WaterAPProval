@@ -1,14 +1,14 @@
 {
   "profile": "Perfil",
   "no_account": "Ninguna cuenta registrada",
-  "about": "Info app",
+  "info_app": "Info de la aplicación",
   "settings": "Configuración",
   "terms": "Términos y condiciones",
   "tell_friends": "Compartir ",
   "reminders": "Recordatorios",
   "encyclopedia": "Enciclopedia",
   "map": "Mapa",
-  "export": "Exportar datos",
+  "export": "Exportar",
   "map_text": "Cartagena de Indias, CO",
   "project_info": "Información",
   "project_description": "es una plataforma que soporta un programa de monitoreo del sistema de caños y lagunas de Cartagena de Indias. Este programa es software libre: usted puede resdistribuírlo y/o modificarlo bajo los términos de la licencia GNU Affero General Public License, u opcionalemente cualquier versión posterior. Para más información, haga clic aquí para leer la GNU Affero General Public License.",
@@ -32,5 +32,6 @@
   "acceptable": "Aceptable (51-70%)",
   "adequate": "Adecuata (71-90%)",
   "optimal": "Óptima (91-100%)",
-  "close": "Cerrar"
+  "close": "Cerrar",
+  "version": "Versión"
 }

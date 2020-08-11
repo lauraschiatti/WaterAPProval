@@ -5,7 +5,6 @@ const String homeRoute = '/';
 const String mapRoute = 'map';
 const String aboutRoute = 'about';
 const String settingsRoute = 'settings';
-const String infoRoute = 'info';
 const String cgenaRoute = 'cartagena';
 
 const String nodeDetailRoute = 'node_detail';
