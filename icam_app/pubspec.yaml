@@ -30,10 +30,13 @@ dependencies:
   # persistent data
   shared_preferences: ^0.5.6+3
   url_launcher: ^5.3.0
-  google_maps_flutter: ^0.5.21+15
+  google_maps_flutter: #0.5.20+1
   # generation of RFC4122 UUIDs.
   uuid: ^2.2.0
   get_version: ^0.2.2
+  # interact with a SQLite database
+  sqflite:
+  path:
 
 dev_dependencies:
   # to store keys on .env file

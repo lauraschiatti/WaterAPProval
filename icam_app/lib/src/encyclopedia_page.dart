@@ -7,7 +7,7 @@ final priceTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
 );
 
-class ICAMInfoPage extends StatelessWidget {
+class EncyclopediaPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

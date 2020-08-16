@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:icam_app/models/node.dart';
 import 'package:icam_app/src/about.dart';
+import 'package:icam_app/src/export_page.dart';
+import 'package:icam_app/src/encyclopedia_page.dart';
+import 'package:icam_app/src/nodes/nodes_show.dart';
 import 'package:icam_app/src/settings.dart';
 import 'package:icam_app/src/home_page.dart';
 import 'package:icam_app/src/map_page.dart';
@@ -26,10 +29,16 @@ class Router {
         return MaterialPageRoute(builder: (_) => SettingsPage());
       case cgenaRoute:
         return MaterialPageRoute(builder: (_) => CartagenaPage());
+      case exportRoute:
+        return MaterialPageRoute(builder: (_) => ExportControllerPage());
+      case encyclopediaRoute:
+        return MaterialPageRoute(builder: (_) => EncyclopediaPage());
 
       case nodeDetailRoute:
         var node = settings.arguments as Node;
         return MaterialPageRoute(builder: (_) => NodeDetailPage(node));
+      case nodesShowRoute:
+        return MaterialPageRoute(builder: (_) => NodesShowPage());
     }
 
     // if none of the cases matches
