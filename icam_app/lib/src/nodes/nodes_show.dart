@@ -4,7 +4,6 @@ import 'package:icam_app/models/node.dart';
 import 'package:icam_app/services/db_provider.dart';
 import 'package:icam_app/theme.dart';
 
-import 'dart:convert';
 
 
 class NodesShowPage extends StatefulWidget {
@@ -39,7 +38,12 @@ class _NodesShowPageState extends State<NodesShowPage> {
           title: Text("Available Nodes"),
           actions: <Widget>[
 //            IconButton(icon: Icon(Icons.clear), onPressed: () {}),
-//            IconButton(onPressed: () {}, icon: Icon(Icons.arrow_back))
+//            IconButton(
+//                onPressed: () {
+//                  Navigator.pop(context,true);
+//                },
+//                icon: Icon(Icons.arrow_back)
+//            )
           ],
 //          actions: <Widget>[
 //            IconButton(onPressed: (){
@@ -49,7 +53,7 @@ class _NodesShowPageState extends State<NodesShowPage> {
 //          ],
         ),
         body: Container(
-          padding: EdgeInsets.fromLTRB(20, 12, 20, 12),
+          padding: EdgeInsets.all(14),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -99,7 +103,7 @@ class _NodesShowPageState extends State<NodesShowPage> {
                           alreadySaved ? Icons.favorite : Icons.favorite_border,
                           color: alreadySaved ? Colors.red : null,
                         ),
-                        onTap: () { // NEW lines from here...
+                        onTap: () {
                           setState(() {
                             if (alreadySaved) {
                               _saved.remove(node);

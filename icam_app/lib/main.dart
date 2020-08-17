@@ -6,23 +6,26 @@ import 'package:icam_app/routes/router.dart';
 import 'package:icam_app/theme.dart';
 import 'package:icam_app/src/splash_page.dart';
 import 'package:flutter_config/flutter_config.dart';
-
 import 'localization/app_localizations.dart';
 
 void main() async {
-   WidgetsFlutterBinding.ensureInitialized();
-
+  WidgetsFlutterBinding.ensureInitialized();
   // load all environment variables
   await FlutterConfig.loadEnvVariables();
-
   runApp(MyApp());
 }
+
+
+//void setPermissions() async{
+//  Map<PermissionGroup, PermissionStatus> permissions =
+//  await PermissionHandler().requestPermissions([PermissionGroup.location]);
+//}
 
 final appTitle = 'ICAM App';
 
 class MyApp extends StatefulWidget {
-  // This widget is the root of your application.
 
+  // locale
   static void setLocale(BuildContext context, Locale locale){
     _MyAppState state = context.findAncestorStateOfType<_MyAppState>();
     state.setLocale(locale);
@@ -33,8 +36,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+
   // current locale
   Locale _locale;
+
   // change locale from anywhere in the app
   void setLocale(Locale locale){
     setState(() {
@@ -65,6 +70,7 @@ class _MyAppState extends State<MyApp> {
         child: Center(child: CircularProgressIndicator()),
       );
     } else {
+
       return MaterialApp(
         title: appTitle,   // onGenerateTitle
         theme: myTheme,

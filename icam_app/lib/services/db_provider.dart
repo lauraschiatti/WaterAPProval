@@ -58,22 +58,29 @@ class DBProvider {
   }
 
   // retrieve all the nodes from the favorite_nodes table.
-  Future<List<Node>> nodes() async {
+  Future<List<Node>> getNodes() async {
     // Get a reference to the database.
     final Database db = await database;
 
     // Query the table for all The Nodes.
+//    var res = await db.query(FAVORITE_NODES_TABLE_NAME);
+//
+//    if (res.length == 0){
+//      return null;
+//    } else {
+//      var resMap = res[0];
+//      return resMap.isNotEmpty ? resMap : null;
+//    }
     final List<Map<String, dynamic>> maps =
             await db.query(FAVORITE_NODES_TABLE_NAME);
 
-    // Convert the List<Map<String, dynamic> into a List<Node>.
+
+    // convert the List<Map> into a List<Node>.
     return List.generate(maps.length, (i) {
       return Node(
-          id: maps[i]['id'],
+          id: maps[i]['_id'],
           name: maps[i]['name'],
           location: maps[i]['location'],
-//        latitude: maps[i]['latitude'],
-//        longitude: maps[i]['longitude'],
           status: maps[i]['status']
       );
     });
@@ -94,7 +101,7 @@ class DBProvider {
       whereArgs: [id],
     );
 
-    print("node with id: ${id} deleted");
+    print("node with id: $id deleted");
   }
 
 }
