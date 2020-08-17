@@ -11,6 +11,7 @@ List<Node> nodeFromJson(String str) => List<Node>.from(json.decode(str).map((x) 
 
 String nodeToJson(List<Node> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
+
 class Node {
   Node({
     this.id,
@@ -28,6 +29,8 @@ class Node {
   String status;
   NodeTypeId nodeTypeId;
 
+  // status: Off, Non Real Time
+
   // get a map string dynamic and and convert it into an
   // instance of Node
   factory Node.fromJson(Map<String, dynamic> json) => Node(
@@ -44,9 +47,10 @@ class Node {
     "_id": id,
     "name": name,
     "location": location,
-    "coordinates": List<dynamic>.from(coordinates.map((x) => x)),
+    // flatten the model to consider supported types for sqlite.
+//    "coordinates": List<dynamic>.from(coordinates.map((x) => x)),
     "status": status == null ? null : status,
-    "node_type_id": nodeTypeIdValues.reverse[nodeTypeId],
+//    "node_type_id": nodeTypeIdValues.reverse[nodeTypeId],
   };
 }
 
@@ -73,7 +77,8 @@ class EnumValues<T> {
 }
 
 // mimics the behaviour of when we get the actual data from the API
-Future<List<Node>> getNodeFromFakeServer() async {
+//Future<List<Node>>
+getNodeFromFakeServer() async {
   String dataStr = await rootBundle
       .loadString('assets/api_json/nodes.json');
 

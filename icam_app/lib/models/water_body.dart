@@ -93,10 +93,10 @@ Future<List<WaterBody>> getNodeFromFakeServer() async {
 
   return await Future.delayed(Duration(seconds: 2), (){
     List<dynamic> data =  jsonDecode(dataStr);
-    List<WaterBody> water_bodies = data.map((data) =>
+    List<WaterBody> waterBodies = data.map((data) =>
         WaterBody.fromJson(data)
     ).toList();
-    return water_bodies;
+    return waterBodies;
   });
 }
 
