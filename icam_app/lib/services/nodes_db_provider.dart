@@ -3,7 +3,7 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:icam_app/models/node.dart';
 
-final FAVORITE_NODES_TABLE_NAME = "favorite_nodes";
+final favoriteNodesTableName = "favorite_nodes";
 
 class DBProvider {
 
@@ -49,7 +49,7 @@ class DBProvider {
     // `conflictAlgorithm` to use in case the same Node is inserted twice.
     // In this case, replace any previous data.
     await db.insert(
-      FAVORITE_NODES_TABLE_NAME,
+      favoriteNodesTableName,
       node.toJson(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
@@ -62,17 +62,8 @@ class DBProvider {
     // Get a reference to the database.
     final Database db = await database;
 
-    // Query the table for all The Nodes.
-//    var res = await db.query(FAVORITE_NODES_TABLE_NAME);
-//
-//    if (res.length == 0){
-//      return null;
-//    } else {
-//      var resMap = res[0];
-//      return resMap.isNotEmpty ? resMap : null;
-//    }
     final List<Map<String, dynamic>> maps =
-            await db.query(FAVORITE_NODES_TABLE_NAME);
+            await db.query(favoriteNodesTableName);
 
 
     // convert the List<Map> into a List<Node>.
@@ -94,7 +85,7 @@ class DBProvider {
 
     // Remove the Node from the database.
     await db.delete(
-      FAVORITE_NODES_TABLE_NAME,
+      favoriteNodesTableName,
       // Use a `where` clause to delete a specific node.
       where: "_id = ?",
       // Pass the Node's id as a whereArg to prevent SQL injection.
@@ -104,4 +95,47 @@ class DBProvider {
     print("node with id: $id deleted");
   }
 
+  // get a node
+  Future<void> getNode(String id) async {
+    // Get a reference to the database.
+    final db = await database;
+
+    // Remove the Node from the database.
+    var queryResult = await db.query(
+      favoriteNodesTableName,
+      where: "_id = ?",
+      whereArgs: [id],
+    );
+
+    return queryResult.isNotEmpty ? queryResult : null;
+  }
+
+  // filter favorite nodes by name
+  getNodesByName(name) async {
+
+    final Database db = await database;
+
+    final List<Map<String, dynamic>> maps =
+    await db.query(
+        favoriteNodesTableName,
+        where: "name LIKE ?",
+        whereArgs: ['%$name%']
+    );
+
+    // print the results
+    maps.forEach((row) => print(row));
+    // {_id: 59b75c5f9a8920223f2eabe4, name: Laguna de Chambacú,
+    // location: Centro, Puerto Duro. Frente al Gigante del Hogar, status: Off}
+
+
+    // convert the List<Map> into a List<Node>.
+    return List.generate(maps.length, (i) {
+      return Node(
+          id: maps[i]['_id'],
+          name: maps[i]['name'],
+          location: maps[i]['location'],
+          status: maps[i]['status']
+      );
+    });
+  }
 }
