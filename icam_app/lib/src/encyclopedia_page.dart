@@ -11,6 +11,9 @@ class EncyclopediaPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+          title: Text(getTranslated(context, "encyclopedia"))
+      ),
       body: Stack(
         children: <Widget> [
           ListView(

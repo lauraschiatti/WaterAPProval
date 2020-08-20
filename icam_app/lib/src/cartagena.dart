@@ -7,7 +7,7 @@ class CartagenaPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(getTranslated(context, "about")),
+          title: Text("Cartagena"),
         ),
         body: Stack(
             children: <Widget> [
@@ -19,8 +19,8 @@ class CartagenaPage extends StatelessWidget {
                     30.0,
                   ),
                   children: <Widget> [
-                    ProjectInfo(),
-                    Divider(height: 40),
+//                    ProjectInfo(),
+//                    Divider(height: 40),
                   ]
               )
             ]

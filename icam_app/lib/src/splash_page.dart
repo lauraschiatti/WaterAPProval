@@ -15,7 +15,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return new SplashScreen(
-      seconds: 5,
+      seconds: 4,
       backgroundColor: myTheme.primaryColor,
       title: Text(
         'ICAM App ',
