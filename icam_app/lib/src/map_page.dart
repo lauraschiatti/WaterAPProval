@@ -7,6 +7,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:uuid/uuid.dart';
 import 'package:icam_app/models/node.dart' as node;
 import 'package:icam_app/models/water_body.dart' as waterBody;
+import 'package:icam_app/classes/widgets.dart';
 
 
 class MapControllerPage extends StatefulWidget {
@@ -15,7 +16,6 @@ class MapControllerPage extends StatefulWidget {
   @override
   MapControllerPageState createState() => MapControllerPageState();
 }
-
 
 class MapControllerPageState extends State<MapControllerPage> {
 
@@ -54,21 +54,21 @@ class MapControllerPageState extends State<MapControllerPage> {
       _markers.clear();
       for (final node in nodes) {
         Marker marker = Marker(
-            markerId: MarkerId(node.id),
-            position: LatLng(node.coordinates[0], node.coordinates[1]),
-            infoWindow: InfoWindow(
-                title: node.name,
-                snippet: node.status,
-                onTap: () {
-                  // InfoWindow clicked
-                  Navigator.pushNamed(
-                      context,
-                      nodeDetailRoute,
-                      arguments: node
-                  );
-                }
-            ),
-            icon: BitmapDescriptor.defaultMarker, //.defaultMarkerWithHue(hue)
+          markerId: MarkerId(node.id),
+          position: LatLng(node.coordinates[0], node.coordinates[1]),
+          infoWindow: InfoWindow(
+              title: node.name,
+              snippet: node.status,
+              onTap: () {
+                // InfoWindow clicked
+                Navigator.pushNamed(
+                    context,
+                    nodeDetailRoute,
+                    arguments: node
+                );
+              }
+          ),
+          icon: BitmapDescriptor.defaultMarker, //.defaultMarkerWithHue(hue)
         );
         _markers.add(marker); // add marker to map
       }
@@ -102,7 +102,7 @@ class MapControllerPageState extends State<MapControllerPage> {
 
           for(var i = 0 ; i < coordinates.length ; i++) { // # polygons
             for(var j = 0; j < coordinates[i].length; j++){
-              print(" # points polygon ${i}: ${coordinates[i][j].length}");
+              print(" # points polygon $i: ${coordinates[i][j].length}");
 
               Polygon polygon = _addPolygon(coordinates[i][j], name, icam);
               _polygons.add(polygon);
@@ -176,14 +176,14 @@ class MapControllerPageState extends State<MapControllerPage> {
             style: TextStyle(
                 fontWeight: FontWeight.bold
             ),
-            textAlign: TextAlign.center,
+//            textAlign: TextAlign.left,
           ),
           content: SingleChildScrollView(
             padding: EdgeInsets.all(0),
             child: ListBody(
               children: <Widget>[
                 Text("ICAMpff: $icam",
-                style: TextStyle(fontStyle: FontStyle.italic)
+                    style: TextStyle(fontStyle: FontStyle.italic)
                 )
               ],
             ),
@@ -214,6 +214,7 @@ class MapControllerPageState extends State<MapControllerPage> {
   // FloatingActionButton
   Widget button(Function function, IconData icon, String heroTag) {
     return new FloatingActionButton(
+//      mini: true,
       heroTag: heroTag,
       // to avoid scheduler warning
       onPressed: function,
@@ -255,32 +256,32 @@ class MapControllerPageState extends State<MapControllerPage> {
             padding: EdgeInsets.all(0),
             child: ListBody(
               children: <Widget>[
-                _DialogItem(
+                DialogItem(
                   icon: Icons.brightness_1,
                   color: Colors.black54,
                   text: getTranslated(context, "unavailable"),
                 ),
-                _DialogItem(
+                DialogItem(
                   icon: Icons.brightness_1,
                   color: Colors.redAccent[700],
                   text: getTranslated(context, "poor"),
                 ),
-                _DialogItem(
+                DialogItem(
                   icon: Icons.brightness_1,
                   color: Colors.orange,
                   text: getTranslated(context, "inadequate"),
                 ),
-                _DialogItem(
+                DialogItem(
                   icon: Icons.brightness_1,
                   color: Colors.yellow[600],
                   text: getTranslated(context, "acceptable"),
                 ),
-                _DialogItem(
+                DialogItem(
                   icon: Icons.brightness_1,
                   color: Colors.green,
                   text: getTranslated(context, "adequate"),
                 ),
-                _DialogItem(
+                DialogItem(
                   icon: Icons.brightness_1,
                   color: myTheme.primaryColor,
                   text: getTranslated(context, "optimal"),
@@ -335,22 +336,26 @@ class MapControllerPageState extends State<MapControllerPage> {
       ),
     );
   }
+
   _buildBody(context) {
     return Stack(
       children: <Widget>[
         GoogleMap(
-            padding: EdgeInsets.fromLTRB(100.0,0,0,0),
-            onMapCreated: _onMapCreated,
-            initialCameraPosition: CameraPosition(
-                target: _center,
-                zoom: 15.0
-            ),
-            minMaxZoomPreference: MinMaxZoomPreference(12.0, 16.0),
-            mapType: _currentMapType,
-            markers: _markers,
-            polygons: _polygons,
-            onCameraMove: _onCameraMove,
-            mapToolbarEnabled: false // disable google maps navigation button
+          padding: EdgeInsets.fromLTRB(100.0,0,0,0),
+          onMapCreated: _onMapCreated,
+          initialCameraPosition: CameraPosition(
+              target: _center,
+              zoom: 13.0
+          ),
+          minMaxZoomPreference: MinMaxZoomPreference(null, 16.0),
+          mapType: _currentMapType,
+          markers: _markers,
+          polygons: _polygons,
+          onCameraMove: _onCameraMove,
+          mapToolbarEnabled: false, // disable google maps navigation button
+          zoomGesturesEnabled: true,
+          scrollGesturesEnabled: true,
+
         ),
         Padding(
           padding: EdgeInsets.all(18.0),
@@ -361,7 +366,7 @@ class MapControllerPageState extends State<MapControllerPage> {
                 button(_onMapTypeButtonPressed, Icons.map, "map"),
                 SizedBox(height: 16.0),
                 button(_showConventionDialog, Icons.data_usage, "show_convention"),
-                SizedBox(height: 16.0)
+                SizedBox(height: 16.0),
               ],
             ),
           ),
@@ -372,35 +377,3 @@ class MapControllerPageState extends State<MapControllerPage> {
 }
 
 // ICAMpff values Items
-class _DialogItem extends StatelessWidget {
-  const _DialogItem({
-    Key key,
-    this.icon,
-    this.color,
-    this.text,
-  }) : super(key: key);
-
-  final IconData icon;
-  final Color color;
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return SimpleDialogOption(
-      padding: EdgeInsets.all(2),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Icon(icon, size: 30, color: color),
-          Flexible(
-            child: Padding(
-              padding: const EdgeInsetsDirectional.only(start: 5, end: 0),
-              child: Text(text),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}

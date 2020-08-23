@@ -4,6 +4,7 @@ import 'package:icam_app/theme.dart';
 import 'package:icam_app/routes/route_names.dart';
 import 'package:icam_app/services/nodes_db_provider.dart';
 import 'package:icam_app/models/node.dart';
+import 'package:icam_app/localization/localization_constants.dart';
 
 
 class FavoritePage extends StatefulWidget {
@@ -29,6 +30,7 @@ class _FavoritePageState extends State<FavoritePage> {
     return _nodeData;
   }
 
+  // get nodes filtered by name
   _getFilteredNodes(name) async {
     final _nodeData = await DBProvider.db.getNodesByName(name);
     print("_nodeData: $_nodeData");
@@ -45,13 +47,19 @@ class _FavoritePageState extends State<FavoritePage> {
   }
 
   List<Node> nodes;
+  TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder(
-          future: _nodeFuture,
-          builder: (context, snapshot) {
+      body: GestureDetector(
+          onTap: () {
+            //  hide the soft keyboard clicking anywhere on the screen.
+            FocusScope.of(context).requestFocus(new FocusNode());
+          },
+          child: FutureBuilder(
+              future: _nodeFuture,
+              builder: (context, snapshot) {
 
 //            if (snapshot.hasError) {
 ////           if (snapshot.hasError) {
@@ -68,81 +76,84 @@ class _FavoritePageState extends State<FavoritePage> {
 //              ];
 //            }
 
-            if (!snapshot.hasData &&
-                snapshot.connectionState == ConnectionState.done) {
-              return Container(
-                  padding: EdgeInsets.all(14),
-                  child: Text("No Data Found")
-              );
-            }
+                if (!snapshot.hasData &&
+                    snapshot.connectionState == ConnectionState.done) {
+                  return Container(
+                      padding: EdgeInsets.all(14),
+                      child: Text(getTranslated(context, "no_nodes"))
+                  );
+                }
 
+                if (snapshot.hasData) {
+                  nodes = snapshot.data;
 
-            if (snapshot.hasData) {
-              nodes = snapshot.data;
-//              return ListViewNodes(nodes: snapshot.data);
-              return Container(
-                padding: EdgeInsets.all(14),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    _buildRichText(),
-                    _buildTextField(),
-                    Expanded(
+                  return Container(
+                    padding: EdgeInsets.fromLTRB(6, 10, 6, 10),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+//                    _buildRichText(),
+                        _buildTextField(),
+                        Expanded(
 //              child: RefreshIndicator(
 //                onRefresh: refreshList,
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: nodes.length,
-                          padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                          itemBuilder: (BuildContext cnt, int index) {
-                            final Node node = nodes[index];
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: nodes.length,
+                              padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                              itemBuilder: (BuildContext cnt, int index) {
+                                final Node node = nodes[index];
 
-                            return ListTile(
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 15),
-                              title: Text(node.name,
-                                style: TextStyle(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black
-                                ),
-                              ),
-                              subtitle: Text(
-                                node.location,
-                                style: TextStyle(
-                                  fontSize: 13,
-                                ),
-                              ),
-                              trailing: IconButton(
-                                icon: Icon(Icons.delete),
-                                color: Colors.red,
-                                onPressed: () {
-                                  DBProvider.db.deleteNode(node.id);
+                                return Card(
+                                    elevation: 18.0,
+                                    shadowColor: Colors.black12,
+                                    child: ListTile(
+                                        contentPadding: EdgeInsets.symmetric(
+                                            horizontal: 15
+                                        ),
+                                        title: Text(node.name,
+                                          style: TextStyle(
+                                              fontSize: 17,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black
+                                          ),
+                                        ),
+                                        subtitle: Text(
+                                          node.location,
+                                          style: TextStyle(
+                                            fontSize: 11,
+                                          ),
+                                        ),
+                                        trailing: IconButton(
+                                          icon: Icon(Icons.delete),
+                                          color: Colors.black38,
+                                          onPressed: () {
+                                            DBProvider.db.deleteNode(node.id);
 
-                                  setState(() {
-                                    nodes.removeAt(index);
-                                  });
-                                },
-                              ),
-                            );
-                          },
-                        )
+                                            setState(() {
+                                              nodes.removeAt(index);
+                                            });
+                                          },
+                                        )
+                                    )
+                                );
+                              },
+                            )
+                        ),
+                      ],
                     ),
-//          )
-                  ],
-                ),
-              );
-            }
+                  );
+                }
 
 
-            return Center(
-              child: Container(
-                child: new CircularProgressIndicator(),
-              ),
-            );
-          }
-
+                return Center(
+                  child: Container(
+                    child: new CircularProgressIndicator(),
+                  ),
+                );
+              }
+          )
       ),
       floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add_location, color: Colors.white),
@@ -192,11 +203,10 @@ class _FavoritePageState extends State<FavoritePage> {
     );
   }
 
-  TextEditingController _controller = TextEditingController();
-
   _buildTextField() {
+
     return Container(
-      padding: EdgeInsets.all(15),
+        padding: EdgeInsets.all(15),
         child: CupertinoTextField(
           controller: _controller,
           onChanged: updateNodes,
@@ -219,7 +229,7 @@ class _FavoritePageState extends State<FavoritePage> {
                 )
             ),
           ),
-          placeholder: "Search favorite nodes",
+          placeholder: getTranslated(context, "search_fav_nodes") + " (${nodes.length})",
         )
     );
   }

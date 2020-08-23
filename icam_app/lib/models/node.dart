@@ -87,8 +87,12 @@ getNodeFromFakeServer() async {
       List<Node> nodes = data.map((data) =>
           Node.fromJson(data)
       ).toList();
+
       return nodes;
+
+
   });
+
 }
 
 
