@@ -7,11 +7,18 @@ import 'package:icam_app/theme.dart';
 import 'package:icam_app/src/splash_page.dart';
 import 'package:flutter_config/flutter_config.dart';
 import 'localization/app_localizations.dart';
+import 'dart:io';
+import 'package:icam_app/classes/http_overwrite.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // load all environment variables
   await FlutterConfig.loadEnvVariables();
+
+  // Override HttpClient globally: without self-signed certificate
+  HttpOverrides.global = new MyHttpOverrides();
+
   runApp(MyApp());
 }
 
