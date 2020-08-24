@@ -21,7 +21,7 @@ class MapControllerPageState extends State<MapControllerPage> {
 
   // google map setup
   Completer<GoogleMapController> _controller = Completer();
-  static const LatLng _center = const LatLng(10.418252, -75.537818);
+  static const LatLng _center = const LatLng(10.4241961, -75.535);
   LatLng _lastMapPosition = _center; // default center
   MapType _currentMapType = MapType.normal;
 
@@ -39,6 +39,7 @@ class MapControllerPageState extends State<MapControllerPage> {
     // draw polygons to the map
     final water_bodies = await waterBody.getNodeFromFakeServer();
     _addPolygons(water_bodies);
+
   }
 
   _onCameraMove(CameraPosition position) {
@@ -355,7 +356,13 @@ class MapControllerPageState extends State<MapControllerPage> {
           mapToolbarEnabled: false, // disable google maps navigation button
           zoomGesturesEnabled: true,
           scrollGesturesEnabled: true,
-
+          // set bounds of the visible map
+          cameraTargetBounds: new CameraTargetBounds(
+            new LatLngBounds(
+              northeast: LatLng(10.452121, -75.505814),
+              southwest: LatLng(10.400885, -75.554942)
+            ),
+          ),
         ),
         Padding(
           padding: EdgeInsets.all(18.0),
@@ -375,5 +382,3 @@ class MapControllerPageState extends State<MapControllerPage> {
     );
   }
 }
-
-// ICAMpff values Items
