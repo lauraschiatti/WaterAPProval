@@ -8,6 +8,7 @@ import 'package:uuid/uuid.dart';
 import 'package:icam_app/models/node.dart' as node;
 import 'package:icam_app/models/water_body.dart' as waterBody;
 import 'package:icam_app/classes/widgets.dart';
+import 'package:icam_app/services/water_body_service.dart';
 
 
 class MapControllerPage extends StatefulWidget {
@@ -37,8 +38,8 @@ class MapControllerPageState extends State<MapControllerPage> {
     _addMarkers(nodes);
 
     // draw polygons to the map
-    final water_bodies = await waterBody.getNodeFromFakeServer();
-    _addPolygons(water_bodies);
+    final waterBodies = await fetchWaterBodies();
+    _addPolygons(waterBodies);
 
   }
 
@@ -78,22 +79,22 @@ class MapControllerPageState extends State<MapControllerPage> {
   }
 
   // polygons
-  _addPolygons(water_bodies){
+  _addPolygons(waterBodies){
     setState(() {
       _polygons.clear();
 
-      print("Number of waterbodies: ${water_bodies.length}");
+      print("Number of waterbodies: ${waterBodies.total}");
 
-      for (final body in water_bodies) {
-        String type = body.geometry.type;
-        List<List<List<dynamic>>> coordinates = body.geometry.coordinates;
+      for (final waterbody in waterBodies.data) {
+        String type = waterbody.geojson.geometry.type;
+        List<List<List<dynamic>>> coordinates = waterbody.geojson.geometry.coordinates;
 
-        String waterBodyId = body.waterBodyId;
-        String name = body.properties.name;
-        double icam = body.properties.icam;
+        String waterBodyId = waterbody.id;
+        String name = waterbody.name;
+        var icampffAvg = waterbody.icampffAvg;
 
         if(type == "Polygon"){
-          Polygon polygon = _addPolygon(coordinates[0], name, icam);
+          Polygon polygon = _addPolygon(coordinates[0], name, icampffAvg);
           _polygons.add(polygon); // add polygon to map
           print("Polygon: id: $waterBodyId, name: $name added");
 
@@ -105,7 +106,7 @@ class MapControllerPageState extends State<MapControllerPage> {
             for(var j = 0; j < coordinates[i].length; j++){
               print(" # points polygon $i: ${coordinates[i][j].length}");
 
-              Polygon polygon = _addPolygon(coordinates[i][j], name, icam);
+              Polygon polygon = _addPolygon(coordinates[i][j], name, icampffAvg);
               _polygons.add(polygon);
             }
           }
@@ -348,19 +349,20 @@ class MapControllerPageState extends State<MapControllerPage> {
               target: _center,
               zoom: 13.0
           ),
-          minMaxZoomPreference: MinMaxZoomPreference(null, 16.0),
+          // set a preference for minimum and maximum zoom.
+          minMaxZoomPreference: MinMaxZoomPreference(13.0, 16.0),
           mapType: _currentMapType,
           markers: _markers,
           polygons: _polygons,
           onCameraMove: _onCameraMove,
-          mapToolbarEnabled: false, // disable google maps navigation button
-          zoomGesturesEnabled: true,
+//          mapToolbarEnabled: false, // disable google maps navigation button
+//          zoomGesturesEnabled: true,
           scrollGesturesEnabled: true,
           // set bounds of the visible map
           cameraTargetBounds: new CameraTargetBounds(
             new LatLngBounds(
-              northeast: LatLng(10.452121, -75.505814),
-              southwest: LatLng(10.400885, -75.554942)
+                northeast: LatLng(10.452121, -75.505814),
+                southwest: LatLng(10.400885, -75.554942)
             ),
           ),
         ),
@@ -378,6 +380,53 @@ class MapControllerPageState extends State<MapControllerPage> {
             ),
           ),
         ),
+//        Positioned(
+//          top: 420,
+//          left: 340,
+//          child: Card(
+//            elevation: 2,
+//            child: Container(
+//              color: Color(0xFFFAFAFA),
+//              width: 40,
+//              height: 100,
+//              child: Column(
+//                children: <Widget>[
+//                  IconButton(
+//                      icon: Icon(Icons.add),
+//                      onPressed: () async {
+////                        var currentZoomLevel = await _controller.getZoomLevel();
+////
+////                        currentZoomLevel = currentZoomLevel + 2;
+////                        _controller.animateCamera(
+////                          CameraUpdate.newCameraPosition(
+////                            CameraPosition(
+////                              target: locationCoords,
+////                              zoom: currentZoomLevel,
+////                            ),
+////                          ),
+////                        );
+//                      }),
+//                  SizedBox(height: 2),
+//                  IconButton(
+//                      icon: Icon(Icons.remove),
+//                      onPressed: () async {
+////                        var currentZoomLevel = await _controller.getZoomLevel();
+////                        currentZoomLevel = currentZoomLevel - 2;
+////                        if (currentZoomLevel < 0) currentZoomLevel = 0;
+////                        _controller.animateCamera(
+////                          CameraUpdate.newCameraPosition(
+////                            CameraPosition(
+////                              target: locationCoords,
+////                              zoom: currentZoomLevel,
+////                            ),
+////                          ),
+////                        );
+//                      }),
+//                ],
+//              ),
+//            ),
+//          ),
+//        )
       ],
     );
   }
