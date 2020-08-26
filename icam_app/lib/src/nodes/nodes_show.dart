@@ -6,6 +6,7 @@ import 'package:icam_app/routes/route_names.dart';
 import 'package:icam_app/services/nodes_db_provider.dart';
 import 'package:icam_app/localization/localization_constants.dart';
 import 'package:icam_app/classes/widgets.dart';
+import 'package:icam_app/services/node_service.dart';
 
 
 class NodesShowPage extends StatefulWidget {
