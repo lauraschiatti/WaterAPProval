@@ -41,7 +41,6 @@ dependencies:
   # charts_flutter: ^0.9.0
   flutter_echarts: ^1.3.5
 
-
 dev_dependencies:
   # to store keys on .env file
   flutter_config: ^1.0.5
@@ -55,6 +54,7 @@ flutter_icons:
   android: true # override the icon for the platform
   ios: true
   image_path: "assets/icon/icon-blue.png"
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -98,5 +98,5 @@ flutter:
         - asset: fonts/Montserrat-Light.ttf
         - asset: fonts/Montserrat-Bold.ttf
 
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/custom-fonts/#from-packages
+# For details regarding fonts from package dependencies,
+# see https://flutter.dev/custom-fonts/#from-packages
