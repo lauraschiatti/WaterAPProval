@@ -9,6 +9,7 @@ import 'package:flutter_config/flutter_config.dart';
 import 'localization/app_localizations.dart';
 import 'dart:io';
 import 'package:icam_app/classes/http_overwrite.dart';
+import 'package:flutter/services.dart';
 
 
 void main() async {
@@ -71,6 +72,12 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     print(".env file ==> API_URL: " + FlutterConfig.get('API_URL'));
+
+    // to prevent device orientation changes and force portrait
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
 
     if(this._locale == null) {
       return Container(
