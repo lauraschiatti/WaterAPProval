@@ -141,57 +141,66 @@ class _DrawerListState extends State<DrawerList> {
       // get real screen resolution
       width: MediaQuery.of(context).size.width / 1.5,
       color: Colors.white,
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: <Widget>[
-          _buildDrawerHeader(context),
-          _buildListTile(
-              context: context,
-              icon: Icons.import_contacts,
-              title: "encyclopedia",
-              route: encyclopediaRoute
-          ),
-          _buildListTile(
-              context: context,
-              icon: Icons.access_alarms,
-              title: "reminders",
-              route: notFoundRoute
-          ),
-          SizedBox(
-            width: 10.0,
-          ),
-          _buildListTile(
-              context: context,
-              icon: Icons.settings,
-              title: "settings",
-              route: settingsRoute
-          ),
-          // TODO: tell friends
+      child: Drawer(
+
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            _buildDrawerHeader(context),
+            _buildListTile(
+                context: context,
+                icon: Icons.import_contacts,
+                title: "encyclopedia",
+                route: encyclopediaRoute
+            ),
+            _buildListTile(
+                context: context,
+                icon: Icons.phone_android,
+                title: "calculator",
+                route: calculatorRoute
+            ),
+            _buildListTile(
+                context: context,
+                icon: Icons.access_alarms,
+                title: "reminders",
+                route: notFoundRoute
+            ),
+            SizedBox(
+              width: 10.0,
+            ),
+            _buildListTile(
+                context: context,
+                icon: Icons.settings,
+                title: "settings",
+                route: settingsRoute
+            ),
+            // TODO: tell friends
 //          _buildListTile(
 //              context: context,
 //              icon: Icons.share,
 //              title: "tell_friends",
 //              route: notFoundRoute
 //          ),
-          _buildListTile(
-              context: context,
-              icon: Icons.format_indent_increase,
-              title: "terms",
-              route: notFoundRoute
-          ),
-          _buildListTile(
-              context: context,
-              icon: Icons.info_outline,
-              title: "info_app",
-              route: aboutRoute
-          )
-        ],
-      ),
+            _buildListTile(
+                context: context,
+                icon: Icons.format_indent_increase,
+                title: "terms",
+                route: notFoundRoute
+            ),
+            _buildListTile(
+                context: context,
+                icon: Icons.info_outline,
+                title: "info_app",
+                route: aboutRoute
+            )
+          ],
+        )
+      )
     );
   }
 }
 
-DrawerHeader _buildDrawerHeader(context){
+_buildDrawerHeader(context){
   return DrawerHeader(
       decoration: BoxDecoration(
           color: myTheme.primaryColor
@@ -231,7 +240,7 @@ DrawerHeader _buildDrawerHeader(context){
   );
 }
 
-ListTile _buildListTile({context, icon, title, route}){
+_buildListTile({context, icon, title, route}){
   return ListTile(
     leading: Icon(
         icon,
@@ -248,7 +257,7 @@ ListTile _buildListTile({context, icon, title, route}){
       Navigator.pushNamed(context, route);
 
 //      setState(() {
-//                _color = Colors.lightBlueAccent;
+//          color = Colors.lightBlueAccent;
 //      });
     },
   );
