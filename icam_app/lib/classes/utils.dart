@@ -15,6 +15,8 @@ List<String> readTimestamp(int timestamp) {
   var diff = now.difference(date);
   var time = '';
 
+  // TODO: translate text
+
   if (diff.inSeconds <= 0 || diff.inSeconds > 0 && diff.inMinutes == 0
       || diff.inMinutes > 0 && diff.inHours == 0 || diff.inHours > 0 && diff.inDays == 0) {
     time = format.format(date);

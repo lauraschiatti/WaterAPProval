@@ -75,21 +75,24 @@ class _WaterBodyDataPagePageState extends State<WaterBodyDataPage> {
 
                 var data = snapshot.data;
                 return Container(
-                  padding: EdgeInsets.all(15),
+                  padding: EdgeInsets.all(18.0),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Row(
+                      Column(
                         children: [
                           Text(
-                              getTranslated(context, "recently_collected_data"),
+                              getTranslated(context, "recently_collected_data")
+                                + "\n${widget.waterbody.puntosDeMonitoreo.length} "
+                                + getTranslated(context, "monitoring_points"),
                               style: TextStyle(
                                   fontWeight: FontWeight.w500,
-                                  fontSize: 15,
-                                  color: myTheme.primaryColor,
+                                  fontSize: 13,
+                                  color: Colors.black54,
+                                  fontStyle: FontStyle.italic
                               ),
-                          )
+                          ),
                         ],
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -147,7 +150,6 @@ class _WaterBodyDataPagePageState extends State<WaterBodyDataPage> {
                         style: TextStyle(color: Colors.black.withOpacity(0.6)),
                       ),
                     ),
-                    listItem(context, "ICAMpff", datum.icampff),
                     listItem(context, getTranslated(context, "dissolved_oxygen"), datum.dissolvedOxygen),
                     listItem(context, getTranslated(context, "nitrate"), datum.nitrate),
                     listItem(context, getTranslated(context, "total_suspended_solids"), datum.totalSuspendedSolids),
@@ -156,7 +158,9 @@ class _WaterBodyDataPagePageState extends State<WaterBodyDataPage> {
                     listItem(context, getTranslated(context, "chrolophyll_a"), datum.chrolophyllA),
                     listItem(context, getTranslated(context, "biochemical_oxygen_demand"), datum.biochemicalOxygenDemand),
                     listItem(context, getTranslated(context, "phosphates"), datum.phosphates),
-                    SizedBox(height: 20,)
+                    SizedBox(height: 20),
+                    listItem(context, getTranslated(context, "obtained_icampff"), datum.icampff),
+                    SizedBox(height: 20)
 
 //                    ButtonBar(
 //                      alignment: MainAxisAlignment.start,
