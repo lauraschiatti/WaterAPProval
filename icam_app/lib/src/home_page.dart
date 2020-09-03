@@ -96,8 +96,8 @@ class _HomePageState extends State<HomePage> {
             title: Text(getTranslated(context, "map"))
         ),
         BottomNavigationBarItem(
-            icon: Icon(Icons.file_download),
-            title: Text(getTranslated(context, "export"))
+            icon: Icon(Icons.insert_chart),
+            title: Text(getTranslated(context, "data"))
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.favorite),

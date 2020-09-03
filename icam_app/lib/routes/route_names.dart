@@ -10,5 +10,6 @@ const String exportRoute = 'export';
 const String encyclopediaRoute = 'encyclopedia';
 
 const String nodeDetailRoute = 'node_detail';
+const String waterBodyDataPageRoute = 'water_body_data';
 const String nodesShowRoute = 'nodes_show';
 const String notFoundRoute = 'notfound';
