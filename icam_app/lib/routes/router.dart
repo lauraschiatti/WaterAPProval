@@ -12,6 +12,7 @@ import 'package:icam_app/src/cartagena.dart';
 import 'package:icam_app/src/not_found.dart';
 import 'package:icam_app/src/nodes/node_details.dart';
 import 'package:icam_app/src/water_body_data_page.dart';
+import 'package:icam_app/src/calculator.dart';
 
 import 'route_names.dart';
 
@@ -35,6 +36,8 @@ class Router {
         return MaterialPageRoute(builder: (_) => ExportControllerPage());
       case encyclopediaRoute:
         return MaterialPageRoute(builder: (_) => EncyclopediaPage());
+      case calculatorRoute:
+        return MaterialPageRoute(builder: (_) => CalculatorPage());
 
       case waterBodyDataPageRoute:
         var waterbody = settings.arguments as WaterBodyData;

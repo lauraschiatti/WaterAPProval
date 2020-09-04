@@ -8,6 +8,7 @@ const String settingsRoute = 'settings';
 const String cgenaRoute = 'cartagena';
 const String exportRoute = 'export';
 const String encyclopediaRoute = 'encyclopedia';
+const String calculatorRoute = 'calculator';
 
 const String nodeDetailRoute = 'node_detail';
 const String waterBodyDataPageRoute = 'water_body_data';
