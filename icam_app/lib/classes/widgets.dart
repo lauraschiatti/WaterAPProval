@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:icam_app/localization/localization_constants.dart';
+import 'package:data_connection_checker/data_connection_checker.dart';
+
 
 class DialogItem extends StatelessWidget {
   const DialogItem({
@@ -33,4 +36,33 @@ class DialogItem extends StatelessWidget {
       ),
     );
   }
+}
+
+
+showConnectivityDialog(context, function){
+  return showDialog(
+      context: context,
+      builder: (_) => new AlertDialog(
+        title: new Text("No internet connection"),
+        content: new Text(getTranslated(context, "check_internet_connection")),
+        actions: <Widget>[
+          FlatButton(
+            child: Text('Close me!'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          FlatButton(
+            child: Text(getTranslated(context, "try_again")),
+            onPressed: () async {
+              // add markers to map
+              function();
+
+              if(await DataConnectionChecker().hasConnection){
+                Navigator.of(context).pop();
+              }
+            },
+          )
+        ],
+      ));
 }

@@ -6,19 +6,47 @@ import 'package:icam_app/theme.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:uuid/uuid.dart';
 import 'package:icam_app/models/node.dart' as node;
-import 'package:icam_app/models/water_body.dart' as waterBody;
 import 'package:icam_app/classes/widgets.dart';
 import 'package:icam_app/services/water_body_service.dart';
+import 'package:data_connection_checker/data_connection_checker.dart';
 
 
 class MapControllerPage extends StatefulWidget {
-  MapControllerPage({Key key}) : super(key: key);
+  MapControllerPage(); //{Key key}) : super(key: key);
 
+  final Key _mapKey = UniqueKey();
   @override
   MapControllerPageState createState() => MapControllerPageState();
 }
 
-class MapControllerPageState extends State<MapControllerPage> {
+
+class MapControllerPageState extends State<MapControllerPage>
+{
+  @override
+  Widget build(BuildContext context)
+  {
+    return Scaffold(
+        // this avoids it crashing/breaking when the keyboard is up
+        resizeToAvoidBottomInset: false,
+        body: Map(key:widget._mapKey)
+    );
+  }
+}
+
+
+class Map extends StatefulWidget
+{
+  ///key is required, otherwise map crashes on hot reload
+  Map({ @required Key key}) :super(key:key);
+
+  @override
+  _MapState createState() => _MapState();
+}
+
+
+// TODO: E/GoogleMapController(22095): Cannot enable MyLocation layer as location permissions are not granted
+
+class _MapState extends State<Map> {
 
   // google map setup
   Completer<GoogleMapController> _controller = Completer();
@@ -30,9 +58,7 @@ class MapControllerPageState extends State<MapControllerPage> {
   final Set<Marker> _markers = {};
   final Set<Polygon> _polygons = {};
 
-  _onMapCreated(GoogleMapController controller) async {
-    _controller.complete(controller);
-
+  _addMarkersAndPolygons() async{
     // add markers to map
     final nodes = await node.getNodeFromFakeServer();
     _addMarkers(nodes);
@@ -40,6 +66,21 @@ class MapControllerPageState extends State<MapControllerPage> {
     // draw polygons to the map
     final waterBodies = await fetchWaterBodies();
     _addPolygons(waterBodies);
+  }
+
+  _onMapCreated(GoogleMapController controller) async {
+    _controller.complete(controller);
+    
+    bool result = await DataConnectionChecker().hasConnection;
+
+    if(result) {
+      _addMarkersAndPolygons();
+
+    } else {
+      print('No internet connection');
+      showConnectivityDialog(context, _addMarkersAndPolygons);
+
+    }
 
   }
 
@@ -312,7 +353,7 @@ class MapControllerPageState extends State<MapControllerPage> {
     return Scaffold(
       floatingActionButton: _buildFloatingActionButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      body: _buildBody(context),
+      body: _buildBody(),
     );
   }
 
@@ -339,7 +380,7 @@ class MapControllerPageState extends State<MapControllerPage> {
     );
   }
 
-  _buildBody(context) {
+  _buildBody() {
     return Stack(
       children: <Widget>[
         GoogleMap(
@@ -350,13 +391,12 @@ class MapControllerPageState extends State<MapControllerPage> {
               zoom: 13.0
           ),
           // set a preference for minimum and maximum zoom.
-          minMaxZoomPreference: MinMaxZoomPreference(13.0, 16.0),
+          minMaxZoomPreference: MinMaxZoomPreference(11.0, 16.0),
           mapType: _currentMapType,
           markers: _markers,
           polygons: _polygons,
           onCameraMove: _onCameraMove,
 //          mapToolbarEnabled: false, // disable google maps navigation button
-//          zoomGesturesEnabled: true,
           scrollGesturesEnabled: true,
           // set bounds of the visible map
           cameraTargetBounds: new CameraTargetBounds(
@@ -380,6 +420,8 @@ class MapControllerPageState extends State<MapControllerPage> {
             ),
           ),
         ),
+      ],
+    );
 //        Positioned(
 //          top: 420,
 //          left: 340,
@@ -388,46 +430,5 @@ class MapControllerPageState extends State<MapControllerPage> {
 //            child: Container(
 //              color: Color(0xFFFAFAFA),
 //              width: 40,
-//              height: 100,
-//              child: Column(
-//                children: <Widget>[
-//                  IconButton(
-//                      icon: Icon(Icons.add),
-//                      onPressed: () async {
-////                        var currentZoomLevel = await _controller.getZoomLevel();
-////
-////                        currentZoomLevel = currentZoomLevel + 2;
-////                        _controller.animateCamera(
-////                          CameraUpdate.newCameraPosition(
-////                            CameraPosition(
-////                              target: locationCoords,
-////                              zoom: currentZoomLevel,
-////                            ),
-////                          ),
-////                        );
-//                      }),
-//                  SizedBox(height: 2),
-//                  IconButton(
-//                      icon: Icon(Icons.remove),
-//                      onPressed: () async {
-////                        var currentZoomLevel = await _controller.getZoomLevel();
-////                        currentZoomLevel = currentZoomLevel - 2;
-////                        if (currentZoomLevel < 0) currentZoomLevel = 0;
-////                        _controller.animateCamera(
-////                          CameraUpdate.newCameraPosition(
-////                            CameraPosition(
-////                              target: locationCoords,
-////                              zoom: currentZoomLevel,
-////                            ),
-////                          ),
-////                        );
-//                      }),
-//                ],
-//              ),
-//            ),
-//          ),
-//        )
-      ],
-    );
   }
 }

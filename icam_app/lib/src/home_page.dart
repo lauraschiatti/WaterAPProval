@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:icam_app/models/language.dart';
 import 'package:icam_app/localization/localization_constants.dart';
@@ -35,8 +36,6 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  //changeLanguage DropdownButton
-
   // change locale based on locale selected by the user
   void _changeLanguage(Language language) async {
     // create Locale based on lang selected using the dropdown
@@ -53,9 +52,12 @@ class _HomePageState extends State<HomePage> {
         body: Center(
           child: widgetOptions.elementAt(selectedIndex),
         ),
+//            Center(child: Text('Connection Status: $_connectionStatus')),
+//            NetworkSensitive(child: _buildSimpleSnackBar()),
         bottomNavigationBar:  _buildBottomNavigationBar()
     );
   }
+
 
   _buildAppBar(){
     return AppBar(
@@ -119,6 +121,7 @@ class _HomePageState extends State<HomePage> {
   }
 
 }
+
 
 
 // Drawer
@@ -262,3 +265,31 @@ _buildListTile({context, icon, title, route}){
     },
   );
 }
+
+
+// network connection
+//class NetworkSensitive extends StatelessWidget {
+//  final Widget child;
+//
+//
+//  NetworkSensitive({
+//    this.child,
+//  });
+//
+//  @override
+//  Widget build(BuildContext context) {
+//    var connectionStatus = Provider.of<ConnectivityStatus>(context);
+//
+//    if (connectionStatus == ConnectivityStatus.WiFi) {
+//      return child;
+//    }
+//
+//    if (connectionStatus == ConnectivityStatus.Cellular) {
+//      return Container(child: Text('Koneksi Mobile'), );
+//    }
+//
+//    if (connectionStatus == ConnectivityStatus.Offline) {
+//      return Container(child: Text('Koneksi Offline'), );
+//    }
+//  }
+//}
