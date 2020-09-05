@@ -70,7 +70,7 @@ class _AboutPageState extends State<AboutPage> {
                 ),
               ),
               SizedBox(height: 24),
-              Image.asset('assets/images/icon.png',
+              Image.asset('assets/icon/water-icon.png',
                   height: 100.0,
                   width: 100.0
               ),
