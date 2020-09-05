@@ -151,6 +151,7 @@ class _NodesShowPageState extends State<NodesShowPage> {
                   );
                 }
 
+                // By default, show a loading spinner.
                 return Center(
                   child: Container(
                     child: new CircularProgressIndicator(),
@@ -219,7 +220,7 @@ class _NodesShowPageState extends State<NodesShowPage> {
               }
 
               Icon _statusIcon = Icon(
-                  Icons.brightness_1,
+                  Icons.location_on,
                   size: 30,
                   color: _statusColor
               );
@@ -336,12 +337,13 @@ class _NodesShowPageState extends State<NodesShowPage> {
             child: ListBody(
               children: <Widget>[
                 DialogItem(
-                  icon: Icons.brightness_1,
+                  icon: Icons.location_on,
                   color: myTheme.primaryColor,
                   text: getTranslated(context, "known_status"),
                 ),
+                SizedBox(height: 10),
                 DialogItem(
-                  icon: Icons.brightness_1,
+                  icon: Icons.location_on,
                   color: Colors.black12,
                   text: getTranslated(context, "unknown_status"),
                 )

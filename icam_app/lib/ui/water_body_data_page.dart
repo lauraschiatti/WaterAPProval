@@ -15,11 +15,11 @@ class WaterBodyDataPage extends StatefulWidget {
   WaterBodyDataPage(this.waterbody);
 
   @override
-  _WaterBodyDataPagePageState createState() => _WaterBodyDataPagePageState();
+  _WaterBodyDataPageState createState() => _WaterBodyDataPageState();
 
 }
 
-class _WaterBodyDataPagePageState extends State<WaterBodyDataPage> {
+class _WaterBodyDataPageState extends State<WaterBodyDataPage> {
 
   Future _futureData;
 
@@ -36,7 +36,6 @@ class _WaterBodyDataPagePageState extends State<WaterBodyDataPage> {
     _futureData = fetchData(additionalFilters);
 
   }
-
 
   @override
   Widget build(BuildContext context) {

@@ -4,12 +4,12 @@ import 'package:icam_app/models/language.dart';
 import 'package:icam_app/localization/localization_constants.dart';
 import 'package:icam_app/main.dart';
 import 'package:icam_app/routes/route_names.dart';
-import 'package:icam_app/src/info_page.dart';
-import 'package:icam_app/src/favorites_page.dart';
+import 'package:icam_app/view/info_page.dart';
+import 'package:icam_app/view/favorites_page.dart';
 import 'package:icam_app/theme.dart';
 
-import 'export_page.dart';
-import 'map_page.dart';
+import 'package:icam_app/view/export_page.dart';
+import 'package:icam_app/view/map_page.dart';
 
 class HomePage extends StatefulWidget {
   HomePage(); // {Key key}) : super(key: key);

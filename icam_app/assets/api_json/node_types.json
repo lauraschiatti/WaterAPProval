@@ -6,6 +6,7 @@
     "sensors": [
       {
         "variable": "Dissolved Oxygen (DO)",
+        "description": "A measure of the amount of oxygen in the water",
         "unit": "mg/L"
       },
       {

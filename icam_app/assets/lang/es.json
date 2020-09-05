@@ -63,5 +63,7 @@
   "enter_value": "Por favor ingresa algún valor",
   "processing_params": "Procesando parámetros",
   "get_icampff": "Obtener ICAMpff",
-  "valid_values": "Valid values"
+  "valid_values": "Valid values",
+  "check_internet_connection": "Verifica la conexión a internet e inténtalo de nuevo.",
+  "try_again": "Intentar de nuevo"
 }

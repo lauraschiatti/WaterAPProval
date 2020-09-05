@@ -20,6 +20,8 @@ dependencies:
   flutter:
     sdk: flutter
 
+  provider: ^3.0.0
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
@@ -55,7 +57,7 @@ dev_dependencies:
 flutter_icons:
   android: true # override the icon for the platform
   ios: true
-  image_path: "assets/icon/icon-blue.png"
+  image_path: "assets/icon/water-icon.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -70,7 +72,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/icon.png
+    - assets/icon/water-icon.png
     - assets/images/user.png
     - assets/images/invemar.png
     # language json files

@@ -12,7 +12,7 @@ const MaterialColor lightBlue = MaterialColor(
     400: Color(0xFF29B6F6),
     500: Color(_lightBluePrimaryValue),
     600: Color(0xFF039BE5),
-    700: Color(0xFF0288D1),
+    700: Color(0xFF0288D1), // hex: 0288d1
     800: Color(0xFF0277BD),
     900: Color(0xFF01579B),
   },

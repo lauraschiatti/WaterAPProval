@@ -12,6 +12,7 @@ import 'package:icam_app/services/water_body_service.dart';
 import 'package:icam_app/services/node_service.dart';
 import 'package:icam_app/classes/echarts_theme_script.dart' show customThemeScript;
 import 'package:icam_app/classes/chart_classes.dart';
+import 'package:icam_app/classes/utils.dart';
 
 class ExportControllerPage extends StatefulWidget {
   ExportControllerPage();//{Key key}) : super(key: key);
@@ -262,9 +263,10 @@ class _ChartState extends State<Chart> {
       _yAxisList.add(wqMPA);
     }
 
+    // wait for all futures to complete
     print("getElements() _yAxisList length: ${_yAxisList.length}");
 
-    _getIcampffs();
+    await _getIcampffs();
   }
 
   Future _getIcampffs() async {
@@ -280,25 +282,25 @@ class _ChartState extends State<Chart> {
       }
     }
 
-//    print("monitoringPoints for ${monitoringPoints.length}");
-
     final string = json.encode(monitoringPoints);
     print("monitoringPoints_str: $string");
 
     var additionalFilters = '[{"trackedObject": {"inq": $string}}]';
     var data = await fetchData(additionalFilters);
     _data = data;
-    print("_data: $_data");
+    print("_data: ${_data.length}");
 
     // format fetched data
     Map<String, WQMonitoringPointAxis> wqPointsAxisMap = {};
 
-    for (var axis in _yAxisList) {
+    for (var axis in _yAxisList) { // at this point only contains monitoring points
       if (axis is WQMonitoringPointAxis) {
         wqPointsAxisMap[axis.id] = axis;
-        print("wqPointsAxisMap: $wqPointsAxisMap");
+        print("wqPointsAxisMap axis: ${wqPointsAxisMap[axis.id]}");
       }
     }
+
+    print("wqPointsAxisMap length: ${wqPointsAxisMap.length}");
 
     for (var datum in _data) {
       if (datum.date != null && _icampffDates.indexOf(datum.date) == -1) {
@@ -312,7 +314,6 @@ class _ChartState extends State<Chart> {
       if (axis != undefined) {
         axis.data.add(datum);
       }
-//      print("axis.data ${axis.data}");
 
       for (var key in wqPointsAxisMap.keys) {
 //          wqPointsAxisMap[key].data.sort((a: any, b: any) => a.date - b.date);
@@ -325,8 +326,7 @@ class _ChartState extends State<Chart> {
 
         for (var date in _icampffDates) {
           var filteredData = data.where((d) =>
-          d.date ==
-              date); //.toList(); //filteredData (Instance of 'Datum', ..., Instance of 'Datum')
+          d.date == date); //.toList(); //filteredData (Instance of 'Datum', ..., Instance of 'Datum')
 
           var icampffPerMonitoringPoint = waterBody.puntosDeMonitoreo.map((mp) {
             // waterBody.puntosDeMonitoreo == data.trackedObject
@@ -374,7 +374,6 @@ class _ChartState extends State<Chart> {
       // 1540702800000: 43.129999999999995, 1543554000000: 36.175, 1548565200000: 37.205,
 
       _icampffDates.sort((a, b) => a.compareTo(b));
-//      print("_icampffDates sorted: $_icampffDates");
 
       _waterBodies.forEach((wb) {
         WaterBodyAxis wbA = new WaterBodyAxis();
@@ -393,11 +392,11 @@ class _ChartState extends State<Chart> {
         _yAxisList.add(wbA);
       });
 
-      print("getIcampff() _yAxisList length: ${_yAxisList.length}");
-
     }
 
     setState(() {});
+
+    print("getIcampff() _yAxisList length: ${_yAxisList.length}");
 
   }
 
@@ -453,35 +452,54 @@ class _ChartState extends State<Chart> {
   ''';
 
     for (var axis in _yAxisList) {
-      print("axis in _yAxisList!!!! ${_yAxisList.length}"); // 392
+//      print("axis in _yAxisList!!!! ${_yAxisList.length}"); // 392
       if (!axis.active) {
         continue;
       }
 
       for (var activeSensor in axis.activeSensors) {
+        print("axis: ${axis.name} with type ${axis.runtimeType} activeSensors: ${axis.activeSensors}");
+
         var name = "${axis.name}(${axis.sensors
             .firstWhere((s) => s.name == activeSensor)
             .title})";
 
-//        if (axis is WQMonitoringPointAxis) {
-//          var cache = {};
-//          for (var datum in axis.data) {
-//            cache[datum.date] = datum[activeSensor];
-//          }
-//
+        if (axis is WQMonitoringPointAxis) {
+
+          print("WQMonitoringPointAxis axis.data ${axis.data}");
+
+          var cache = {};
+          for (var datum in axis.data) {
+            cache[datum.date] = datum[activeSensor];
+          }
+
 //          series.add({
 //          commonSeriesConfig,
 //          name,
 //          _icampffDates.map((date) => (cache[date] != null ? cache[date] : -1)),
 //          });
 //
-//        } else {
-//          series.add({
-//          commonSeriesConfig,
-//          name,
-//          axis.data.map((d) => d[activeSensor]),
-//          });
-//        }
+        } else {
+
+          print("WaterBodyAxis axis.data ${axis.data}");
+
+          var data = axis.data.map((d) => d[activeSensor]).toList();
+          var dataStr = json.encode(data);
+          print("d[activeSensor] dataStr: $dataStr");
+
+          var nameStr = json.encode(name).replaceAll('"', '\'');
+          print("nameStr: $nameStr");
+
+          var add = '''{
+              type: 'line',
+              name: $nameStr,
+              data: $dataStr,
+            }''';
+          print("add: $add");
+
+          series.add(add);
+        }
+
 
         if (legendNames.indexOf(name) == -1) {
           legendNames.add(name);
@@ -489,15 +507,21 @@ class _ChartState extends State<Chart> {
         }
 
         var unit = _units.firstWhere((u) => u.getName == activeSensor);
-        print("activeSensor: $activeSensor");
-        print("unit: $unit");
+//        print("activeSensor: $activeSensor");
+//        print("unit: $unit");
         units.add(unit != null ? unit.getUnit : '');
-        print("units: ${units.length}");
+//        print("units: ${units.length}");
       }
     }
 
     final legendNamesStr = json.encode(legendNames).replaceAll('"', '\'');
     print("legendNames_str: $legendNamesStr");
+
+    final dates = _icampffDates.map((element) {
+      return readTimestamp(element)[0];
+    }).toList();
+
+    print("_icampffDates:  $dates");
 
     var series2 = '''[
             {
@@ -585,12 +609,12 @@ class _ChartState extends State<Chart> {
           },
           xAxis: {
             type: 'category',
-            data: ['Day1', 'Day2', 'Day3', 'Day4', 'Day5', 'Day6', 'Day7']
+            data: $dates,
           },
           yAxis: {
             type: 'value',
           },
-          series: $series2
+          series: $series
         }
      ''',
       ),

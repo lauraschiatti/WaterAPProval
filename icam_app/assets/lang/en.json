@@ -11,7 +11,7 @@
   "data": "Data",
   "map_text": "Cartagena de Indias, CO",
   "project_info": "Project Information",
-  "project_description": "is a web-based platform that supports the monitoring program of the bayous and lagoons system of Cartagena de Indias. This program is freely available: you may redistribute and/or modify it under the terms of the license GNU Affero General Public License or any other subsequent version. For more information, click here to read the GNU Affero General Public License.",
+  "project_description": "is a mobile-based platform that supports the monitoring program of the bayous and lagoons system of Cartagena de Indias. This program is freely available: you may redistribute and/or modify it under the terms of the license GNU Affero General Public License or any other subsequent version. For more information, click here to read the GNU Affero General Public License.",
   "contact": "Contact",
   "contact_info":"You are free to type your comments in our project's Wiki, where we may provide you with additional in-depth information about the project.",
   "join": "Join the conversation",
@@ -59,9 +59,11 @@
   "monitoring_points": "monitoring point(s)",
   "calculator": "Online ICAMpff calculator",
   "icampff_calculator": "This calculator allows you to evaluate the Marine and Estuarine Water Quality Index for Fauna and Flora Preservation (ICAMpff, by its initials in Spanish), which was created by Invemar (Institute for Marine and Coastal Research).",
-  "insert_params": "Insert the physico-chemical and biological parameters of water quality",
+  "insert_params": "Insert the physicochemical and biological parameters of water quality",
   "enter_value": "Please enter some value",
   "processing_params": "Processing params",
   "get_icampff": "Get ICAMff",
-  "valid_values": "Valores válidos"
+  "valid_values": "Valores válidos",
+  "check_internet_connection": "Check your internet connection and try it again.",
+  "try_again": "Try again"
 }

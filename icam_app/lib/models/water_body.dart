@@ -119,11 +119,11 @@ class WaterBody {
     this.total,
   });
 
-  List<Datum> data;
+  List<WaterBodyData> data;
   int total;
 
   factory WaterBody.fromJson(Map<String, dynamic> json) => WaterBody(
-      data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+      data: List<WaterBodyData>.from(json["data"].map((x) => WaterBodyData.fromJson(x))),
   total: json["total"],
   );
 
@@ -133,8 +133,8 @@ class WaterBody {
   };
 }
 
-class Datum {
-  Datum({
+class WaterBodyData {
+  WaterBodyData({
     this.id,
     this.category,
     this.name,
@@ -172,7 +172,7 @@ class Datum {
   List<dynamic> columns;
   String sort;
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory WaterBodyData.fromJson(Map<String, dynamic> json) => WaterBodyData(
       id: json["id"],
       category: json["category"],
       name: json["name"],

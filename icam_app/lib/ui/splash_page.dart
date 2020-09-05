@@ -3,7 +3,7 @@ import 'package:splashscreen/splashscreen.dart';
 
 import 'package:icam_app/theme.dart';
 
-import 'home_page.dart';
+import 'package:icam_app/view/home_page.dart';
 
 // splash screen
 class SplashPage extends StatefulWidget {

@@ -105,6 +105,25 @@ class _FavoritePageState extends State<FavoritePage> {
                               itemBuilder: (BuildContext cnt, int index) {
                                 final Node node = nodes[index];
 
+//                                Card(
+//                                  child: ListTile(
+//                                      leading: const Icon(Icons.map,
+//                                          size: 40.0, color: Colors.black12),
+//                                      title: Text('${waterBody.name}'),
+////                                TODO: subtitle: Text(
+////                                  "Icampff: ${waterBody.icampff.toString()}",
+////                                ),
+//                                      trailing: IconButton(
+//                                        icon: Icon(Icons.keyboard_arrow_right),
+//                                        color: Colors.black38,
+//                                        onPressed: () {
+//
+//                                        },
+//                                      )
+//                                  ),
+//
+//                                );
+
                                 return Card(
                                     elevation: 18.0,
                                     shadowColor: Colors.black12,
