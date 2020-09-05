@@ -52,7 +52,7 @@
   "thermotolerant_coliforms": "Thermotolerant Coliforms",
   "ph": "pH",
   "total_suspended_solids": "Total Suspended Solids",
-  "chrolophyll_a": "Chrolophyll A",
+  "chrolophyll_a": "Chlorophyll A",
   "biochemical_oxygen_demand": "Biochemical Oxygen Demand",
   "phosphates": "Phosphates",
   "obtained_icampff": "Obtained ICAMpff",
@@ -65,5 +65,17 @@
   "get_icampff": "Get ICAMff",
   "valid_values": "Valores válidos",
   "check_internet_connection": "Check your internet connection and try it again.",
-  "try_again": "Try again"
+  "try_again": "Try again",
+  "chart_explanation": "The user may: (a) visualize the chart of the last ICAMpff values for a water body and (b) compare with any other of the water bodies along the lagoon system. \n\nThe data will be fetched in a few seconds.",
+  "visualize_data": "Visualize data",
+  "cartagena": "Cartagena de Indias is a coastal city that is located between three large bodies of water: the bay of Cartagena to the south, the Ciénaga de la Virgen to the north and the Caribbean Sea to the west. \n\nIn addition, there is also the system of pipes and lagoons (or simply lagoon system). These bodies of water are of great importance for the communities that inhabit the city (especially those who live nearby) due to the performance of different economic activities, such as fishing, transportation, shipping, tourism and recreation.",
+  "what_is_icam": "What is ICAMpff?",
+  "icam_details": "The Marine and Estuarine Water Quality Index for Fauna and Flora Preservation was developed by the Institute of Marine and Coastal Research (INVEMAR, due to its initials in Spanish). This index is meant to preserve the marine biota. It considers eight parameters: dissolved oxygen, nitrates and nitrites, total phosphates, total suspended solids, biological oxygen demand, fecal coliforms pH and chlorophyll A, to study the impact of domestic contamination in marine waters.",
+  "what_is_dissolved_oxygen": "Is essential for the survival of the aerobic organisms present in the waterbody, such as bacteria and fungi use the dissolved oxygen to decompose the organic material at the bottom of the water, which contributes to the recycling of nutrients. The high values of dissolved oxygen suggest that more photosynthesis is being produced by the plants than microorganism’s consumption, while the low values suggest that the oxygen is being consumed faster than it is produced, negatively affecting fish and invertebrate populations",
+  "what_is_nitrate_phosphates": "The abundance of nitrates and phosphorus improve the growth of algae and aquatic plant in the waterbodies. As a consequence, the oxygen concentrations that the aquatic species need to survive diminishes, causing damage to the waterbody.",
+  "what_is_total_suspended_solids": "The importance of the suspended solids lies in the fact that as the amount of sediment in the water column increases, the clarity of the water decreases, which makes it difficult for plants to perform photosynthesis. In addition, excessive amounts of suspended sediment can negatively affect animals by making it difficult for them to feed and find Food.",
+  "what_is_thermotolerant_coliforms" : "Fecal Coliforms are a biological contamination indicator, which despite having no value for the preservation of aquatic life, indicate the presence of pathogenic organisms that can pose a risk to human health.",
+  "what_is_ph": "Its measurement in coastal water is important since the acidification of the ocean continues to occur in the ocean basins. The pH can be affected by the concentration of dissolved oxygen and determines which organisms can live and thrive. In addition to this, the pH tolerance of marine organisms indicates that there is little evidence of damage caused by a decrement in pH of 0.5 to 1.0.",
+  "what_is_chrolophyll_a": "It is one of the main parameters related to eutrophication or calculation of the level of algae blooming, due to the accumulation of organic waste in marine coastlines or in a lake, lagoon, reservoir, etc ",
+  "what_is_biochemical_oxygen_demand": "It is often used to predict the impact of an effluent discharged into the receiving bodies, such as rivers, lakes and the sea, because it indicates the amount of organic matter present in the waterbody. For this reason, a low BOD is an indicator of good water quality, while a high BOD indicates contaminated water. Unpolluted waterbodies usually have BOD values of 2 mg/L or less, while waterbodies that receive sewage may have BOD values of up to 10 mg/L. "
 }
