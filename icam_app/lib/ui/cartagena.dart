@@ -7,7 +7,7 @@ class CartagenaPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Cartagena"),
+          title: Text("Cartagena de Indias, CO"),
         ),
         body: Stack(
             children: <Widget> [
@@ -19,7 +19,7 @@ class CartagenaPage extends StatelessWidget {
                     30.0,
                   ),
                   children: <Widget> [
-//                    ProjectInfo(),
+                    CartagenaInfo(),
 //                    Divider(height: 40),
                   ]
               )
@@ -41,27 +41,40 @@ TextStyle _textStyleContent = TextStyle(
   height: 1.5,
 );
 
-class ProjectInfo extends StatelessWidget {
+class CartagenaInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
         children: <Widget>[
           Row(
             children: <Widget>[
-              Text(
-                getTranslated(context, "project_info"),
-                style: _textStyleTitle,
-              ),
+//              Text(
+////                getTranslated(context, ""),
+//                style: _textStyleTitle,
+//              ),
             ],
           ),
           SizedBox(height: 10.0),
           SingleChildScrollView(
               child: Text(
-                appTitle + " " + getTranslated(context, "project_description"),
+                getTranslated(context, "cartagena"),
                 style: _textStyleContent,
                 textAlign: TextAlign.justify,
               )
-          )
+          ),
+          SizedBox(height: 40.0),
+          Image(
+            image: AssetImage('assets/images/cartagena.jpg'),
+//            height: 100,
+//            width: 100,
+          ),
+          SizedBox(height: 30.0),
+          Image(
+            image: AssetImage('assets/images/cartagena2.jpg'),
+//            height: 100,
+//            width: 100,
+          ),
+          SizedBox(height: 30.0),
         ]
     );
   }

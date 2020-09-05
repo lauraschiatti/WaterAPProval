@@ -75,6 +75,8 @@ flutter:
     - assets/icon/water-icon.png
     - assets/images/user.png
     - assets/images/invemar.png
+    - assets/images/cartagena.jpg
+    - assets/images/cartagena2.jpg
     # language json files
     - assets/lang/en.json
     - assets/lang/es.json
