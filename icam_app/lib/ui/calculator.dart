@@ -3,6 +3,7 @@ import 'package:icam_app/localization/localization_constants.dart';
 import 'package:flutter/services.dart';
 import 'package:icam_app/theme.dart';
 import 'package:icam_app/services/icam_service.dart';
+import 'package:icam_app/classes/widgets.dart';
 
 
 class CalculatorPage extends StatelessWidget {
@@ -46,8 +47,7 @@ class FormContainer extends StatelessWidget {
       padding: EdgeInsets.all(10),
       child: Column(
         children: <Widget>[
-          Card(
-            child: Container(
+          Container(
               alignment: Alignment.topLeft,
               padding: EdgeInsets.all(15),
               child: Text(
@@ -59,8 +59,8 @@ class FormContainer extends StatelessWidget {
                 ),
                 textAlign: TextAlign.justify,
               )
-            ),
           ),
+          IcamValues(),
           Card(
             child: Container(
               alignment: Alignment.topLeft,
@@ -197,9 +197,9 @@ class _IcamFormState extends State<IcamForm> {
                     ? Text(
                   "$_icampff",
                   style: TextStyle(
-                    color: Colors.indigo,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold
+                      color: Colors.indigo,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold
                   ),
                 )
                     : Text(""),
@@ -258,8 +258,6 @@ class _IcamFormState extends State<IcamForm> {
   }
 
 }
-
-
 
 _buildTextFormField(context, controller, focus, nextfocus, label, icon, {autofocus=false}){
 
@@ -329,8 +327,9 @@ _buildTextFormField(context, controller, focus, nextfocus, label, icon, {autofoc
         return null;
       }
       final n = num.tryParse(value);
+      String error = value + getTranslated(context, "not_valid_number");
       if(n == null) {
-        return '"$value" is not a valid number';
+        return error;
       }
       return null;
     },
@@ -344,4 +343,70 @@ _fieldFocusChange(BuildContext context, FocusNode currentFocus,FocusNode nextFoc
   if(nextFocus != null) {
     FocusScope.of(context).requestFocus(nextFocus);
   }
+}
+
+class IcamValues extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+
+    return Container(
+        alignment: Alignment.topLeft,
+        padding: EdgeInsets.all(15),
+        child: Column(
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Text(
+                    getTranslated(context, "icam_values"),
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 10.0),
+              SingleChildScrollView(
+                padding: EdgeInsets.all(0),
+                child: ListBody(
+                  children: <Widget>[
+                    DialogItem(
+                      icon: Icons.brightness_1,
+                      color: Colors.black54,
+                      text: getTranslated(context, "unavailable"),
+                    ),
+                    DialogItem(
+                      icon: Icons.brightness_1,
+                      color: Colors.redAccent[700],
+                      text: getTranslated(context, "poor"),
+                    ),
+                    DialogItem(
+                      icon: Icons.brightness_1,
+                      color: Colors.orange,
+                      text: getTranslated(context, "inadequate"),
+                    ),
+                    DialogItem(
+                      icon: Icons.brightness_1,
+                      color: Colors.yellow[600],
+                      text: getTranslated(context, "acceptable"),
+                    ),
+                    DialogItem(
+                      icon: Icons.brightness_1,
+                      color: Colors.green,
+                      text: getTranslated(context, "adequate"),
+                    ),
+                    DialogItem(
+                      icon: Icons.brightness_1,
+                      color: myTheme.primaryColor,
+                      text: getTranslated(context, "optimal"),
+                    ),
+                  ],
+                ),
+              )
+            ]
+        )
+
+    );
+  }
+
 }

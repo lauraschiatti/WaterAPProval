@@ -164,21 +164,19 @@ class _DrawerListState extends State<DrawerList> {
                 title: "calculator",
                 route: calculatorRoute
             ),
-            _buildListTile(
-                context: context,
-                icon: Icons.access_alarms,
-                title: "reminders",
-                route: notFoundRoute
-            ),
-            SizedBox(
-              width: 10.0,
-            ),
-            _buildListTile(
-                context: context,
-                icon: Icons.settings,
-                title: "settings",
-                route: settingsRoute
-            ),
+//            _buildListTile(
+//                context: context,
+//                icon: Icons.access_alarms,
+//                title: "reminders",
+//                route: notFoundRoute
+//            ),
+            Divider(height: 20),
+//            _buildListTile(
+//                context: context,
+//                icon: Icons.settings,
+//                title: "settings",
+//                route: settingsRoute
+//            ),
             // TODO: tell friends
 //          _buildListTile(
 //              context: context,
@@ -194,8 +192,8 @@ class _DrawerListState extends State<DrawerList> {
             ),
             _buildListTile(
                 context: context,
-                icon: Icons.info_outline,
-                title: "info_app",
+                icon: Icons.copyright,
+                title: "app",
                 route: aboutRoute
             )
           ],

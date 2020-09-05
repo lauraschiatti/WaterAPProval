@@ -3,7 +3,7 @@ import 'package:splashscreen/splashscreen.dart';
 
 import 'package:icam_app/theme.dart';
 
-import 'package:icam_app/view/home_page.dart';
+import 'package:icam_app/ui/home_page.dart';
 
 // splash screen
 class SplashPage extends StatefulWidget {
@@ -18,17 +18,17 @@ class _SplashPageState extends State<SplashPage> {
       seconds: 4,
       backgroundColor: myTheme.primaryColor,
       title: Text(
-        'ICAM App ',
+        'WaterAPProval ',
         style: TextStyle(
             fontWeight: FontWeight.w300,
             fontSize: 20.0,
             color: Colors.white
         ),
       ),
-      image: Image.asset('assets/images/icon.png',
+      image: Image.asset('assets/icon/water-icon.png',
         fit: BoxFit.cover,
-//          height: 100.0,
-//          width: 100.0
+          height: 150.0,
+          width: 150.0
       ),
       photoSize: 90.0,
       loaderColor: Colors.white,
