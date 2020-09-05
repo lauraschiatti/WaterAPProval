@@ -35,7 +35,6 @@ class ExportControllerPageState extends State<ExportControllerPage> {
     _futureWaterBodies = fetchWaterBodies();
   }
 
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
 
   @override
@@ -48,155 +47,58 @@ class ExportControllerPageState extends State<ExportControllerPage> {
                   children: <Widget>[
                     Padding(
                       child: Text(
-                          'Explore data',
+                          getTranslated(context, "visualize_data"),
                           style: TextStyle(
                               fontSize: 20
                           )
                       ),
-                      padding: EdgeInsets.fromLTRB(0, 40, 0, 20),
+                      padding: EdgeInsets.fromLTRB(0, 40, 0, 0),
                     ),
-
-                    Text('- data will be fetched in a few seconds'),
-                    Text('- tap the bar and trigger the snack'),
-
-                    SizedBox(height: 50),
+                    Padding(
+                      child: Text(
+                          getTranslated(context, "chart_explanation"),
+                          style: TextStyle(
+                              fontSize: 14
+                          )
+                      ),
+                      padding: EdgeInsets.fromLTRB(30, 20, 30, 10),
+                    ),
+                    SizedBox(height: 20),
                     SizedBox(
+                        // TODO: scroll horizontally the chart
                         width: 380,
                         height: 400,
-                        child: FittedBox(child: Chart(key:widget._chartKey))
+                        child: FittedBox(
+                            child: Chart(key:widget._chartKey),
+                        )
                     ),
+                    SizedBox(height: 10),
+                    Text("CJA: Caño Juan Angola - ICAMpff \n"
+                        "Ldc: Laguna del cabrero - ICAMpff \n"
+                        "Ldc : Laguna de chambacú - ICAMpff \n"
+                        "CdlQ: Ciénaga de las Quintas - ICAMpff \n"
+                        "Cdb: Caño de bazurto - ICAMpff \n"
+                        "LdSL: Laguna de San Lázaro - ICAMpff \n",
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontStyle: FontStyle.italic,
+                        ),
 
-                    SizedBox(height: 50),
+
+                    )
                   ]
               )
           )
       );
     }
 
-    _buildDataList(){
-      return Container(
-          padding: EdgeInsets.fromLTRB(6, 10, 6, 10),
-          child: Column(
-//              mainAxisAlignment: MainAxisAlignment.center,
-//              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Padding(
-                  child: Text(
-                    'Available water bodies',
-                    style: TextStyle(
-//                          fontSize: 20,
-                    ),
-                    textAlign: TextAlign.left,
-                  ),
-                  padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
-                ),
-                Expanded(
-                  child: FutureBuilder(
-                    future: _futureWaterBodies,
-                    builder: (context, snapshot) {
-//                 if (snapshot.hasError) {
-//                    children = <Widget>[
-//                      Icon(
-//                        Icons.error_outline,
-//                        color: Colors.red,
-//                        size: 60,
-//                      ),
-//                      Padding(
-//                        padding: const EdgeInsets.only(top: 16),
-//                        child: Text('Error: ${snapshot.error}'),
-//                      )
-//                    ];
-//                  }
 
 
-                      if (!snapshot.hasData &&
-                          snapshot.connectionState == ConnectionState.done) {
-                        return Container(
-                            padding: EdgeInsets.all(14),
-                            child: Text("No water bodies available")
-                        );
-                      }
 
-                      if (snapshot.hasData) {
-
-                        var waterBodies = snapshot.data.data;
-
-                        return ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          itemCount: waterBodies.length,
-                          padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                          itemBuilder: (BuildContext cnt, int index) {
-                            var waterBody = waterBodies[index];
-
-                            return Card(
-                              child: ListTile(
-                                leading: const Icon(Icons.brightness_1,
-                                    size: 30.0, color: Colors.black12),
-                                title: Text('${waterBody.name}'),
-//                                TODO: subtitle: Text(
-//                                  "Icampff: ${waterBody.icampff.toString()}",
-//                                ),
-                                trailing: IconButton(
-                                    icon: Icon(Icons.keyboard_arrow_right),
-                                    color: Colors.black38,
-                                    onPressed: () {
-                                      Navigator.pushNamed(
-                                          context,
-                                          waterBodyDataPageRoute,
-                                          arguments: waterBody
-                                      );
-
-                                    },
-                                  )
-                              ),
-
-                            );
-                          },
-
-                        );
-                      }
-
-                      return Center(
-                        child: Container(
-                          child: new CircularProgressIndicator(),
-                        ),
-                      );
-                    },
-                  ),
-                )
-              ]
-          )
+    return Scaffold(
+      body:
+        _buildChart(),
       );
-
-    }
-
-
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: new AppBar(
-          toolbarHeight: 80,
-          flexibleSpace: new Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              new TabBar(
-                tabs: [
-                  Tab(icon: Icon(Icons.insert_chart), text: "Data visualization",),
-                  Tab(icon: Icon(Icons.storage), text: "Explore data"),
-                ],
-              ),
-            ],
-          ),
-        ),
-        body: TabBarView(
-          children: [
-            _buildChart(),
-            _buildDataList()
-          ],
-        ),
-      ),
-    );
   }
 }
 
@@ -226,7 +128,7 @@ class _ChartState extends State<Chart> {
     new Unit('totalSuspendedSolids', 'mg/L'),
     new Unit('thermotolerantColiforms', 'NMP/100ml'),
     new Unit('pH', ''),
-    new Unit('chrolophyllA', 'µg/L'),
+    new Unit('chlorophyllA', 'µg/L'),
     new Unit('biochemicalOxygenDemand', 'mg/L'),
     new Unit('phosphates', 'µg/L')
   ];
@@ -352,30 +254,18 @@ class _ChartState extends State<Chart> {
       }
 
 //      print("_icampffs $_icampffs");
-
       // _icampffs ==> one for each water body ...
       // {5daccf7da52adb394573ca72: {1507438800000: 29.58, 1529211600000: 34.12,
       // 1540702800000: 9.38, 1543554000000: 5.47, 1548565200000: 6.74, 1550984400000: 8.41,
       // 1554008400000: 11.07, 1556427600000: 47.09},
 
-      // 5db289f6458f3171dfaf380b: {1507438800000: 43.41, 1529211600000: 10.97,
-      // 1540702800000: 13.67, 1543554000000: 8.75, 1548565200000: 16.82,
-      // 1550984400000: 16.86, 1554008400000: 10.63, 1556427600000: 15.44},
-
-      // 5db3cb47a53e2a108358072b: {1507438800000: 28.785, 1529211600000: 38.335,
-      // 1540702800000: 32.925, 1543554000000: 19.275, 1548565200000: 23.35,
-      // 1550984400000: 21.995, 1554008400000: 21.185000000000002, 1556427600000: 34.0},
-
-      // 5db4b2fb327b7d19875b3bc4: {1507438800000: 39.39, 1529211600000: 33.535, 1540702800000: 38.185,
-      // 1543554000000: 28.509999999999998, 1548565200000: 32.955, 1550984400000: 26.435,
-      // 1554008400000: 33.16, 1556427600000: 34.005},
-
-      // 5db4e5a2b5986235dfe66005: {1507438800000: 40.125, 1529211600000: 22.794999999999998,
-      // 1540702800000: 43.129999999999995, 1543554000000: 36.175, 1548565200000: 37.205,
-
       _icampffDates.sort((a, b) => a.compareTo(b));
 
-      _waterBodies.forEach((wb) {
+    }
+
+    print("_icampffs[waterBody.id] $_icampffs");
+
+    _waterBodies.forEach((wb) {
         WaterBodyAxis wbA = new WaterBodyAxis();
 
         wbA.id = wb.id;
@@ -384,7 +274,7 @@ class _ChartState extends State<Chart> {
         wbA.active = true;
         wbA.dataLoaded = true;
         wbA.data = _icampffDates.map((date) => ({
-          'icampff': this._icampffs[wb.id][date]
+          'icampff': double.parse(this._icampffs[wb.id][date].toStringAsFixed(2))
         })).toList();
 
         print("wbA $wbA");
@@ -392,12 +282,21 @@ class _ChartState extends State<Chart> {
         _yAxisList.add(wbA);
       });
 
-    }
-
     setState(() {});
 
     print("getIcampff() _yAxisList length: ${_yAxisList.length}");
 
+  }
+
+
+  String getInitials({String string, int limitTo}) {
+    var buffer = StringBuffer();
+    var split = string.split(' ');
+    for (var i = 0 ; i < (limitTo ?? split.length); i ++) {
+      buffer.write(split[i][0]);
+    }
+
+    return buffer.toString();
   }
 
   @override
@@ -427,32 +326,27 @@ class _ChartState extends State<Chart> {
     '#000000',
   ]''';
 
-//    var textColor = 'black';
-    var axisLineColor = 'black';
-    var splitLineColor = '#c7c7c7';
-
     var series = [];
     var legendNames = [];
     var units = [];
-    var commonSeriesConfig = '''{
-    type: 'line',
-    smooth: true,
-    itemStyle: {
-      borderColor: 'rgba(0,0,0,0.4)',
-      borderWidth: 1,
-    },
-    lineStyle: {
-      normal: {
-        width: 3,
-        shadowColor: 'rgba(0,0,0,0.4)',
-        shadowBlur: 10,
-        shadowOffsetY: 10,
+    var commonSeriesConfig = '''
+      type: 'line',
+      smooth: true,
+      itemStyle: {
+        borderColor: 'rgba(0,0,0,0.4)',
+        borderWidth: 1,
       },
-    },
+      lineStyle: {
+        normal: {
+          width: 3,
+          shadowColor: 'rgba(0,0,0,0.4)',
+          shadowBlur: 10,
+          shadowOffsetY: 10,
+        },
+      },
   ''';
 
     for (var axis in _yAxisList) {
-//      print("axis in _yAxisList!!!! ${_yAxisList.length}"); // 392
       if (!axis.active) {
         continue;
       }
@@ -460,7 +354,7 @@ class _ChartState extends State<Chart> {
       for (var activeSensor in axis.activeSensors) {
         print("axis: ${axis.name} with type ${axis.runtimeType} activeSensors: ${axis.activeSensors}");
 
-        var name = "${axis.name}(${axis.sensors
+        String name = "${axis.name}(${axis.sensors
             .firstWhere((s) => s.name == activeSensor)
             .title})";
 
@@ -487,11 +381,20 @@ class _ChartState extends State<Chart> {
           var dataStr = json.encode(data);
           print("d[activeSensor] dataStr: $dataStr");
 
-          var nameStr = json.encode(name).replaceAll('"', '\'');
+          // get name initials ==> same string that the one considered as legendNames
+
+          String wbname;
+          if(name == 'Laguna del cabrero(ICAMpff)'){
+            wbname = "Ldca";
+          } else {
+            wbname =  getInitials(string: name);
+          }
+
+          var nameStr = json.encode(wbname).replaceAll('"', '\'');
           print("nameStr: $nameStr");
 
           var add = '''{
-              type: 'line',
+              $commonSeriesConfig
               name: $nameStr,
               data: $dataStr,
             }''';
@@ -501,10 +404,8 @@ class _ChartState extends State<Chart> {
         }
 
 
-        if (legendNames.indexOf(name) == -1) {
-          legendNames.add(name);
-          print("legendNames $legendNames");
-        }
+        legendNames.add(name);
+        print("legendNames $legendNames");
 
         var unit = _units.firstWhere((u) => u.getName == activeSensor);
 //        print("activeSensor: $activeSensor");
@@ -514,102 +415,85 @@ class _ChartState extends State<Chart> {
       }
     }
 
+
+    // legend Names
+
     final legendNamesStr = json.encode(legendNames).replaceAll('"', '\'');
     print("legendNames_str: $legendNamesStr");
 
+    final legendNamesInitials = legendNames.map((e) {
+
+      String wbname;
+      if(e == 'Laguna del cabrero(ICAMpff)'){
+        wbname = "Ldca";
+      } else {
+        wbname =  getInitials(string: e);
+      }
+      return wbname;
+    }).toList();
+
+    final legendNamesInitialsStr = json.encode(legendNamesInitials).replaceAll('"', '\'');
+    print("legendNamesInitials_str: ${legendNamesInitialsStr}");
+
+
+    // dates
     final dates = _icampffDates.map((element) {
       return readTimestamp(element)[0];
     }).toList();
 
-    print("_icampffDates:  $dates");
+    final datesStr = json.encode(dates).replaceAll('"', '\'');
+    print("dates_str: $datesStr");
 
-    var series2 = '''[
-            {
-              name: 'Caño Juan Angola(ICAMpff)',
-              type: 'line',
-              stack: 'total',
-              data: [320, 302, 301, 334, 390, 330, 320]
-            },
-            {
-              name: 'Laguna del cabrero(ICAMpff)',
-              type: 'line',
-              stack: 'total',
-              data: [120, 132, 101, 134, 90, 230, 210]
-            },
-            {
-              name: 'Laguna de chambacú(ICAMpff)',
-              type: 'line',
-              stack: 'total',
-              data: [220, 182, 191, 234, 290, 330, 310]
-            },
-            {
-              name: 'Ciénaga de las Quintas(ICAMpff)',
-              type: 'line',
-              stack: 'total',
-              data: [150, 212, 201, 154, 190, 330, 410]
-            },
-            {
-              name: 'Caño de bazurto(ICAMpff)',
-              type: 'line',
-              stack: 'total',
-              data: [820, 832, 901, 934, 1290, 1330, 1320]
-            },
-            {
-              name: 'Laguna de San Lázaro(ICAMpff)',
-              type: 'line',
-              stack: 'total',
-              data: [832, 832, 901, 994, 1290, 1330, 1320]
-            }
-          ]
-  ''';
+    print("dates:  $dates");
 
     return Container(
+//      child: ListView.builder(
+//        itemCount: _yAxisList.length,
+//        itemBuilder: (BuildContext ctxt, int index) {
+//            if (_yAxisList[index] is WQMonitoringPointAxis) {
+//              return Text("${_yAxisList[index].type}");
+//            } else {
+//              return Text("${_yAxisList[index].type}");
+//
+//            }
+//        }
+//      ),
+
       child: Echarts(
-        extensions: [customThemeScript], //[darkThemeScript],
-        extraScript: '''
-        var base = +new Date(1968, 9, 3);
-        var oneDay = 24 * 3600 * 1000;
-        var date = [];
-
-        var data = [Math.random() * 300];
-
-        for (var i = 1; i < 20000; i++) {
-            var now = new Date(base += oneDay);
-            date.push([now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'));
-            data.push(Math.round((Math.random() - 0.5) * 20 + data[i - 1]));
-        }
-        
-      ''',
-
+        extensions: [customThemeScript],
         option: '''{
+          color: $colors,
+          tooltip: {
+              trigger: 'axis',
+              position: function (pt) {
+                  return [pt[0], '3%'];
+              }
+          },
           legend: {
-            data: $legendNamesStr,  
-            type: 'scroll',
+            data: $legendNamesInitialsStr,
+//            type: 'scroll',
 //              orient: 'vertical',
             y: 50
           },
           toolbox: {
             feature: {
-              dataZoom: {
-                  yAxisIndex: 'none'
-              },
-              restore: {},
               saveAsImage: {
+                show: true,
                 title: 'Guardar',
-                name: `grafico`,
-              },                
+                name: `grafico`
+              },
             }
           },
           grid: {
             left: '3%',
             right: '4%',
-            top: '30%',
-            bottom: '3%',
+            top: '35%',
+            bottom: '2%',
             containLabel: true,
           },
           xAxis: {
             type: 'category',
-            data: $dates,
+            data: $datesStr,
           },
           yAxis: {
             type: 'value',
@@ -619,9 +503,8 @@ class _ChartState extends State<Chart> {
      ''',
       ),
       width: 300,
-      height: 300,
+      height: 300, //800
     );
   }
+
 }
-
-

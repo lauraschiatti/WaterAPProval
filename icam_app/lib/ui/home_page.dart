@@ -4,12 +4,13 @@ import 'package:icam_app/models/language.dart';
 import 'package:icam_app/localization/localization_constants.dart';
 import 'package:icam_app/main.dart';
 import 'package:icam_app/routes/route_names.dart';
-import 'package:icam_app/view/info_page.dart';
-import 'package:icam_app/view/favorites_page.dart';
+import 'package:icam_app/ui/info_page.dart';
+import 'package:icam_app/ui/favorites_page.dart';
 import 'package:icam_app/theme.dart';
 
-import 'package:icam_app/view/export_page.dart';
-import 'package:icam_app/view/map_page.dart';
+import 'package:icam_app/ui/export_page.dart';
+import 'package:icam_app/ui/explore_data.dart';
+import 'package:icam_app/ui/map_page.dart';
 
 class HomePage extends StatefulWidget {
   HomePage(); // {Key key}) : super(key: key);
@@ -26,6 +27,7 @@ class _HomePageState extends State<HomePage> {
   List<Widget> widgetOptions = <Widget>[
     MapControllerPage(),
     ExportControllerPage(),
+//    ExploreDataPage(),
     FavoritePage(),
     InfoPage()
   ];

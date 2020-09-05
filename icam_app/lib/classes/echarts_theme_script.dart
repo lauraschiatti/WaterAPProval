@@ -20,7 +20,7 @@ const customThemeScript = r'''
         log('ECharts is not Loaded');
         return;
     }
-    var contrastColor = '#eee';
+    var contrastColor = '#fff1111';
     var axisCommon = function () {
         return {
             axisLine: {
@@ -44,7 +44,7 @@ const customThemeScript = r'''
 //                    type: 'dashed',
                     color: '#c7c7c7'
                 }
-            },
+            },          
             splitArea: {
                 areaStyle: {
                     color: contrastColor
@@ -78,6 +78,7 @@ const customThemeScript = r'''
         color: colorPalette,
         backgroundColor: '#fafafa',
         tooltip: {
+            trigger: 'axis',
             axisPointer: {
                 lineStyle: {
                     color: contrastColor
