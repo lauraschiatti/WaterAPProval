@@ -34,13 +34,13 @@ class InfoPage extends StatelessWidget {
 }
 
 TextStyle _textStyleTitle = TextStyle(
-    fontSize: 22,
+    fontSize: 20,
     color: Colors.black87,
     fontWeight: FontWeight.w600
 );
 
 TextStyle _textStyleContent = TextStyle(
-  fontSize: 15,
+  fontSize: 13,
   color: Colors.black87,
   height: 1.5,
 );
@@ -109,7 +109,7 @@ class Contact extends StatelessWidget {
 }
 
 _launchURL() async {
-  const url = 'https://github.com/lauricdd/ICAM_app';
+  const url = 'https://github.com/lauricdd/WaterAPProval';
   if (await canLaunch(url)) {
     await launch(url);
   } else {
