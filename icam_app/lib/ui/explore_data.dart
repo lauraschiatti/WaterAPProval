@@ -39,7 +39,7 @@ class ExploreDataPageState extends State<ExploreDataPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text("recently_collected_data")
+          title: Text(getTranslated(context, "recently_collected"))
       ),
       body:
         Container(
@@ -50,7 +50,7 @@ class ExploreDataPageState extends State<ExploreDataPage> {
               children: <Widget>[
                 Padding(
                   child: Text(
-                    'Available water bodies',
+                    getTranslated(context, "available_wb"),
                     style: TextStyle(
 //                          fontSize: 20,
                     ),

@@ -70,29 +70,26 @@ Widget _buildBody(BuildContext context) {
               Expanded(
                 child: ListTile(
                   title: Text(
-                    "Water bodies",
+                    getTranslated(context, "available_wb"),
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold
                     ),
                   ),
                   subtitle: Text("6"),
-                  trailing: Icon(Icons.map),
                 ),
               ),
-              VerticalDivider(),
-
+              Divider(),
               Expanded(
                 child: ListTile(
                   title: Text(
-                    "Monitoring points (nodes)",
+                    getTranslated(context, "available_nodes"),
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold
                     ),
                   ),
                   subtitle: Text("8"),
-                  trailing: Icon(Icons.location_on),
                 ),
               ),
             ],
@@ -128,7 +125,7 @@ Widget _buildBody(BuildContext context) {
                             size: 40
                           ),
                           Text(
-                            "recently collected data",
+                            getTranslated(context, "recently_collected"),
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18.0,
@@ -140,15 +137,15 @@ Widget _buildBody(BuildContext context) {
                     )
                 ),
               ),
-              const SizedBox(width: 16.0),
-              Expanded(
-                child: _buildTile(
-                  color: Colors.pink,
-                  icon: Icons.portrait,
-                  title: "Dropped",
-
-                ),
-              ),
+//              const SizedBox(width: 16.0),
+//              Expanded(
+//                child: _buildTile(
+//                  color: Colors.pink,
+//                  icon: Icons.portrait,
+//                  title: "Dropped",
+//
+//                ),
+//              ),
             ],
           ),
         ),
@@ -183,7 +180,7 @@ Widget _buildBody(BuildContext context) {
                             size: 40
                           ),
                           Text(
-                            "ICAMpff chart",
+                            getTranslated(context, "icam_chart"),
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18.0,
@@ -195,15 +192,15 @@ Widget _buildBody(BuildContext context) {
                     )
                 ),
               ),
-              const SizedBox(width: 16.0),
-              Expanded(
-                child: _buildTile(
-                  color: Colors.blue,
-                  icon: Icons.portrait,
-                  title: "Admitted",
-
-                ),
-              ),
+//              const SizedBox(width: 16.0),
+//              Expanded(
+//                child: _buildTile(
+//                  color: Colors.blue,
+//                  icon: Icons.portrait,
+//                  title: "Admitted",
+//
+//                ),
+//              ),
             ],
           ),
         ),
