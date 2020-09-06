@@ -470,15 +470,15 @@ class _ChartState extends State<Chart> {
 //              orient: 'vertical',
             y: 50
           },
-          toolbox: {
-            feature: {
-              saveAsImage: {
-                show: true,
-                title: 'Guardar',
-                name: `grafico`
-              },
-            }
-          },
+//          toolbox: {
+//            feature: {
+//              saveAsImage: {
+//                show: true,
+//                title: 'Guardar',
+//                name: `grafico`
+//              },
+//            }
+//          },
           grid: {
             left: '3%',
             right: '4%',

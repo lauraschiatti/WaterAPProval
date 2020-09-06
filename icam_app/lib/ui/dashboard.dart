@@ -57,7 +57,7 @@ Widget _buildBody(BuildContext context) {
         Padding(
           padding: const EdgeInsets.only(left: 16.0),
           child: Text(
-            "Dashboard",
+            getTranslated(context, "dashboard"),
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
           ),
         ),
@@ -113,7 +113,7 @@ Widget _buildBody(BuildContext context) {
                       height: 150.0,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4.0),
-                        color: Colors.green,
+                        color: Colors.red[700],
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -137,15 +137,6 @@ Widget _buildBody(BuildContext context) {
                     )
                 ),
               ),
-//              const SizedBox(width: 16.0),
-//              Expanded(
-//                child: _buildTile(
-//                  color: Colors.pink,
-//                  icon: Icons.portrait,
-//                  title: "Dropped",
-//
-//                ),
-//              ),
             ],
           ),
         ),
@@ -168,7 +159,7 @@ Widget _buildBody(BuildContext context) {
                       height: 150.0,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4.0),
-                        color: Colors.pink,
+                        color: Colors.green,
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -192,19 +183,54 @@ Widget _buildBody(BuildContext context) {
                     )
                 ),
               ),
-//              const SizedBox(width: 16.0),
-//              Expanded(
-//                child: _buildTile(
-//                  color: Colors.blue,
-//                  icon: Icons.portrait,
-//                  title: "Admitted",
-//
-//                ),
-//              ),
             ],
           ),
         ),
         const SizedBox(height: 16.0),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                child: GestureDetector(
+                    onTap: (){
+                      Navigator.pushNamed(
+                        context,
+                        nodesShowRoute,
+                      );
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(8.0),
+                      height: 150.0,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4.0),
+                        color: Colors.blue,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          Icon(
+                              Icons.location_on,
+                              color: Colors.white,
+                              size: 40
+                          ),
+                          Text(
+                            getTranslated(context, "available_nodes"),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18.0,
+                                color: Colors.white
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                ),
+              ),
+            ],
+          ),
+        ),
       ],
     ),
   );
