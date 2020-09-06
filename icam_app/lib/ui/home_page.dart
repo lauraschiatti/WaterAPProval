@@ -10,6 +10,7 @@ import 'package:icam_app/theme.dart';
 
 import 'package:icam_app/ui/export_page.dart';
 import 'package:icam_app/ui/explore_data.dart';
+import 'package:icam_app/ui/dashboard.dart';
 import 'package:icam_app/ui/map_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -26,8 +27,7 @@ class _HomePageState extends State<HomePage> {
 
   List<Widget> widgetOptions = <Widget>[
     MapControllerPage(),
-    ExportControllerPage(),
-//    ExploreDataPage(),
+    DashboardPage(),
     FavoritePage(),
     InfoPage()
   ];

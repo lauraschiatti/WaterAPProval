@@ -47,19 +47,11 @@ class ExportControllerPageState extends State<ExportControllerPage> {
                   children: <Widget>[
                     Padding(
                       child: Text(
-                          getTranslated(context, "visualize_data"),
-                          style: TextStyle(
-                              fontSize: 20
-                          )
-                      ),
-                      padding: EdgeInsets.fromLTRB(0, 40, 0, 0),
-                    ),
-                    Padding(
-                      child: Text(
-                          getTranslated(context, "chart_explanation"),
-                          style: TextStyle(
-                              fontSize: 14
-                          )
+                        getTranslated(context, "chart_explanation"),
+                        style: TextStyle(
+                            fontSize: 14
+                        ),
+                        textAlign: TextAlign.justify,
                       ),
                       padding: EdgeInsets.fromLTRB(30, 20, 30, 10),
                     ),
@@ -74,7 +66,7 @@ class ExportControllerPageState extends State<ExportControllerPage> {
                     ),
                     SizedBox(height: 10),
                     Text("CJA: Caño Juan Angola - ICAMpff \n"
-                        "Ldc: Laguna del cabrero - ICAMpff \n"
+                        "Ldca: Laguna del cabrero - ICAMpff \n"
                         "Ldc : Laguna de chambacú - ICAMpff \n"
                         "CdlQ: Ciénaga de las Quintas - ICAMpff \n"
                         "Cdb: Caño de bazurto - ICAMpff \n"
@@ -96,6 +88,9 @@ class ExportControllerPageState extends State<ExportControllerPage> {
 
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text(getTranslated(context, "visualize_data"))
+      ),
       body:
         _buildChart(),
       );

@@ -6,6 +6,7 @@ const String mapRoute = 'map';
 const String aboutRoute = 'about';
 const String settingsRoute = 'settings';
 const String cgenaRoute = 'cartagena';
+const String dashboardRoute = 'dashboard';
 const String exportRoute = 'export';
 const String exploreRoute = 'explore';
 const String encyclopediaRoute = 'encyclopedia';
