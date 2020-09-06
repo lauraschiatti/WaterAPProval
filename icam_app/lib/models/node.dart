@@ -3,7 +3,6 @@
 //     final node = nodeFromJson(jsonString);
 
 import 'dart:convert';
-
 import 'package:flutter/services.dart';
 
 // JSON conversion methods
@@ -19,7 +18,7 @@ class Node {
     this.location,
     this.coordinates,
     this.status,
-    this.nodeTypeId,
+    this.lastDatum,
   });
 
   String id;
@@ -27,7 +26,7 @@ class Node {
   String location;
   List<double> coordinates;
   String status;
-  NodeTypeId nodeTypeId;
+  LastDatum lastDatum;
 
   // status: Off, Non Real Time
 
@@ -39,7 +38,7 @@ class Node {
     location: json["location"],
     coordinates: List<double>.from(json["coordinates"].map((x) => x.toDouble())),
     status: json["status"] == null ? null : json["status"],
-    nodeTypeId: nodeTypeIdValues.map[json["node_type_id"]],
+    lastDatum: LastDatum.fromJson(json["lastDatum"]),
   );
 
   // convert Node instance into map string dynamic
@@ -49,31 +48,89 @@ class Node {
     "location": location,
     // flatten the model to consider supported types for sqlite.
 //    "coordinates": List<dynamic>.from(coordinates.map((x) => x)),
-    "status": status == null ? null : status,
-//    "node_type_id": nodeTypeIdValues.reverse[nodeTypeId],
+    "status": status,
+//    "lastDatum": lastDatum.toJson(),
   };
 }
 
-enum NodeTypeId { THE_59_C9_D9019_A892016_CA4_BE413, THE_5_A16342_A9_A8920290056_A542, THE_59_C9_D9019_A892016_CA4_BE412 }
+class LastDatum {
+  LastDatum({
+    this.latitude,
+    this.longitude,
+    this.icampff,
+    this.dissolvedOxygen,
+    this.nitrate,
+    this.totalSuspendedSolids,
+    this.thermotolerantColiforms,
+    this.pH,
+    this.chrolophyllA,
+    this.biochemicalOxygenDemand,
+    this.phosphates,
+    this.date,
+    this.trackedObject,
+    this.active,
+    this.createdAt,
+    this.sensor,
+    this.user,
+  });
 
-final nodeTypeIdValues = EnumValues({
-  "59c9d9019a892016ca4be412": NodeTypeId.THE_59_C9_D9019_A892016_CA4_BE412,
-  "59c9d9019a892016ca4be413": NodeTypeId.THE_59_C9_D9019_A892016_CA4_BE413,
-  "5a16342a9a8920290056a542": NodeTypeId.THE_5_A16342_A9_A8920290056_A542
-});
+  int latitude;
+  int longitude;
+  double icampff;
+  double dissolvedOxygen;
+  double nitrate;
+  double totalSuspendedSolids;
+  int thermotolerantColiforms;
+  double pH;
+  double chrolophyllA;
+  double biochemicalOxygenDemand;
+  double phosphates;
+  dynamic date;
+  String trackedObject;
+  bool active;
+  int createdAt;
+  String sensor;
+  String user;
 
-class EnumValues<T> {
-  Map<String, T> map;
-  Map<T, String> reverseMap;
+  factory LastDatum.fromJson(Map<String, dynamic> json) => LastDatum(
+    latitude: json["latitude"],
+    longitude: json["longitude"],
+    icampff: json["icampff"].toDouble(),
+    dissolvedOxygen: json["dissolvedOxygen"].toDouble(),
+    nitrate: json["nitrate"].toDouble(),
+    totalSuspendedSolids: json["totalSuspendedSolids"].toDouble(),
+    thermotolerantColiforms: json["thermotolerantColiforms"],
+    pH: json["pH"].toDouble(),
+    chrolophyllA: json["chrolophyllA"].toDouble(),
+    biochemicalOxygenDemand: json["biochemicalOxygenDemand"].toDouble(),
+    phosphates: json["phosphates"].toDouble(),
+    date: json["date"],
+    trackedObject: json["trackedObject"],
+    active: json["active"],
+    createdAt: json["createdAt"],
+    sensor: json["sensor"],
+    user: json["user"],
+  );
 
-  EnumValues(this.map);
-
-  Map<T, String> get reverse {
-    if (reverseMap == null) {
-      reverseMap = map.map((k, v) => new MapEntry(v, k));
-    }
-    return reverseMap;
-  }
+  Map<String, dynamic> toJson() => {
+    "latitude": latitude,
+    "longitude": longitude,
+    "icampff": icampff,
+    "dissolvedOxygen": dissolvedOxygen,
+    "nitrate": nitrate,
+    "totalSuspendedSolids": totalSuspendedSolids,
+    "thermotolerantColiforms": thermotolerantColiforms,
+    "pH": pH,
+    "chrolophyllA": chrolophyllA,
+    "biochemicalOxygenDemand": biochemicalOxygenDemand,
+    "phosphates": phosphates,
+    "date": date,
+    "trackedObject": trackedObject,
+    "active": active,
+    "createdAt": createdAt,
+    "sensor": sensor,
+    "user": user,
+  };
 }
 
 // mimics the behaviour of when we get the actual data from the API
@@ -89,7 +146,6 @@ getNodeFromFakeServer() async {
       ).toList();
 
       return nodes;
-
 
   });
 
