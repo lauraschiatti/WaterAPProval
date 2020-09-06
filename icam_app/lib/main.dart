@@ -4,12 +4,13 @@ import 'package:icam_app/localization/localization_constants.dart';
 import 'package:icam_app/routes/route_names.dart';
 import 'package:icam_app/routes/router.dart';
 import 'package:icam_app/theme.dart';
-import 'package:icam_app/src/splash_page.dart';
+import 'package:icam_app/ui/splash_page.dart';
 import 'package:flutter_config/flutter_config.dart';
 import 'localization/app_localizations.dart';
 import 'dart:io';
 import 'package:icam_app/classes/http_overwrite.dart';
 import 'package:flutter/services.dart';
+import 'package:data_connection_checker/data_connection_checker.dart';
 
 
 void main() async {
@@ -17,7 +18,7 @@ void main() async {
   // load all environment variables
   await FlutterConfig.loadEnvVariables();
 
-  // Override HttpClient globally: without self-signed certificate
+  // override HttpClient globally: without self-signed certificate
   HttpOverrides.global = new MyHttpOverrides();
 
   runApp(MyApp());
@@ -29,7 +30,7 @@ void main() async {
 //  await PermissionHandler().requestPermissions([PermissionGroup.location]);
 //}
 
-final appTitle = 'ICAM App';
+final appTitle = 'WaterAPProval';
 
 class MyApp extends StatefulWidget {
 
@@ -71,6 +72,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+
     print(".env file ==> API_URL: " + FlutterConfig.get('API_URL'));
 
     // to prevent device orientation changes and force portrait
@@ -78,6 +80,7 @@ class _MyAppState extends State<MyApp> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+
 
     if(this._locale == null) {
       return Container(

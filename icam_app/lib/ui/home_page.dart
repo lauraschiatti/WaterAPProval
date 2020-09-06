@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:icam_app/models/language.dart';
 import 'package:icam_app/localization/localization_constants.dart';
 import 'package:icam_app/main.dart';
@@ -127,6 +128,17 @@ class _HomePageState extends State<HomePage> {
 
 
 // Drawer
+
+_launchURL() async {
+  const url = 'https://github.com/lauricdd/WaterAPProval/blob/master/LICENSE';
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
+
+
 class DrawerList extends StatefulWidget{
   @override
   _DrawerListState createState() => _DrawerListState();
@@ -184,11 +196,15 @@ class _DrawerListState extends State<DrawerList> {
 //              title: "tell_friends",
 //              route: notFoundRoute
 //          ),
-            _buildListTile(
-                context: context,
-                icon: Icons.format_indent_increase,
-                title: "terms",
-                route: notFoundRoute
+            ListTile(
+                leading: Icon(
+                    Icons.format_indent_increase,
+                    size: 18
+                ),
+                title: Text(getTranslated(context, "terms"),
+                  style: TextStyle(fontSize: 16),
+                ),
+                onTap:_launchURL
             ),
             _buildListTile(
                 context: context,
