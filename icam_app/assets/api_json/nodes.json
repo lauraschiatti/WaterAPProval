@@ -1,117 +1,226 @@
 [
   {
-    "_id" : "59b75c5f9a8920223f2eabe4",
-    "name": "Laguna de Chambacú",
+    "_id" : "5db3cb31a53e2a108358072a",
+    "name": "Laguna de Chambacú 2",
     "location": "Centro, Puerto Duro. Frente al Gigante del Hogar",
-    "coordinates": [10.425083333333, -75.543888888889],
+    "coordinates": [10.423069, -75.542453],
     "status": "Off",
-    "node_type_id": "59c9d9019a892016ca4be413"
+    "lastDatum": {
+      "latitude": 0,
+      "longitude": 0,
+      "icampff": 1,
+      "dissolvedOxygen": -1,
+      "nitrate": -1,
+      "totalSuspendedSolids": -1,
+      "thermotolerantColiforms": -1,
+      "pH": -1,
+      "chrolophyllA": -1,
+      "biochemicalOxygenDemand": -1,
+      "phosphates": -1,
+      "date": 1556427600000,
+      "trackedObject": "5dacbdcaa52adb394573ca71",
+      "active": true,
+      "createdAt": 1572158947945,
+      "sensor": "no-sensor",
+      "user": "5dabb534a7c2657f209e4034"
+    }
   },
   {
-    "_id": "59b75c5f9a8920223f2eabe5",
-    "name": "Laguna de San Lázaro",
-    "location": "CAI de Manga. Frente a la Suzuki",
-    "coordinates": [10.417638888889, -75.543111111111],
-    "status": "Off",
-    "node_type_id": "59c9d9019a892016ca4be413"
-  },
-  {
-    "_id": "59b75c5f9a8920223f2eabe6",
-    "name": "Bocana",
+    "_id": "5db4b2ae327b7d19875b3bc3",
+    "name": "Ciénaga de las Quintas 2",
     "location": "Ciénaga de La Virgen",
-    "coordinates": [10.4519306, -75.5072576],
-    "status": "Off",
-    "node_type_id": "59c9d9019a892016ca4be413"
+    "coordinates": [10.41451, -75.531924],
+    "status": "Non Real Time",
+    "lastDatum": {
+      "latitude": 0,
+      "longitude": 0,
+      "icampff": 15.44,
+      "dissolvedOxygen": 2.31,
+      "nitrate": 99.5,
+      "totalSuspendedSolids": 63.5,
+      "thermotolerantColiforms": 8860,
+      "pH": 7.46,
+      "chrolophyllA": 0.725,
+      "biochemicalOxygenDemand": 21.43,
+      "phosphates": 85.6,
+      "date": 1556427600000,
+      "trackedObject": "5db298ae458f3171dfaf380c",
+      "active": true,
+      "createdAt": 1572011546799,
+      "sensor": "no-sensor",
+      "user": "5dabb534a7c2657f209e4034"
+    }
   },
   {
-    "_id": "59b75c5f9a8920223f2eabe7",
-    "name": "Caño Juan Angola",
+    "_id": "5db4b2a9327b7d19875b3bc2",
+    "name": "Ciénaga de las Quintas 1",
     "location": "Debajo del Puente peatonal nuevo, junto a la vía de Crespo",
-    "coordinates": [10.4421288, -75.5237424],
-    "status": "Off",
-    "node_type_id": "59c9d9019a892016ca4be413"
-  },
-  {
-    "_id": "59b75c5f9a8920223f2eabe8",
-    "name": "Caño Bazurto",
-    "location": "Junto al puente Jiménez (del lado izquierdo del puente, mirando hacia el Pie de la Popa)",
-    "coordinates": [10.414694444444, -75.532333333333],
-    "status": "Off",
-    "node_type_id": "59c9d9019a892016ca4be413"
-  },
-  {
-    "_id": "59b75c5f9a8920223f2eabe9",
-    "name": "Ciénaga de las Quintas",
-    "location": " Frente a la calle",
     "coordinates": [10.40894376, -75.52499499],
     "status": "Off",
-    "node_type_id": "59c9d9019a892016ca4be413"
-  },
-  {
-    "_id": "59b75c5f9a8920223f2eabea",
-    "name": "Bahía",
-    "location": "Puerto de Marina de Rosales",
-    "coordinates": [10.404833333333, -75.523972222222],
-    "status": "Off",
-    "node_type_id": "59c9d9019a892016ca4be413"
-  },
-  {
-    "_id": "5a1652279a89202b695560e2",
-    "name": "Cotecmar",
-    "location": "Zona Industrial Mamonal Km 9",
-    "coordinates": [10.3336549, -75.5059747],
-    "status": "Non Real Time",
-    "node_type_id": "5a16342a9a8920290056a542"
+    "lastDatum": {
+      "latitude": 0,
+      "longitude": 0,
+      "icampff": 42.39,
+      "dissolvedOxygen": 4.19,
+      "nitrate": 69.55,
+      "totalSuspendedSolids": 27.8,
+      "thermotolerantColiforms": 4200,
+      "pH": 8.12,
+      "chrolophyllA": 1.709,
+      "biochemicalOxygenDemand": 13.67,
+      "phosphates": 60.34,
+      "date": 1556427600000,
+      "trackedObject": "5db4b2a9327b7d19875b3bc2",
+      "active": true,
+      "createdAt": 1572134298412,
+      "sensor": "no-sensor",
+      "user": "5dabb534a7c2657f209e4034"
+    }
   },
   {
     "_id": "5b02af2b08de6a000d4bc0e4",
+    "name": "Laguna de San Lázaro 1",
     "location": "Puente Román, Laguna de San Lázaro",
     "coordinates": [
       10.4162931,
       -75.5452592
     ],
-    "name": "Laguna de San Lázaro 1",
-    "node_type_id": "59c9d9019a892016ca4be412"
+    "status": "Off",
+    "lastDatum": {
+      "latitude": 0,
+      "longitude": 0,
+      "icampff": 42.66,
+      "dissolvedOxygen": 3.79,
+      "nitrate": 74.7,
+      "totalSuspendedSolids": 40.53,
+      "thermotolerantColiforms": 4120,
+      "pH": 8.04,
+      "chrolophyllA": 1.789,
+      "biochemicalOxygenDemand": 12.78,
+      "phosphates": 64.33,
+      "date": 1556427600000,
+      "trackedObject": "5db3cb31a53e2a108358072a",
+      "active": true,
+      "createdAt": 1572117209756,
+      "sensor": "no-sensor",
+      "user": "5dabb534a7c2657f209e4034"
+    }
   },
   {
     "_id": "5b02af2b08de6a000d4bc0e5",
+    "name": "Laguna de San Lázaro 2",
     "location": "Puente Heredia, Laguna de San Lázaro",
     "coordinates": [
       10.422268,
       -75.542683
     ],
-    "name": "Laguna de San Lázaro 2",
-    "node_type_id": "59c9d9019a892016ca4be412"
+    "status": "Non Real Time",
+    "lastDatum": {
+      "latitude": 0,
+      "longitude": 0,
+      "icampff": 42.39,
+      "dissolvedOxygen": 4.19,
+      "nitrate": 69.55,
+      "totalSuspendedSolids": 27.8,
+      "thermotolerantColiforms": 4200,
+      "pH": 8.12,
+      "chrolophyllA": 1.709,
+      "biochemicalOxygenDemand": 13.67,
+      "phosphates": 60.34,
+      "date": 1556427600000,
+      "trackedObject": "5db4b2a9327b7d19875b3bc2",
+      "active": true,
+      "createdAt": 1572134298412,
+      "sensor": "no-sensor",
+      "user": "5dabb534a7c2657f209e4034"
+    }
   },
   {
-    "_id": "5b02af2b08de6a000d4bc0e8",
+    "name": "Laguna de Chambacú 1",
+    "_id": "5db3cb23a53e2a1083580729",
     "location": "Puente de chambacú, laguna de chambacú",
     "coordinates": [
       10.426821,
       -75.543696
     ],
-    "name": "Laguna de Chambacú 1",
-    "node_type_id": "59c9d9019a892016ca4be412"
+    "status": "Off",
+    "lastDatum": {
+      "latitude": 0,
+      "longitude": 0,
+      "icampff": 25.34,
+      "dissolvedOxygen": 3.05,
+      "nitrate": 88.9,
+      "totalSuspendedSolids": 41.65,
+      "thermotolerantColiforms": 6460,
+      "pH": 7.62,
+      "chrolophyllA": 1.912,
+      "biochemicalOxygenDemand": 18.94,
+      "phosphates": 73.8,
+      "date": 1556427600000,
+      "trackedObject": "5db3cb23a53e2a1083580729",
+      "active": true,
+      "createdAt": 1572064550499,
+      "sensor": "no-sensor",
+      "user": "5dabb534a7c2657f209e4034"
+    }
   },
   {
-    "_id": "5b02af2b08de6a000d4bc0e9",
+    "_id": "5db298ae458f3171dfaf380c",
+    "name": "Laguna del Cabrero 1",
     "location": "Cabrero, Laguna del Cabrero",
     "coordinates": [
       10.430926,
       -75.542428
     ],
-    "name": "Laguna del Cabrero 1",
-    "node_type_id": "59c9d9019a892016ca4be412"
+    "status": "Unknown",
+    "lastDatum": {
+      "latitude": 0,
+      "longitude": 0,
+      "icampff": 25.62,
+      "dissolvedOxygen": 3.67,
+      "nitrate": 95.67,
+      "totalSuspendedSolids": 36.7,
+      "thermotolerantColiforms": 6780,
+      "pH": 7.83,
+      "chrolophyllA": 0.998,
+      "biochemicalOxygenDemand": 16.89,
+      "phosphates": 65.48,
+      "date": 1556427600000,
+      "trackedObject": "5db4b2ae327b7d19875b3bc3",
+      "active": true,
+      "createdAt": 1572134927728,
+      "sensor": "no-sensor",
+      "user": "5dabb534a7c2657f209e4034"
+    }
   },
   {
-    "_id": "5b02af2b08de6a000d4bc0ea",
+    "_id": "5dacbdcaa52adb394573ca71",
+    "name": "Caño Juan Angola 1",
     "location": "Aeropuerto, Caño Juan Angola",
     "coordinates": [
       10.44262,
       -75.5216947
     ],
-    "name": "Caño Juan Angola 1",
-    "node_type_id": "59c9d9019a892016ca4be412"
+    "status": "Off",
+    "lastDatum": {
+      "latitude": 0,
+      "longitude": 0,
+      "icampff": 47.09,
+      "dissolvedOxygen": 7.38,
+      "nitrate": 73.5,
+      "totalSuspendedSolids": 28.56,
+      "thermotolerantColiforms": 3880,
+      "pH": 8.45,
+      "chrolophyllA": 1.754,
+      "biochemicalOxygenDemand": 14.56,
+      "phosphates": 50.67,
+      "date": 1556427600000,
+      "trackedObject": "5db4f024b5986235dfe6600d",
+      "active": true,
+      "createdAt": 1572139639408,
+      "sensor": "no-sensor",
+      "user": "5dabb534a7c2657f209e4034"
+    }
   }
 ]
 
