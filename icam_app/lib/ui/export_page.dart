@@ -4,9 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_echarts/flutter_echarts.dart';
 import 'package:icam_app/localization/localization_constants.dart';
-import 'package:icam_app/routes/route_names.dart';
-import 'package:icam_app/theme.dart';
-import 'package:icam_app/models/datum.dart';
 import 'package:icam_app/services/datum_service.dart';
 import 'package:icam_app/services/water_body_service.dart';
 import 'package:icam_app/services/node_service.dart';
@@ -15,7 +12,7 @@ import 'package:icam_app/classes/chart_classes.dart';
 import 'package:icam_app/classes/utils.dart';
 
 class ExportControllerPage extends StatefulWidget {
-  ExportControllerPage();//{Key key}) : super(key: key);
+  ExportControllerPage();
 
   final Key _chartKey = UniqueKey();
 
@@ -26,17 +23,11 @@ class ExportControllerPage extends StatefulWidget {
 
 class ExportControllerPageState extends State<ExportControllerPage> {
 
-  Future _futureWaterBodies;
-
   @override
   void initState() {
     super.initState();
-
-    _futureWaterBodies = fetchWaterBodies();
   }
-
-
-
+  
   @override
   Widget build(BuildContext context) {
 
@@ -428,7 +419,7 @@ class _ChartState extends State<Chart> {
     }).toList();
 
     final legendNamesInitialsStr = json.encode(legendNamesInitials).replaceAll('"', '\'');
-    print("legendNamesInitials_str: ${legendNamesInitialsStr}");
+    print("legendNamesInitials_str: $legendNamesInitialsStr");
 
 
     // dates

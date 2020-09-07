@@ -1,23 +1,13 @@
-import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_echarts/flutter_echarts.dart';
 import 'package:icam_app/localization/localization_constants.dart';
 import 'package:icam_app/routes/route_names.dart';
 import 'package:icam_app/theme.dart';
-import 'package:icam_app/models/datum.dart';
-import 'package:icam_app/services/datum_service.dart';
 import 'package:icam_app/services/water_body_service.dart';
-import 'package:icam_app/services/node_service.dart';
-import 'package:icam_app/classes/echarts_theme_script.dart' show customThemeScript;
-import 'package:icam_app/classes/chart_classes.dart';
-import 'package:icam_app/classes/utils.dart';
 
 class ExploreDataPage extends StatefulWidget {
   ExploreDataPage();
-
-  final Key _chartKey = UniqueKey();
 
   @override
   ExploreDataPageState createState() => ExploreDataPageState();
@@ -39,7 +29,7 @@ class ExploreDataPageState extends State<ExploreDataPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text(getTranslated(context, "recently_collected"))
+          title: Text(getTranslated(context, "available_wb"))
       ),
       body:
         Container(
@@ -48,16 +38,18 @@ class ExploreDataPageState extends State<ExploreDataPage> {
 //              mainAxisAlignment: MainAxisAlignment.center,
 //              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Padding(
-                  child: Text(
-                    getTranslated(context, "available_wb"),
-                    style: TextStyle(
-//                          fontSize: 20,
-                    ),
-                    textAlign: TextAlign.left,
-                  ),
-                  padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
-                ),
+//                Padding(
+//                  child: Text(
+//                    getTranslated(context, "recently_collected"),
+//                    style: TextStyle(
+//                        fontSize: 18,
+//                        color: Colors.black87,
+//                        fontWeight: FontWeight.w600
+//                    ),
+//                    textAlign: TextAlign.left,
+//                  ),
+//                  padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
+//                ),
                 Expanded(
                   child: FutureBuilder(
                     future: _futureWaterBodies,
@@ -99,12 +91,12 @@ class ExploreDataPageState extends State<ExploreDataPage> {
 
                             return Card(
                               child: ListTile(
-                                  leading: const Icon(Icons.brightness_1,
-                                      size: 30.0, color: Colors.black12),
+                                  leading: Icon(
+                                      Icons.brightness_1,
+                                      size: 30.0,
+                                      color: myTheme.primaryColor
+                                  ),
                                   title: Text('${waterBody.name}'),
-//                                TODO: subtitle: Text(
-//                                  "Icampff: ${waterBody.icampff.toString()}",
-//                                ),
                                   trailing: IconButton(
                                     icon: Icon(Icons.keyboard_arrow_right),
                                     color: Colors.black38,

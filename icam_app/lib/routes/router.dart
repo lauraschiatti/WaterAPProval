@@ -14,7 +14,6 @@ import 'package:icam_app/ui/nodes/node_details.dart';
 import 'package:icam_app/ui/water_body_data_page.dart';
 import 'package:icam_app/ui/calculator.dart';
 import 'package:icam_app/ui/explore_data.dart';
-import 'package:icam_app/ui/water_bodies/water_bodies_details.dart';
 import 'package:icam_app/ui/dashboard.dart';
 
 import 'route_names.dart';
@@ -52,9 +51,6 @@ class Router {
       case waterBodyDataPageRoute:
         var waterbody = settings.arguments as WaterBodyData;
         return MaterialPageRoute(builder: (_) => WaterBodyDataPage(waterbody));
-      case waterBodyDetailPageRoute:
-        var waterbody = settings.arguments as WaterBodyData;
-        return MaterialPageRoute(builder: (_) => WaterBodyDetailPage(waterbody));
 
       case nodeDetailRoute:
         var node = settings.arguments as Node;

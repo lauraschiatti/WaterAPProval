@@ -9,8 +9,6 @@ import 'package:icam_app/ui/info_page.dart';
 import 'package:icam_app/ui/favorites_page.dart';
 import 'package:icam_app/theme.dart';
 
-import 'package:icam_app/ui/export_page.dart';
-import 'package:icam_app/ui/explore_data.dart';
 import 'package:icam_app/ui/dashboard.dart';
 import 'package:icam_app/ui/map_page.dart';
 
@@ -281,31 +279,3 @@ _buildListTile({context, icon, title, route}){
     },
   );
 }
-
-
-// network connection
-//class NetworkSensitive extends StatelessWidget {
-//  final Widget child;
-//
-//
-//  NetworkSensitive({
-//    this.child,
-//  });
-//
-//  @override
-//  Widget build(BuildContext context) {
-//    var connectionStatus = Provider.of<ConnectivityStatus>(context);
-//
-//    if (connectionStatus == ConnectivityStatus.WiFi) {
-//      return child;
-//    }
-//
-//    if (connectionStatus == ConnectivityStatus.Cellular) {
-//      return Container(child: Text('Koneksi Mobile'), );
-//    }
-//
-//    if (connectionStatus == ConnectivityStatus.Offline) {
-//      return Container(child: Text('Koneksi Offline'), );
-//    }
-//  }
-//}

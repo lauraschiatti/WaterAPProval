@@ -109,7 +109,7 @@ class Contact extends StatelessWidget {
 }
 
 _launchURL() async {
-  const url = 'https://github.com/lauricdd/WaterAPProval';
+  const url = 'https://github.com/lauricdd/WaterAPProval/wiki';
   if (await canLaunch(url)) {
     await launch(url);
   } else {

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
-
 import 'package:icam_app/theme.dart';
-
 import 'package:icam_app/ui/home_page.dart';
 
 // splash screen

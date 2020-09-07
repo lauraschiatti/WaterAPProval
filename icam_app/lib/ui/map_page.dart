@@ -9,6 +9,7 @@ import 'package:icam_app/models/node.dart' as node;
 import 'package:icam_app/classes/widgets.dart';
 import 'package:icam_app/services/water_body_service.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
+import "dart:math";
 
 
 class MapControllerPage extends StatefulWidget {
@@ -65,6 +66,7 @@ class _MapState extends State<Map> {
 
     // draw polygons to the map
     final waterBodies = await fetchWaterBodies();
+
     _addPolygons(waterBodies);
   }
 
@@ -126,13 +128,19 @@ class _MapState extends State<Map> {
 
       print("Number of waterbodies: ${waterBodies.total}");
 
+      List<double> _icamvalues = [9.851, 79.851, 29.851, 90.851, 58.851, 80.851];
+
       for (final waterbody in waterBodies.data) {
         String type = waterbody.geojson.geometry.type;
         List<List<List<dynamic>>> coordinates = waterbody.geojson.geometry.coordinates;
 
         String waterBodyId = waterbody.id;
         String name = waterbody.name;
-        var icampffAvg = waterbody.icampffAvg;
+
+        final _random = new Random();
+
+        var element = _icamvalues[_random.nextInt(_icamvalues.length)];
+        var icampffAvg = element;//waterbody.icampffAvg;
 
         if(type == "Polygon"){
           Polygon polygon = _addPolygon(coordinates[0], name, icampffAvg);
@@ -422,13 +430,6 @@ class _MapState extends State<Map> {
         ),
       ],
     );
-//        Positioned(
-//          top: 420,
-//          left: 340,
-//          child: Card(
-//            elevation: 2,
-//            child: Container(
-//              color: Color(0xFFFAFAFA),
-//              width: 40,
+
   }
 }

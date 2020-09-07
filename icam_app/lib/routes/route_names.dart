@@ -14,6 +14,5 @@ const String calculatorRoute = 'calculator';
 
 const String nodeDetailRoute = 'node_detail';
 const String waterBodyDataPageRoute = 'water_body_data';
-const String waterBodyDetailPageRoute = 'water_body_details';
 const String nodesShowRoute = 'nodes_show';
 const String notFoundRoute = 'notfound';

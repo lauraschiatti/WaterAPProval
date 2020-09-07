@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:icam_app/localization/localization_constants.dart';
-import 'package:icam_app/main.dart';
 
 class CartagenaPage extends StatelessWidget {
   @override
@@ -29,11 +28,6 @@ class CartagenaPage extends StatelessWidget {
   }
 }
 
-TextStyle _textStyleTitle = TextStyle(
-    fontSize: 22,
-    color: Colors.black87,
-    fontWeight: FontWeight.w600
-);
 
 TextStyle _textStyleContent = TextStyle(
   fontSize: 15,

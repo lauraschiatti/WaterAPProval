@@ -49,7 +49,6 @@ android {
         versionName flutterVersionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-
         // get env keys
         manifestPlaceholders = [googleMapApiKey: "$System.env.GOOGLE_MAPS_API_KEY"]
     }

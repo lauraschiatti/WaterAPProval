@@ -6,8 +6,6 @@ import 'package:icam_app/routes/route_names.dart';
 import 'package:icam_app/services/nodes_db_provider.dart';
 import 'package:icam_app/localization/localization_constants.dart';
 import 'package:icam_app/classes/widgets.dart';
-import 'package:icam_app/services/node_service.dart';
-
 
 class NodesShowPage extends StatefulWidget {
 
@@ -21,6 +19,23 @@ class _NodesShowPageState extends State<NodesShowPage> {
   List<Node> _initialList;
   Future _initialListFuture;
   List<Node> _currentList = [];
+
+  // get all favorite nodes
+  List<String> _favoriteIds = [];
+
+  _getFavoriteNodes() async {
+    final _nodeData = await DBProvider.db.getNodes();
+
+    for (int i = 0; i < _nodeData.length; i++) {
+      if (_nodeData[i].id != null) {
+        print('you got your ${_nodeData[i].id}');
+        _favoriteIds.add(_nodeData[i].id);
+        // Do your stuff
+      }
+    }
+
+    print("_nodeData ${_nodeData.length}");
+  }
 
   // get all nodes
   _getNodes() async {
@@ -41,6 +56,7 @@ class _NodesShowPageState extends State<NodesShowPage> {
   initState() {
     super.initState();
     _initialListFuture = _getNodes();
+    _getFavoriteNodes();
     print("filterNodes() _initialListFuture $_initialListFuture");
     _controller.addListener(onChange);
   }
@@ -208,10 +224,13 @@ class _NodesShowPageState extends State<NodesShowPage> {
         child: ListView.builder(
             itemCount: _currentList.length,
             itemBuilder: (BuildContext context, int index) {
+
               Node current = _currentList.elementAt(index);
 
-              // alreadySaved are those on _saved or already saved as fav on the db
-              final alreadySaved = _saved.contains(current);
+              // alreadySaved are those on _saved or already saved as fav on the db (__favoriteIds)
+              final alreadySaved = _saved.contains(current)
+                  || _favoriteIds.contains(current.id);
+
 
               Color _statusColor = Colors.black12;
 
@@ -252,6 +271,11 @@ class _NodesShowPageState extends State<NodesShowPage> {
                       setState(() {
                         if (alreadySaved) {
                           _saved.remove(current);
+
+                          if(_favoriteIds.contains(current.id)){
+                            _favoriteIds.remove(current.id);
+                          }
+
                           DBProvider.db.deleteNode(current.id);
                         } else {
                           _saved.add(current);
@@ -288,7 +312,7 @@ class _NodesShowPageState extends State<NodesShowPage> {
     _currentList.clear();
 
     String name = _controller.text;
-    print("filter cars for name " + name);
+    print("filter nodes for name " + name);
     if (name.isEmpty) {
       tmp.addAll(_initialList);
     } else {

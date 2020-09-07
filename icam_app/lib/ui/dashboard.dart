@@ -1,24 +1,10 @@
-
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_echarts/flutter_echarts.dart';
 import 'package:icam_app/localization/localization_constants.dart';
 import 'package:icam_app/routes/route_names.dart';
-import 'package:icam_app/theme.dart';
-import 'package:icam_app/models/datum.dart';
-import 'package:icam_app/services/datum_service.dart';
-import 'package:icam_app/services/water_body_service.dart';
-import 'package:icam_app/services/node_service.dart';
-import 'package:icam_app/classes/echarts_theme_script.dart' show customThemeScript;
-import 'package:icam_app/classes/chart_classes.dart';
-import 'package:icam_app/classes/utils.dart';
 
 class DashboardPage extends StatefulWidget {
   DashboardPage();
-
-  final Key _chartKey = UniqueKey();
 
   @override
   DashboardPageState createState() => DashboardPageState();
@@ -235,40 +221,3 @@ Widget _buildBody(BuildContext context) {
     ),
   );
 }
-
-_buildTile({Color color, IconData icon, String title}) {
-  return GestureDetector(
-      onTap: (){
-        print("Container clicked");
-      },
-      child: Container(
-        padding: const EdgeInsets.all(8.0),
-        height: 150.0,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(4.0),
-          color: color,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            Icon(
-              icon,
-              color: Colors.white,
-            ),
-            Text(
-              title,
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18.0,
-                  color: Colors.white
-              ),
-            )
-          ],
-        ),
-      )
-  );
-}
-
-
-

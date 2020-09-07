@@ -1,8 +1,6 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:icam_app/models/datum.dart';
-
 
 getIcampff(params) async {
   final endpoint = 'http://buritaca.invemar.org.co/ICAMWebService/calculate-icam-ae';

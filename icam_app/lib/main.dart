@@ -10,7 +10,6 @@ import 'localization/app_localizations.dart';
 import 'dart:io';
 import 'package:icam_app/classes/http_overwrite.dart';
 import 'package:flutter/services.dart';
-import 'package:data_connection_checker/data_connection_checker.dart';
 
 
 void main() async {
