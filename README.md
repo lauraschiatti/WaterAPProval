@@ -1,7 +1,7 @@
 # WaterAPProval
 Design &amp; Implementation of Mobile Applications 2020 @ MSc. Computer Science &amp; Engineering - Politecnico di Milano.
 
-Water APProval Elevator Pitch available con https://youtu.be/kHbYwKZ56fw
+Water APProval Elevator Pitch available on https://youtu.be/kHbYwKZ56fw
 
 ## Purpose
 
